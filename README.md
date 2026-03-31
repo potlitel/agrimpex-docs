@@ -139,7 +139,6 @@ La documentación cubre los siguientes módulos 📚:
 | Canal | Enlace |
 |-------|--------|
 | 🌐 Sitio Web | [https://eicma.cu](https://eicma.cu) |
-| 🐙 GitLab | [https://gitlab.eicma.cu/eicma/agrimpex](https://gitlab.eicma.cu/eicma/agrimpex) |
 | 📧 Email | contacto@eicma.cu |
 
 ---
