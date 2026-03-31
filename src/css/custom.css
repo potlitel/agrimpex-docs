@@ -1,0 +1,308 @@
+/**
+ * Agrimpex - Manual de Usuario
+ * Custom CSS Styles
+ */
+
+/* Modo Claro - Colores principales */
+:root {
+  --ifm-color-primary: #1e3a8a;
+  --ifm-color-primary-dark: #1e3a8a;
+  --ifm-color-primary-darker: #1d4ed8;
+  --ifm-color-primary-darkest: #1e40af;
+  --ifm-color-primary-light: #2563eb;
+  --ifm-color-primary-lighter: #3b82f6;
+  --ifm-color-primary-lightest: #60a5fa;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-navbar-background-color: #1e3a8a;
+  --ifm-navbar-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --ifm-background-color: #ffffff;
+  --ifm-font-color-base: #1f2937;
+}
+
+/* Modo Oscuro - Colores adaptados */
+[data-theme='dark'] {
+  --ifm-color-primary: #60a5fa;
+  --ifm-color-primary-dark: #3b82f6;
+  --ifm-color-primary-darker: #2563eb;
+  --ifm-color-primary-darkest: #1d4ed8;
+  --ifm-color-primary-light: #93c5fd;
+  --ifm-color-primary-lighter: #bfdbfe;
+  --ifm-color-primary-lightest: #dbeafe;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-navbar-background-color: #1e293b;
+  --ifm-background-color: #1e293b;
+  --ifm-font-color-base: #f1f5f9;
+}
+
+/* Navbar - Modo Claro */
+.navbar {
+  background-color: var(--ifm-color-primary);
+}
+
+.navbar__title {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.navbar__link {
+  color: #ffffff;
+}
+
+.navbar__link:hover {
+  color: #bfdbfe;
+}
+
+/* Navbar - Modo Oscuro */
+[data-theme='dark'] .navbar {
+  background-color: #0f172a;
+}
+
+[data-theme='dark'] .navbar__title {
+  color: #f8fafc;
+}
+
+[data-theme='dark'] .navbar__link {
+  color: #cbd5e1;
+}
+
+[data-theme='dark'] .navbar__link:hover {
+  color: #60a5fa;
+}
+
+/* Footer */
+.footer {
+  background-color: #1e293b;
+}
+
+[data-theme='dark'] .footer {
+  background-color: #0f172a;
+}
+
+/* Sidebar - Estilos mejorados */
+.menu__link {
+  font-size: 0.95rem;
+  color: #374151;
+  border-radius: 6px;
+  margin: 2px 8px;
+  padding: 8px 12px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.menu__link:hover {
+  background-color: rgba(30, 58, 138, 0.08);
+  color: #1e3a8a;
+}
+
+/* Ítem activo del sidebar */
+.menu__link--active {
+  background-color: rgba(30, 58, 138, 0.12);
+  color: #1e3a8a;
+  font-weight: 600;
+  border-left: 3px solid #1e3a8a;
+  padding-left: 9px;
+}
+
+/* Indicador visual activo */
+.menu__link--active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 24px;
+  background-color: #1e3a8a;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Categorías del sidebar */
+.menu__link--sublist {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 16px;
+  padding: 8px 16px;
+}
+
+.menu__link--sublist::after {
+  content: '▾';
+  font-size: 0.7rem;
+}
+
+/* Sidebar - Modo Oscuro */
+[data-theme='dark'] .menu__link {
+  color: #cbd5e1;
+}
+
+[data-theme='dark'] .menu__link:hover {
+  background-color: rgba(96, 165, 250, 0.15);
+  color: #60a5fa;
+}
+
+[data-theme='dark'] .menu__link--active {
+  background-color: rgba(30, 58, 138, 0.4);
+  color: #f8fafc;
+  border-left-color: #60a5fa;
+}
+
+[data-theme='dark'] .menu__link--active::before {
+  background-color: #60a5fa;
+}
+
+[data-theme='dark'] .menu__link--sublist {
+  color: #e2e8f0;
+}
+
+/* Admonitions (notas, warnings, etc) */
+.admonition {
+  font-size: 0.95rem;
+}
+
+.admonition-heading h5 {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+/* Títulos - Modo Claro */
+h1 {
+  color: var(--ifm-color-primary-darkest);
+  font-weight: 700;
+}
+
+h2 {
+  color: var(--ifm-color-primary-darker);
+  font-weight: 600;
+  border-bottom: 2px solid var(--ifm-color-primary-lightest);
+  padding-bottom: 0.5rem;
+}
+
+h3 {
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+/* Títulos - Modo Oscuro */
+[data-theme='dark'] h1 {
+  color: #f8fafc;
+}
+
+[data-theme='dark'] h2 {
+  color: #93c5fd;
+  border-bottom-color: #1e3a8a;
+}
+
+[data-theme='dark'] h3 {
+  color: #60a5fa;
+}
+
+.markdown > h2:first-child {
+  margin-top: 0;
+}
+
+/* Tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+[data-theme='dark'] table {
+  color: #e2e8f0;
+}
+
+/* Links */
+a {
+  color: var(--ifm-color-primary);
+}
+
+[data-theme='dark'] a {
+  color: #60a5fa;
+}
+
+a:hover {
+  color: var(--ifm-color-primary-darker);
+}
+
+[data-theme='dark'] a:hover {
+  color: #93c5fd;
+}
+
+/* ===========================================
+   TABLE OF CONTENTS (TOC) - On This Page
+   =========================================== */
+
+/* Contenedor del TOC */
+.table-of-contents {
+  font-size: 0.85rem;
+  padding: 12px;
+  border-left: 1px solid #e5e7eb;
+}
+
+/* Links del TOC */
+.table-of-contents__link {
+  color: #6b7280;
+  padding: 6px 12px;
+  display: block;
+  border-radius: 4px;
+  margin: 2px 0;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  position: relative;
+}
+
+.table-of-contents__link:hover {
+  color: #1e3a8a;
+  background-color: rgba(30, 58, 138, 0.06);
+}
+
+.table-of-contents__link--active {
+  color: #1e3a8a;
+  font-weight: 600;
+  background-color: rgba(30, 58, 138, 0.1);
+  border-left: 3px solid #1e3a8a;
+  margin-left: -3px;
+  padding-left: 12px;
+}
+
+/* Nivel 2 (h2) en el TOC */
+.table-of-contents__link--active.table-of-contents__link--level-2 {
+  border-left-color: #3b82f6;
+}
+
+.table-of-contents__link--level-2 {
+  padding-left: 20px;
+}
+
+/* Nivel 3 (h3) en el TOC */
+.table-of-contents__link--level-3 {
+  padding-left: 28px;
+  font-size: 0.8rem;
+}
+
+/* Modo Oscuro - TOC */
+[data-theme='dark'] .table-of-contents {
+  border-left-color: #374151;
+}
+
+[data-theme='dark'] .table-of-contents__link {
+  color: #94a3b8;
+}
+
+[data-theme='dark'] .table-of-contents__link:hover {
+  color: #60a5fa;
+  background-color: rgba(96, 165, 250, 0.1);
+}
+
+[data-theme='dark'] .table-of-contents__link--active {
+  color: #60a5fa;
+  background-color: rgba(96, 165, 250, 0.15);
+  border-left-color: #60a5fa;
+}
+
+/* Transición suave */
+.table-of-contents__link {
+  transition: all 0.2s ease-in-out;
+}
