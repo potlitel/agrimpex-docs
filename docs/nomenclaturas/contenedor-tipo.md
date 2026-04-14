@@ -2,7 +2,7 @@
 sidebar_position: 7
 ---
 
-# Tipos de Contenedor
+# Tipos de Contenedor 📦
 
 ## Descripción
 
@@ -12,6 +12,15 @@ El catálogo de **Tipos de Contenedor** define las diferentes especificaciones y
 
 - **Menú**: Nomenclaturas → Tipos de Contenedor
 - **Ruta directa**: `/management/nomenclatures/container-type`
+
+## User Stories Asociadas
+
+| HU | Nombre | Descripción |
+|----|--------|-------------|
+| HU-42 | Adicionar Tipo de contenedor | Crear nuevos tipos |
+| HU-43 | Editar Tipo de contenedor | Modificar tipos existentes |
+| HU-44 | Listar Tipo de contenedor | Ver todos los tipos activos |
+| HU-45 | Filtar Tipo de contenedor | Buscar y filtrar tipos |
 
 ## Interfaz
 
@@ -26,6 +35,48 @@ Este catálogo se utiliza en:
 - Cálculo de capacidad
 - Planificación de carga
 - Reporting de flete
+
+## Campos
+
+| Campo | Obligatorio | Descripción |
+|-------|-------------|-------------|
+| Código | Sí | Código de 2 caracteres (ej: GP, HC, RH, OT) |
+| Nombre | Sí | Nombre descriptivo (hasta 30 caracteres) |
+| Activo | Sí | Toggle (por defecto: Activo) |
+
+## Operaciones CRUD
+
+### HU-42: Adicionar Tipo de contenedor
+
+1. Accede al módulo de Tipos de Contenedor
+2. Haz clic en **"+ Adicionar Tipo"**
+3. Ingresa el código (2 caracteres alfabéticos)
+4. Ingresa el nombre
+5. Verifica que esté activo
+6. Haz clic en **"Guardar"**
+
+### HU-43: Editar Tipo de contenedor
+
+1. Busca el tipo en la tabla
+2. Haz clic en editar
+3. Modifica el código o nombre
+4. Puedes activar/desactivar
+5. Guarda los cambios
+
+### HU-44: Listar Tipo de contenedor
+
+- Muestra todos los tipos activos
+- Ordenado alfabéticamente por código
+
+### HU-45: Filtar Tipo de contenedor
+
+| Filtro | Tipo |
+|--------|------|
+| Código | Búsqueda parcial |
+| Nombre | Búsqueda parcial |
+| Estado filter | Activo/Inactivo |
+
+---
 
 ## Tipos Estándar
 
@@ -47,33 +98,14 @@ Este catálogo se utiliza en:
 | GM | Garment | Para ropa en perchas |
 | BB | Bulk | Para carga a granel |
 
-## Campos
+---
 
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| Código | Texto | Código identificador (HU20, RF, etc.) |
-| Nombre | Texto | Nombre descriptivo |
-| Descripción | Texto | Detalles del tipo |
-| Longitud | Número | Longitud en pies |
-| Anchura | Número | Anchura en pies |
-| Altura | Número | Altura en pies |
-| Capacidad Volumen | Número | Volumen en m³ |
-| Capacidad Peso | Número | Peso máximo en kg |
-| Es Refrigerado | Booleano | Si requiere temperatura controlada |
-| Activo | Booleano | Si está disponible |
+## Reglas de Negocio
 
-## Crear Tipo de Contenedor
-
-1. Accede al módulo de Tipos de Contenedor
-2. Haz clic en **"+ Agregar Tipo"**
-3. Completa los campos técnicos:
-   - Código ISO estándar (recomendado)
-   - Nombre descriptivo
-   - Dimensiones (largo, ancho, alto)
-   - Capacidad en volumen y peso
-4. Activa "Es Refrigerado" si aplica
-5. Activa el toggle "Activo"
-6. Haz clic en **"Guardar"**
+- El código debe ser único y de 2 caracteres
+- El nombre debe ser único (hasta 30 caracteres)
+- Se crea con estado Activo por defecto
+- Solo tipos Activos aparecen en los listados
 
 ---
 

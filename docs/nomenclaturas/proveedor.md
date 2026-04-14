@@ -2,7 +2,7 @@
 sidebar_position: 16
 ---
 
-# Proveedores
+# Proveedores 🏭
 
 ## Descripción
 
@@ -12,6 +12,10 @@ El catálogo de **Proveedores** registra la información de todos los proveedore
 
 - **Menú**: Nomenclaturas → Proveedores
 - **Ruta directa**: `/management/nomenclatures/supplier`
+
+## User Stories Associadas
+
+El catálogo de Proveedores sigue el patrón CRUD estándar.
 
 ## Interfaz
 
@@ -27,6 +31,28 @@ Este catálogo se utiliza en:
 - Trazabilidad de origen
 - Evaluación de proveedores
 
+## Campos
+
+| Campo | Obligatorio | Descripción |
+|-------|-------------|-------------|
+| No. MINCEX | Sí | Número de identificación MINCEX |
+| Nombre de la compañía | Sí | Nombre del proveedor |
+| País | Sí | País de origen |
+
+## Datos de Ejemplo
+
+| No. MINCEX | Nombre de la compañía | País |
+|------------|----------------------|------|
+| 8788999453333 | Will Supply | Alemania |
+| 5475566666688 | COMERCIALIZADORA DIEGO | EUA |
+| 6455445666666 | NIXIA LATINO TRADING | EUA |
+| 5656566777777 | CARIBBEAN LOGISTIC | EUA |
+| 8878889989899 | PTG Trading | ITALIA |
+| 8889054445555 | AGRENFRUT | FRANCIA |
+| 3344567833578 | DALIAN PEREZ | TURKIA |
+
+---
+
 ## Tipos de Proveedor
 
 | Código | Tipo | Descripción |
@@ -36,79 +62,13 @@ Este catálogo se utiliza en:
 | AGENTE | Agente | Representante comercial |
 | COMISIONISTA | Comisionista | Intermediario |
 
-## Campos
+---
 
-### Identificación
+## Reglas de Negocio
 
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| Código | Texto | Identificador único |
-| Nombre | Texto | Nombre del proveedor |
-| Nombre Local | Texto | Nombre en idioma local |
-| País | Relación | País de origen |
-| Estado | Relación | Estado/Provincia |
-| Condado | Relación | Ciudad/Municipio |
-
-### Información Legal
-
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| RUC / Tax ID | Texto | Identificador fiscal |
-| Tipo Identificación | Texto | Tipo de ID fiscal |
-
-### Dirección
-
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| Dirección | Texto | Dirección completa |
-| Código Postal | Texto | Código postal |
-| Ciudad | Texto | Ciudad |
-
-### Contacto
-
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| Contacto Principal | Texto | Persona de contacto |
-| Cargo | Texto | Cargo del contacto |
-| Teléfono | Texto | Teléfono |
-| Email | Texto | Correo electrónico |
-| Web | Texto | Sitio web |
-
-### Información Comercial
-
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| Productos | Lista | Productos que surte |
-| Tiempo Entrega | Número | Días de entrega típico |
-| Condiciones Pago | Texto | Términos de pago |
-| Moneda | Relación | Moneda de transacción |
-| Descuento | Número | Descuento estándar (%) |
-| Calificación | Texto | Evaluación (A, B, C) |
-
-## Crear Proveedor
-
-1. Accede al módulo de Proveedores
-2. Haz clic en **"+ Agregar Proveedor"**
-3. Completa identificación:
-   - Código y nombre
-   - Tipo de proveedor
-   - Identificación fiscal
-4. Define ubicación:
-   - País, estado, condado
-   - Dirección completa
-5. Agrega información de contacto
-6. Configura comercialmente:
-   - Productos que surte
-   - Condiciones de pago
-   - Moneda de transacción
-7. Activa el toggle "Activo"
-8. Haz clic en **"Guardar"**
-
-## Evaluar Proveedor
-
-:::info NOTA
-Mantén actualizada la calificación del proveedor basada en el desempeño: calidad, tiempos de entrega, cumplimiento de especificaciones.
-:::
+- El número MINCEX debe ser único
+- El país es requerido
+- Solo proveedores Activos aparecen en los listados
 
 ---
 

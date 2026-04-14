@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# Condados / Municipios
+# Condados / Municipios 🏘️
 
 ## Descripción
 
@@ -12,6 +12,15 @@ El catálogo de **Condados** (o municipios) representa el nivel más detallado d
 
 - **Menú**: Nomenclaturas → Condados
 - **Ruta directa**: `/management/nomenclatures/county`
+
+## User Stories Asociadas
+
+| HU | Nombre | Descripción |
+|----|--------|-------------|
+| HU-26 | Adicionar Condado | Crear nuevos condados |
+| HU-27 | Editar Condado | Modificar condados existentes |
+| HU-28 | Listar Condado | Ver todos los condados activos |
+| HU-29 | Filtar Condado | Buscar y filtrar condados |
 
 ## Interfaz
 
@@ -37,39 +46,56 @@ Cada Condado debe estar asociado a un Estado.
 
 ## Campos
 
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| Código | Texto | Código identificador del condado |
-| Nombre | Texto | Nombre del municipio o condado |
-| Estado | Relación | Estado al que pertenece |
-| Tipo | Texto | Tipo (urbano, rural, especial) |
-| Activo | Booleano | Si el condado está disponible |
+| Campo | Obligatorio | Descripción |
+|-------|-------------|-------------|
+| Nombre del condado | Sí | Nombre del municipio o condado |
+| Estado | Sí | Estado al que pertenece |
+| Activo | Sí | Estado (toggle) |
 
-## Crear Condado
+## Operaciones CRUD
+
+### HU-26: Adicionar Condado
 
 1. Accede al módulo de Condados
-2. Haz clic en **"+ Agregar Condado"**
-3. Completa los campos:
-   - Ingresa el código
-   - Ingresa el nombre
-   - Selecciona el estado padre
-   - Selecciona el tipo de zona
-4. Activa el toggle "Activo"
-5. Haz clic en **"Guardar"**
+2. Haz clic en **"+ Adicionar Condado"**
+3. Ingresa el nombre del condado
+4. Selecciona el estado padre
+5. Verifica que esté activo
+6. Haz clic en **"Guardar"**
 
-## Eliminar Condado
+### HU-27: Editar Condado
+
+1. Busca el condado en la tabla
+2. Haz clic en editar
+3. Modifica el nombre o el estado
+4. Puedes activar/desactivar
+5. Guarda los cambios
+
+### HU-28: Listar Condado
+
+- Muestra todos los condados activos
+- Ordenado alfabéticamente por nombre
+- Muestra el estado padre
+
+### HU-29: Filtar Condado
+
+| Filtro | Tipo |
+|--------|------|
+| Condado | Búsqueda parcial |
+| Estado | Dropdown |
+| Estado filter | Activo/Inactivo |
+
+---
+
+## Reglas de Negocio
+
+- El nombre del condado debe ser único dentro del estado
+- Depende del catálogo de Estados
+- Solo condados Activos aparecen en los listados
 
 :::danger ADVERTENCIA
 No puedes eliminar un condado que tenga clientes, plantas u otras entidades asociadas.
 :::
-
-## Ejemplo de Jerarquía
-
-| País | Estado | Condado |
-|------|--------|--------|
-| Cuba | La Habana | Plaza de la Revolución |
-| Cuba | La Habana | Centro Habana |
-| Cuba | Matanzas | Cárdenas |
 
 ---
 

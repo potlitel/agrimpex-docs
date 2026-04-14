@@ -2,16 +2,25 @@
 sidebar_position: 14
 ---
 
-# Estados de Solicitud (SAP)
+# Estados de Solicitud SAP 📋
 
 ## Descripción
 
-El catálogo de **Estados SAP** define los estados del proceso de solicitud de permisos ante las autoridades competentes. Estos estados reflejan el flujo de trabajo desde la solicitud inicial hasta la aprobación final.
+El catálogo de **Estados de Solicitud** (también llamado Estados SAP) define los estados del proceso de solicitud de permisos ante las autoridades competentes. Estos estados reflejan el flujo de trabajo desde la solicitud inicial hasta la aprobación final.
 
 ## Acceso
 
 - **Menú**: Nomenclaturas → Estados de Solicitud
 - **Ruta directa**: `/management/nomenclatures/sap`
+
+## User Stories Asociadas
+
+| HU | Nombre | Descripción |
+|----|--------|-------------|
+| HU-54 | Adicionar Estado Solicitud Permiso | Crear nuevos estados |
+| HU-55 | Editar Estado Solicitud Permiso | Modificar estados existentes |
+| HU-56 | Listar Estado Solicitud Permiso | Ver todos los estados activos |
+| HU-57 | Filtar Estado Solicitud Permiso | Buscar y filtrar estados |
 
 ## Interfaz
 
@@ -26,6 +35,45 @@ Este catálogo se utiliza en:
 - Control de workflow
 - Reporting de tramitología
 - Gestión de tiempos
+
+## Campos
+
+| Campo | Obligatorio | Descripción |
+|-------|-------------|-------------|
+| Nombre del estado | Sí | Nombre del estado (único) |
+| Activo | Sí | Toggle (por defecto: Activo) |
+
+## Operaciones CRUD
+
+### HU-54: Adicionar Estado Solicitud Permiso
+
+1. Accede al módulo de Estados de Solicitud
+2. Haz clic en **"+ Adicionar Estado"**
+3. Ingresa el nombre del estado
+4. Verifica que esté activo
+5. Haz clic en **"Guardar"**
+
+### HU-55: Editar Estado Solicitud Permiso
+
+1. Busca el estado en la tabla
+2. Haz clic en editar
+3. Modifica el nombre
+4. Puedes activar/desactivar
+5. Guarda los cambios
+
+### HU-56: Listar Estado Solicitud Permiso
+
+- Muestra todos los estados activos
+- Ordenado alfabéticamente por nombre
+
+### HU-57: Filtar Estado Solicitud Permiso
+
+| Filtro | Tipo |
+|--------|------|
+| Estado | Búsqueda parcial |
+| Estado filter | Activo/Inactivo |
+
+---
 
 ## Flujo de Estados
 
@@ -51,51 +99,14 @@ REMITIDO → EN_TRÁMITE → OTORGADO
 | RECHAZADO | Rechazado | Solicitud denegada |
 | CADUCADO | Caducado | Vigencia vencida |
 
-## Campos
+---
 
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| Código | Texto | Identificador del estado |
-| Nombre | Texto | Nombre descriptivo |
-| Descripción | Texto | Detalles del estado |
-| Categoría | Texto | Categoría (inicial, intermedio, final) |
-| Color | Color | Color para visualización |
-| Permite Edición | Booleano | Si permite editar solicitud |
-| Permite Documentos | Booleano | Si permite subir documentos |
-| Estado Final | Booleano | Si es un estado terminal |
-| Activo | Booleano | Si está disponible |
+## Reglas de Negocio
 
-## Configuración de Workflow
-
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| Estados Siguientes | Lista | Estados a los que puede avanzar |
-| Requiere Justificación | Booleano | Si requiere explicación |
-| Notifica Usuario | Booleano | Si notifica al solicitante |
-
-## Crear Estado SAP
-
-1. Accede al módulo de Estados SAP
-2. Haz clic in **"+ Agregar Estado"**
-3. Completa los datos:
-   - Código y nombre
-   - Descripción
-   - Categoría
-4. Configura el comportamiento:
-   - Permite edición
-   - Permite documentos
-   - Notifica usuario
-5. Define si es estado final
-6. Especifica los estados siguientes posibles
-7. Asigna un color para la UI
-8. Activa el toggle "Activo"
-9. Guarda el registro
-
-## Configuración de Transiciones
-
-:::info NOTA
-Es importante configurar correctamente las transiciones entre estados para mantener la integridad del workflow de solicitudes.
-:::
+- El nombre del estado debe ser único
+- Solo caracteres alfabéticos
+- Se crea con estado Activo por defecto
+- Solo estados Activos aparecen en los listados
 
 ---
 

@@ -2,7 +2,7 @@
 sidebar_position: 15
 ---
 
-# Clientes
+# Clientes 👥
 
 ## Descripción
 
@@ -12,6 +12,10 @@ El catálogo de **Clientes** contiene la información de todas las empresas o pe
 
 - **Menú**: Nomenclaturas → Clientes
 - **Ruta directa**: `/management/nomenclatures/client`
+
+## User Stories Associadas
+
+El catálogo de Clientes sigue el patrón CRUD estándar.
 
 ## Interfaz
 
@@ -27,6 +31,26 @@ Este catálogo se utiliza en:
 - Órdenes de entrega
 - Reporting comercial
 
+## Campos
+
+| Campo | Obligatorio | Descripción |
+|-------|-------------|-------------|
+| NIT | Sí | Identificador tributario |
+| Nombre | Sí | Nombre del cliente |
+| Administrador | No | Nombre del administrador |
+| Correo | No | Correo electrónico |
+| Teléfono | No | Teléfono de contacto |
+| Tipo Forma Gestión | Sí | Mipyme o TCP |
+
+## Datos de Ejemplo
+
+| NIT | Nombre | Administrador | Correo | Teléfono | Tipo Forma Gestión |
+|-----|--------|---------------|--------|----------|-------------------|
+| 678899999999 | MALPICA | Jose L. Rodriguez Rodriguez | joser@gmail.com | 55555555 | Mipyme |
+| 532236895633 | CARBONEL VARGAS SURL | Angel Carbonel Díaz | carbonel@gmail.com | 51887458 | TCP |
+
+---
+
 ## Tipos de Cliente
 
 | Código | Tipo | Descripción |
@@ -36,72 +60,13 @@ Este catálogo se utiliza en:
 | PERSONA | Persona Natural | Particular |
 | COOPERATIVA | Cooperativa | Cooperativa productiva |
 
-## Campos
+---
 
-### Identificación
+## Reglas de Negocio
 
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| Código | Texto | Identificador único del cliente |
-| Tipo | Relación | Tipo de cliente |
-| RUC / NIT | Texto | Identificador tributario |
-| Nombre Comercial | Texto | Nombre de fantasía |
-| Razón Social | Texto | Nombre legal completo |
-| País | Relación | País de residencia |
-| Estado | Relación | Estado/Provincia |
-| Condado | Relación | Municipio |
-
-### Información de Contacto
-
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| Dirección | Texto | Dirección completa |
-| Teléfono Principal | Texto | Teléfono principal |
-| Teléfono Secundario | Texto | Teléfono secundario |
-| Email Principal | Texto | Correo principal |
-| Email Facturación | Texto | Correo para facturas |
-| Web | Texto | Sitio web |
-
-### Información Comercial
-
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| Cliente Desde | Fecha | Fecha de primer contacto |
-| Categoría | Texto | Categoría (VIP, Regular, Nuevo) |
-| Límite Crédito | Número | Límite de crédito autorizado |
-| Condiciones Pago | Texto | Términos de pago |
-| Descuento | Número | Descuento porcentual |
-| Vendedor Asignado | Relación | Comercial responsable |
-
-## Crear Cliente
-
-1. Accede al módulo de Clientes
-2. Haz clic en **"+ Agregar Cliente"**
-3. Completa la identificación:
-   - Código interno
-   - Tipo de cliente
-   - RUC/NIT
-   - Nombre comercial y razón social
-4. Define la ubicación:
-   - País, estado, condado
-   - Dirección completa
-5. Agrega contactos:
-   - Teléfonos
-   - Emails
-6. Configura información comercial:
-   - Categoría
-   - Límite de crédito
-   - Condiciones de pago
-7. Activa el toggle "Activo"
-8. Haz clic en **"Guardar"**
-
-## Información Adicional
-
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| Contacto Principal | Texto | Persona de contacto |
-| Cargo Contacto | Texto | Cargo del contacto |
-| Notas | Texto | Observaciones adicionales |
+- El NIT debe ser único
+- El tipo de forma de gestión es requerido
+- Solo clientes Activos aparecen en los listados
 
 ---
 
