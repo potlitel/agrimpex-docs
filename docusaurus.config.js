@@ -7,10 +7,6 @@ const config = {
   tagline: 'Sistema de Gestión de Importaciones',
   favicon: 'img/favicon.ico',
 
-  future: {
-    v4: true,
-  },
-
   url: 'https://agrimpex.eicma.cu',
   baseUrl: '/',
 
