@@ -801,6 +801,616 @@
       "suffix": "exportacion",
       "route": "/logistic/reports",
       "scrollY": 500
+    },
+    {
+      "docId": "nomenclaturas/moneda",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/currency/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/moneda",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/currency/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/moneda",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/currency/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/permiso",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/permit-type/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/permiso",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/permit-type/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/permiso",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/permit-type/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/contenedor-tipo",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/container-type/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/contenedor-tipo",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/container-type/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/contenedor-tipo",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/container-type/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/area",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/area/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/area",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/area/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/area",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/area/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/cargo",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/cargo/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/cargo",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/cargo/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/cargo",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/cargo/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/pais",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/country/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/pais",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/country/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/pais",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/country/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/condado",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/county/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/condado",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/county/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/condado",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/county/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/estado",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/state/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/estado",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/state/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/estado",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/state/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/contenedor-estado",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/containers-state/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/contenedor-estado",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/containers-state/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/contenedor-estado",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/containers-state/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/operador",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/operator/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/operador",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/operator/list",
+      "scrollY": 420,
+      "scrollRight": true
+    },
+    {
+      "docId": "nomenclaturas/operador",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/operator/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/carga",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/loads-type/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/carga",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/loads-type/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/carga",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/loads-type/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/planta",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/plant/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/planta",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/plant/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/planta",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/plant/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/producto",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/product/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/producto",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/product/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/producto",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/product/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/sap",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/sap/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/sap",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/sap/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/sap",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/sap/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/contract",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/contract/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/contract",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/contract/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/oferta",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/oferta/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/oferta",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/oferta/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/cliente",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/client/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/cliente",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/client/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/proveedor",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/supplier/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/proveedor",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/supplier/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/gestion",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/management-type/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/gestion",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/management-type/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/product-line",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/product-line/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/product-line",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/product-line/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/product-origin",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/product-origin/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/product-origin",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/product-origin/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/product-origin",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/product-origin/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/port",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/port/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/port",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/port/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/port",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/port/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/shipper",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/shipper/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/shipper",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/shipper/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/shipper",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/shipper/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/airline",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/airline/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/airline",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/airline/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/airline",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/airline/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/airport",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/airport/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/airport",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/airport/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/airport",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/airport/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/ship",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/ship/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/ship",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/ship/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/ship",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/ship/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/download-address",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/download-address/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/download-address",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/download-address/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/download-address",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/download-address/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/solicitud-compra",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/solicitud-compra/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/solicitud-compra",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/solicitud-compra/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/manufacturer",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/manufacturer/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/manufacturer",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/manufacturer/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/manufacturer",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/manufacturer/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/brand",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/brand/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/brand",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/brand/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/brand",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/brand/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/unit-of-measure",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/unit-of-measure/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/unit-of-measure",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/unit-of-measure/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/unit-of-measure",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/unit-of-measure/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/categoria",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/categoria/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/categoria",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/categoria/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/categoria",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/categoria/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/margen-comercial",
+      "suffix": "filtros",
+      "route": "/management/nomenclatures/margen-comercial/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "nomenclaturas/margen-comercial",
+      "suffix": "operaciones",
+      "route": "/management/nomenclatures/margen-comercial/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "nomenclaturas/margen-comercial",
+      "suffix": "formulario",
+      "route": "/management/nomenclatures/margen-comercial/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/index",
+      "suffix": "mapa-basicos",
+      "route": "/management/nomenclatures/currency/list",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/index",
+      "suffix": "mapa-logisticos",
+      "route": "/management/nomenclatures/port/list",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/index",
+      "suffix": "mapa-comerciales",
+      "route": "/management/nomenclatures/contract/list",
+      "scrollY": 0
+    },
+    {
+      "docId": "nomenclaturas/index",
+      "suffix": "mapa-apoyo",
+      "route": "/management/nomenclatures/airport/list",
+      "scrollY": 0
     }
 
   ]

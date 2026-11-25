@@ -24,7 +24,7 @@ const allowedExtraHeadings = [
   'Formulario de inicio de sesión', 'Sesión, errores y redirecciones',
   'Formulario de recuperación', 'Envío del código',
   'Formulario de nueva contraseña', 'Validación del código y errores',
-  'Mapa del módulo', 'Operaciones y estados', 'Uso del asistente',
+  'Mapa del módulo', 'Operaciones y estados', 'Uso del asistente', 'Excepciones del nomenclador',
   'Control y trazabilidad', 'Columnas y resultados', 'Generación y exportación',
 ];
 const expectedScreenCount = 113;
@@ -223,6 +223,19 @@ if (!inventoryOnly) {
         fail(`Manifiesto: scrollRight inválido en ${label}`);
       }
     }
+    if (capture.docId.startsWith('nomenclaturas/')) {
+      for (const key of ['clickText', 'waitForText', 'waitFor']) {
+        if (capture[key] !== undefined && (typeof capture[key] !== 'string' || !capture[key].trim())) {
+          fail(`Manifiesto: ${key} inválido en ${label}`);
+        }
+      }
+      if (capture.scrollY !== undefined && (!Number.isInteger(capture.scrollY) || capture.scrollY < 0)) {
+        fail(`Manifiesto: scrollY inválido en ${label}`);
+      }
+      if (capture.scrollRight !== undefined && typeof capture.scrollRight !== 'boolean') {
+        fail(`Manifiesto: scrollRight inválido en ${label}`);
+      }
+    }
     if (capture.docId.startsWith('administracion/')) {
       for (const key of ['clickText', 'waitForText']) {
         if (capture[key] !== undefined && (typeof capture[key] !== 'string' || !capture[key].trim())) {
@@ -286,6 +299,47 @@ if (!inventoryOnly) {
     'logistica/reportes',
   ];
   for (const docId of logisticaDocIds) {
+    if (!captures.some((capture) => capture.docId === docId)) {
+      fail(`Manifiesto: faltan capturas sufijadas para ${docId}`);
+    }
+  }
+  const nomenclaturasDocIds = [
+    'nomenclaturas/index',
+    'nomenclaturas/moneda',
+    'nomenclaturas/permiso',
+    'nomenclaturas/contenedor-tipo',
+    'nomenclaturas/area',
+    'nomenclaturas/cargo',
+    'nomenclaturas/pais',
+    'nomenclaturas/condado',
+    'nomenclaturas/estado',
+    'nomenclaturas/contenedor-estado',
+    'nomenclaturas/operador',
+    'nomenclaturas/carga',
+    'nomenclaturas/planta',
+    'nomenclaturas/producto',
+    'nomenclaturas/sap',
+    'nomenclaturas/contract',
+    'nomenclaturas/oferta',
+    'nomenclaturas/cliente',
+    'nomenclaturas/proveedor',
+    'nomenclaturas/gestion',
+    'nomenclaturas/product-line',
+    'nomenclaturas/product-origin',
+    'nomenclaturas/port',
+    'nomenclaturas/shipper',
+    'nomenclaturas/airline',
+    'nomenclaturas/airport',
+    'nomenclaturas/ship',
+    'nomenclaturas/download-address',
+    'nomenclaturas/solicitud-compra',
+    'nomenclaturas/manufacturer',
+    'nomenclaturas/brand',
+    'nomenclaturas/unit-of-measure',
+    'nomenclaturas/categoria',
+    'nomenclaturas/margen-comercial',
+  ];
+  for (const docId of nomenclaturasDocIds) {
     if (!captures.some((capture) => capture.docId === docId)) {
       fail(`Manifiesto: faltan capturas sufijadas para ${docId}`);
     }
@@ -362,6 +416,16 @@ if (!inventoryOnly) {
         if (tabbedForms.includes(screen.docId) && heading === 'Formulario (alta y edición)'
           && new Set(suffixed).size < 2) {
           fail(`docs/${screen.docId}.md: "Formulario (alta y edición)" debe mostrar al menos dos capturas de las pestañas`);
+        }
+      }
+      if (screen.docId.startsWith('nomenclaturas/')) {
+        const suffixed = images.filter((image) => image.startsWith(`${screen.docId}-`));
+        if (!suffixed.length) {
+          fail(`docs/${screen.docId}.md: la sección "${heading}" debe mostrar una captura sufijada del manifiesto`);
+        }
+        if (screen.docId === 'nomenclaturas/index' && heading === 'Mapa del módulo'
+          && new Set(suffixed).size < 2) {
+          fail(`docs/${screen.docId}.md: "Mapa del módulo" debe mostrar al menos dos capturas del módulo`);
         }
       }
     }
