@@ -1,24 +1,36 @@
 ---
-sidebar_position: 7
+sidebar_position: 8
+source_route: /dashboard
+source_component: TemplateSidebarComponent
+status: vigente
 ---
 
-# Plantilla de Documentación
+# Componentes de plantilla
 
-## Descripción
+## Propósito
 
-Esta página estándar documenta el uso y construcción de páginas del manual de usuario Agrimpex. Las páginas del sistema se construyen a partir de una estructura estándar: título, descripción, acceso, componentes o funcionalidades, y notas suplementarias según el caso.
+Referencia técnica de los componentes de plantilla reutilizados en el backoffice.
 
-## Estructura de una Página
+## Acceso
 
-- **Título:** nombre descriptivo del módulo o funcionalidad
-- **Descripción:** explicación general del módulo y sus funciones
-- **Acceso:** ruta o menú para llegar al módulo
-- **Componentes:** listado de componentes principales con descripción breve
-- **Relacionados:** enlaces a páginas relacionadas
+- **Menú:** Acerca del Sistema → Componentes de plantilla
+- **Ruta directa:** `/dashboard`
+- **Componente:** `TemplateSidebarComponent`
 
-## Notas Adicionales
+## Captura
 
-- Las páginas de documentación deben usar español y un tono claro y directo
-- Se usan cabeceras (`##`) para organizar la información
-- Las tablas se usan para datos estructurados y listas de elementos
-- Las alertas (`:::info`, `:::note`, `:::warning`) destacan información útil
+![template — captura real](/img/screenshots/core/template.png)
+
+*Captura tomada del backoffice Agrimpex.*
+
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Componente | Componente compartido de la plantilla. | No |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Ver ejemplo | Acceder | Todo usuario autenticado | `/dashboard` |

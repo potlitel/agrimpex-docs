@@ -1,25 +1,37 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
+source_route: /error/404
+source_component: Error404Component
+status: vigente
 ---
 
-# Errores Comunes
+# Páginas de error
 
-## Descripción
+## Propósito
 
-Esta página documenta los errores comunes del sistema Agrimpex y sus soluciones posibles.
+Explica las páginas de error 404 y 500 del backoffice.
 
-## Solución de Problemas
+## Acceso
 
-Si presentas un error no descrito en esta página, revisa que estés usando la versión correcta del sistema y que tu conexión esté estable; si el problema persiste, contacta al equipo de soporte.
+- **Menú:** Acerca del Sistema → Páginas de error
+- **Ruta directa:** `/error/404`
+- **Componente:** `Error404Component`
 
-## Notificación de Problemas
+## Captura
 
-Si encuentras un problema en el funcionamiento del sistema, se recomienda:
+![errors — captura real](/img/screenshots/core/errors.png)
 
-1. Anotar el mensaje de error exacto, si existe
-2. Describir los pasos seguidos para reproducirlo
-3. Notificarlo para su revisión y seguimiento
+*Captura tomada del backoffice Agrimpex.*
 
-:::note
-Los errores detectados se revisan periódicamente; esta página se actualiza según la frecuencia de los mismos.
-:::
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Código | 404 o 500. | No |
+| Mensaje | Detalle del error. | No |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Regresar | Regresar | Público (sin autenticación) | `/dashboard` |

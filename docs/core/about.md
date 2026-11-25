@@ -1,22 +1,36 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
+source_route: /about
+source_component: AboutPage
+status: vigente
 ---
 
-# Sobre Agrimpex
+# Acerca de
 
-## Descripción
+## Propósito
 
-Agrimpex es el sistema de gestión de importaciones del proyecto Agrimpex. Es una aplicación que permite administrar los datos, procesos de importación y seguridad del sistema.
+Descripción institucional del sistema Agrimpex.
 
-## Propósito del Sistema
+## Acceso
 
-El sistema de gestión de importaciones permite:
+- **Menú:** Acerca del Sistema → Acerca de
+- **Ruta directa:** `/about`
+- **Componente:** `AboutPage`
 
-- Registrar y administrar datos de operaciones de importación
-- Control de acceso y seguridad
-- Trazabilidad de las operaciones realizadas
-- Visualización y reportes de los procesos
+## Captura
 
-## Contacto
+![about — captura real](/img/screenshots/core/about.png)
 
-Si necesitas más información sobre el sistema, puedes contactar al equipo de desarrollo a través de los canales oficiales del proyecto Agrimpex.
+*Captura tomada del backoffice Agrimpex.*
+
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Producto | Agrimpex y su propósito. | No |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Leer | Acceder | Público (sin autenticación) | `/about` |

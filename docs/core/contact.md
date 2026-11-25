@@ -1,27 +1,36 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
+source_route: /contact
+source_component: ContactPage
+status: vigente
 ---
 
 # Contacto
 
-## Descripción
+## Propósito
 
-A continuación, encuentras la información de contacto del proyecto Agrimpex y del equipo de desarrollo del sistema de gestión de importaciones.
+Datos de contacto para soporte del sistema.
 
-## Información de Contacto
+## Acceso
 
-| Canal | Información |
-|-------|-------------|
-| Proyecto | Agrimpex - Gestión de Importaciones |
-| Repositorio | GitLab (proyecto Agrimpex) |
-| Organización | EICMA Soft |
+- **Menú:** Acerca del Sistema → Contacto
+- **Ruta directa:** `/contact`
+- **Componente:** `ContactPage`
 
-## Páginas Destacadas
+## Captura
 
-- [Introducción](/docs/intro): descripción general del sistema
-- [Gestión de Contenedores](/docs/logistica/contenedores)
-- [Trazabilidad y Seguridad](/docs/seguridad/trazabilidad)
+![contact — captura real](/img/screenshots/core/contact.png)
 
-:::info
-Para soporte técnico, revisa primero la documentación y el manual de usuario; los tickets de soporte se tratan caso por caso según la urgencia y el alcance reportado.
-:::
+*Captura tomada del backoffice Agrimpex.*
+
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Correo electrónico | Canal de contacto. | No |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Contactar | Enviar email | Público (sin autenticación) | `/contact` |

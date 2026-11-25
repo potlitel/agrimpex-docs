@@ -3,160 +3,249 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const puppeteer = require('puppeteer-core');
 const path = require('path');
 const fs = require('fs');
+const os = require('os');
 const sqlite3 = require('sqlite3').verbose();
 
-const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const NOMENCLADORES = [
-  { slug: 'area', name: 'Areas', route: '/management/nomenclatures/area/list' },
-  { slug: 'country', name: 'Paises', route: '/management/nomenclatures/country/list' },
-  { slug: 'state', name: 'Estados', route: '/management/nomenclatures/state/list' },
-  { slug: 'county', name: 'Condados', route: '/management/nomenclatures/county/list' },
-  { slug: 'containers-state', name: 'EstadosContenedor', route: '/management/nomenclatures/containers-state/list' },
-  { slug: 'container-type', name: 'TiposContenedor', route: '/management/nomenclatures/container-type/list' },
-  { slug: 'permit-type', name: 'TiposPermiso', route: '/management/nomenclatures/permit-type/list' },
-  { slug: 'loads-type', name: 'TiposCarga', route: '/management/nomenclatures/loads-type/list' },
-  { slug: 'currency', name: 'Monedas', route: '/management/nomenclatures/currency/list' },
-  { slug: 'product', name: 'Productos', route: '/management/nomenclatures/product/list' },
-  { slug: 'operator', name: 'Operadores', route: '/management/nomenclatures/operator/list' },
-  { slug: 'plant', name: 'Plantas', route: '/management/nomenclatures/plant/list' },
-  { slug: 'sap', name: 'EstadosSAP', route: '/management/nomenclatures/sap/list' },
-  { slug: 'client', name: 'Clientes', route: '/management/nomenclatures/client/list' },
-  { slug: 'supplier', name: 'Proveedores', route: '/management/nomenclatures/supplier/list' },
-  { slug: 'management-type', name: 'TiposGestion', route: '/management/nomenclatures/management-type/list' },
-];
+const root = path.join(__dirname, '..');
+const inventoryPath = path.join(root, 'scripts/docs-inventory.json');
+const outputDir = path.join(root, 'static/img/screenshots');
+const baseUrl = (process.env.DOCS_CAPTURE_BASE_URL || 'http://localhost:5000').replace(/\/$/, '');
+const apiUrl = (process.env.DOCS_API_URL || 'http://127.0.0.1:8990').replace(/\/$/, '');
+const only = (process.env.DOCS_CAPTURE_ONLY || '').split(',').map((s) => s.trim()).filter(Boolean);
+const limit = Number(process.env.DOCS_CAPTURE_LIMIT || 0);
+const delay = Number(process.env.DOCS_CAPTURE_DELAY || 1500);
+const batchSize = Number(process.env.DOCS_CAPTURE_BATCH || 12);
+const appVersion = 'v1.0.0';
+const userDataKey = 'authf649fc9a5f55';
 
-const BASE_URL = 'https://localhost:5000';
-const OUTPUT_DIR = path.join(__dirname, '../static/img/nomenclaturas');
-const FIREFOX_PROFILE = process.env.HOME + '/snap/firefox/common/.mozilla/firefox/7a0g4z93.default-1767602802589';
+// Rutas con parámetros: se capturan con valores concretos de ejemplo.
+const ROUTE_OVERRIDES = {
+  'seguridad/notificaciones': '/logistic/notification/BL/BL-1',
+  'core/verify': '/verify/DEMO-CODE',
+};
 
-function getFirefoxCookies() {
-  return new Promise((resolve, reject) => {
-    const db = new sqlite3.Database(FIREFOX_PROFILE + '/cookies.sqlite', (err) => {
-      if (err) {
-        console.log('Error opening database:', err.message);
-        resolve([]);
-        return;
+const lsKeys = {
+  token: `${appVersion}-token-${userDataKey}`,
+  refreshToken: `${appVersion}-refresh_token`,
+  refreshExpiration: `${appVersion}-session_ttl`,
+};
+
+function resolveExecutable() {
+  const candidates = [
+    process.env.DOCS_CAPTURE_EXECUTABLE,
+    path.join(os.homedir(), '.cache/ms-playwright/chromium-1234/chrome-linux64/chrome'),
+    '/usr/bin/google-chrome',
+    '/usr/bin/chromium',
+    '/usr/bin/chromium-browser',
+  ].filter(Boolean);
+  const found = candidates.find((candidate) => fs.existsSync(candidate));
+  if (!found) throw new Error('No se encontró Chrome/Chromium. Define DOCS_CAPTURE_EXECUTABLE.');
+  return found;
+}
+
+function firefoxProfiles() {
+  const profiles = [process.env.DOCS_FIREFOX_PROFILE].filter(Boolean);
+  const base = path.join(os.homedir(), '.mozilla/firefox');
+  if (fs.existsSync(base)) {
+    for (const entry of fs.readdirSync(base, { withFileTypes: true })) {
+      if (entry.isDirectory() && /default/i.test(entry.name)) profiles.push(path.join(base, entry.name));
+    }
+  }
+  return profiles.filter((profile) => fs.existsSync(path.join(profile, 'cookies.sqlite')));
+}
+
+function readFirefoxToken(name) {
+  return new Promise((resolve) => {
+    const profiles = firefoxProfiles();
+    if (!profiles.length) return resolve(null);
+    let pending = profiles.length;
+    let best = null;
+    for (const profile of profiles) {
+      const source = path.join(profile, 'cookies.sqlite');
+      const target = path.join(os.tmpdir(), `agrimpex-docs-cookies-${path.basename(profile)}-${process.pid}.sqlite`);
+      try {
+        fs.copyFileSync(source, target);
+      } catch {
+        if (--pending === 0) return resolve(best);
+        continue;
       }
-    });
-
-    db.all('SELECT host, name, value, path, expiry, isSecure FROM moz_cookies WHERE host LIKE "%localhost%" OR host LIKE "%5000%"', [], (err, rows) => {
-      if (err) {
-        console.log('Error querying:', err.message);
-        resolve([]);
-        return;
-      }
-
-      const cookies = rows.map(row => ({
-        name: row.name,
-        value: row.value,
-        domain: row.host.startsWith('.') ? row.host : '.' + row.host,
-        path: row.path,
-        expires: row.expiry > 0 ? row.expiry : -1,
-        secure: row.isSecure === 1,
-        httpOnly: false
-      }));
-
-      console.log('Found ' + cookies.length + ' cookies for localhost');
-      db.close();
-      resolve(cookies);
-    });
+      const db = new sqlite3.Database(target, sqlite3.OPEN_READONLY, (error) => {
+        if (error) {
+          try { fs.unlinkSync(target); } catch {}
+          if (--pending === 0) return resolve(best);
+          return;
+        }
+        db.get('SELECT value, expiry FROM moz_cookies WHERE host="localhost" AND name=? ORDER BY expiry DESC LIMIT 1', [name], (queryError, row) => {
+          db.close();
+          try { fs.unlinkSync(target); } catch {}
+          if (!queryError && row && (!best || row.expiry > best.expiry)) best = row;
+          if (--pending === 0) resolve(best);
+        });
+      });
+    }
   });
 }
 
-async function captureScreenshots() {
-  const cookies = await getFirefoxCookies();
+function decodeExpiry(token) {
+  try {
+    const payload = JSON.parse(Buffer.from(token.split('.')[1], 'base64url').toString());
+    return payload.exp * 1000;
+  } catch {
+    return 0;
+  }
+}
 
-  const browser = await puppeteer.launch({
-    executablePath: '/usr/bin/google-chrome',
-    headless: 'new',
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--ignore-certificate-errors',
-      '--disable-gpu',
-      '--disable-dev-shm-usage'
-    ]
+async function refreshSession() {
+  if (process.env.DOCS_BEARER) {
+    return { token: process.env.DOCS_BEARER, refreshToken: null, expiration: decodeExpiry(process.env.DOCS_BEARER) };
+  }
+  const stored = await readFirefoxToken('refresh_token');
+  if (!stored) throw new Error('No hay refresh token de localhost en ningún perfil de Firefox.');
+  const response = await fetch(`${apiUrl}/api/refresh_token`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ refresh_token: stored.value }),
   });
+  if (!response.ok) throw new Error(`No se pudo refrescar la sesión: HTTP ${response.status} ${(await response.text()).slice(0, 200)}`);
+  const data = await response.json();
+  if (!data.token) throw new Error('La API no devolvió un token.');
+  return {
+    token: data.token,
+    refreshToken: data.refresh_token || stored.value,
+    expiration: data.refresh_token_expiration || decodeExpiry(data.token),
+  };
+}
 
-  const page = await browser.newPage();
-  await page.setViewport({ width: 1920, height: 1080 });
-
-  if (cookies.length > 0) {
-    console.log('Setting cookies...');
-    for (const cookie of cookies) {
-      try {
-        await page.setCookie(cookie);
-      } catch (e) {
-        // Ignore cookie errors
-      }
-    }
-  }
-
-  console.log('Navegando a la pagina principal...\n');
-
-  await page.goto(BASE_URL + '/dashboard', {
-    waitUntil: 'domcontentloaded',
-    timeout: 30000
-  });
-  await sleep(5000);
-
-  const url = await page.url();
-  console.log('URL actual:', url);
-
-  if (url.includes('/auth/login')) {
-    console.log('\nNo se encontraron cookies validas. Por favor, inicia sesion en Firefox y ejecuta este script de nuevo.\n');
-    await browser.close();
-    return;
-  }
-
-  console.log('Sesion activa detectada!\n');
-
-  console.log('Capturando screenshots de nomencladores...\n');
-
-  for (const nom of NOMENCLADORES) {
-    try {
-      console.log('Capturando: ' + nom.name);
-
-      await page.goto(BASE_URL + nom.route, {
-        waitUntil: 'domcontentloaded',
-        timeout: 30000
-      });
-      await sleep(4000);
-
-      const currentUrl = await page.url();
-      if (currentUrl.includes('/auth/login')) {
-        console.log('Sesion expirada.');
-        break;
-      }
-
-      const filename = nom.slug + '-listado.png';
-      const filepath = path.join(OUTPUT_DIR, filename);
-
-      await page.screenshot({
-        path: filepath,
-        fullPage: false
-      });
-
-      const stats = fs.statSync(filepath);
-      console.log('Guardado: ' + filename + ' (' + stats.size + ' bytes)');
-
-    } catch (error) {
-      console.error('Error: ' + error.message);
-    }
-  }
-
-  console.log('\nCaptura completada!');
-  await browser.close();
+function updatePage(docId) {
+  const file = path.join(root, 'docs', `${docId}.md`);
+  if (!fs.existsSync(file)) return false;
+  const content = fs.readFileSync(file, 'utf8');
+  const image = `/img/screenshots/${docId}.png`;
+  let updated = content.replace(
+    /!\[[^\]]* — captura pendiente\]\(\/img\/screenshots\/placeholder\.svg\)/,
+    `![${docId.split('/').pop()} — captura real](${image})`,
+  );
+  updated = updated.replace(/\*Captura referencial pendiente de sustituir por una imagen real\.\*/, '*Captura tomada del backoffice Agrimpex.*');
+  if (updated === content) return false;
+  fs.writeFileSync(file, updated);
+  return true;
 }
 
 async function main() {
-  console.log('Script de captura de screenshots usando cookies de Firefox\n');
-  console.log('Directorio: ' + OUTPUT_DIR);
-  console.log('Frontend: ' + BASE_URL + '\n');
-  console.log('IMPORTANTE: Inicia sesion en Firefox antes de ejecutar.\n');
+  const inventory = JSON.parse(fs.readFileSync(inventoryPath, 'utf8'));
+  const session = await refreshSession();
+  if (session.expiration && session.expiration < Date.now()) throw new Error('El token obtenido ya está vencido.');
+  console.log(`Sesión refrescada (expira ${new Date(session.expiration).toISOString()}).`);
 
-  await captureScreenshots();
+  const executablePath = resolveExecutable();
+  const origin = new URL(baseUrl).origin;
+  const injectValues = {
+    origin,
+    tokenKey: lsKeys.token,
+    refreshKey: lsKeys.refreshToken,
+    expirationKey: lsKeys.refreshExpiration,
+    token: session.token,
+    refreshToken: session.refreshToken,
+    expiration: session.expiration,
+  };
+
+  async function launch() {
+    const browser = await puppeteer.launch({
+      executablePath,
+      headless: 'new',
+      args: [
+        '--no-sandbox', '--disable-setuid-sandbox', '--ignore-certificate-errors',
+        '--disable-gpu', '--disable-dev-shm-usage', '--disable-extensions',
+        '--disable-background-networking', '--js-flags=--max-old-space-size=512',
+      ],
+    });
+    const page = await browser.newPage();
+    await page.setViewport({ width: 1366, height: 768 });
+    await page.evaluateOnNewDocument((values) => {
+      if (location.origin !== values.origin) return;
+      if (location.pathname.startsWith('/auth')) {
+        localStorage.removeItem(values.tokenKey);
+        localStorage.removeItem(values.refreshKey);
+        localStorage.removeItem(values.expirationKey);
+        return;
+      }
+      localStorage.setItem(values.tokenKey, values.token);
+      if (values.refreshToken) localStorage.setItem(values.refreshKey, values.refreshToken);
+      if (values.expiration) localStorage.setItem(values.expirationKey, String(values.expiration));
+    }, injectValues);
+    await page.goto(`${baseUrl}/dashboard`, { waitUntil: 'domcontentloaded', timeout: 45000 });
+    await sleep(2500);
+    if (page.url().includes('/auth/login')) throw new Error('La sesión no fue reconocida por el frontend; revisa el token y la configuración local.');
+    return { browser, page };
+  }
+
+  let { browser, page } = await launch();
+  console.log('Sesión activa detectada.');
+
+  const screens = inventory.screens.filter((screen) => {
+    if (only.length && !only.includes(screen.docId)) return false;
+    if (process.env.DOCS_CAPTURE_SKIP_EXISTING === '1' && fs.existsSync(path.join(outputDir, `${screen.docId}.png`))) return false;
+    return true;
+  }).slice(0, limit || undefined);
+
+  let captured = 0;
+  let skipped = 0;
+  let updated = 0;
+  let sinceRestart = 0;
+  const failures = [];
+
+  async function restart() {
+    try { if (browser) await browser.close(); } catch {}
+    ({ browser, page } = await launch());
+    sinceRestart = 0;
+  }
+
+  for (const screen of screens) {
+    const route = ROUTE_OVERRIDES[screen.docId] || screen.sourceRoute;
+    if (/:|\$/.test(route)) {
+      console.log(`OMITIR ${screen.docId} (ruta con parámetros: ${screen.sourceRoute})`);
+      skipped++;
+      continue;
+    }
+    try {
+      if (!browser || !browser.connected || sinceRestart >= batchSize) await restart();
+      await page.goto(`${baseUrl}${route}`, { waitUntil: 'domcontentloaded', timeout: 30000 });
+      await page.waitForNetworkIdle({ idleTime: 500, timeout: 6000 }).catch(() => {});
+      await sleep(delay);
+      const isAuthScreen = route.startsWith('/auth');
+      if (!isAuthScreen && page.url().includes('/auth/login')) throw new Error('Sesión expirada durante la captura');
+      const file = path.join(outputDir, `${screen.docId}.png`);
+      fs.mkdirSync(path.dirname(file), { recursive: true });
+      await page.screenshot({ path: file, fullPage: false });
+      captured++;
+      sinceRestart++;
+      if (updatePage(screen.docId)) updated++;
+      console.log(`CAPTURADO ${screen.docId} (${page.url()}) -> ${path.relative(root, file)}`);
+    } catch (error) {
+      failures.push(`${screen.docId}: ${error.message}`);
+      console.error(`ERROR ${screen.docId}: ${error.message}`);
+      if (!browser || !browser.connected) {
+        try { await restart(); } catch (restartError) {
+          console.error(`ERROR reiniciando navegador: ${restartError.message}`);
+          try { if (browser) await browser.close(); } catch {}
+          browser = null;
+          page = null;
+        }
+      }
+    }
+  }
+
+  try { if (browser) await browser.close(); } catch {}
+  console.log(`\nResultado: ${captured} capturas, ${updated} páginas actualizadas, ${skipped} omitidas, ${failures.length} errores.`);
+  if (failures.length) {
+    console.error(failures.join('\n'));
+    process.exitCode = 1;
+  }
 }
 
-main();
+main().catch((error) => {
+  console.error(`Error fatal: ${error.message}`);
+  process.exitCode = 1;
+});

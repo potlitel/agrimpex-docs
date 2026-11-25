@@ -1,24 +1,43 @@
 ---
-sidebar_position: 23
+sidebar_position: 33
+source_route: /management/nomenclatures/categoria/list
+source_component: CategoriaListComponent
+status: vigente
 ---
 
-# Categorías
+# Categoría
 
-## Descripción
+## Propósito
 
-El catálogo de Categorías permite clasificar los productos o mercancías en grupos funcionales dentro del sistema, facilitando la gestión y reportes por categoría.
+Gestiona el nomenclador categoría del sistema.
 
 ## Acceso
 
-1. Menú: **Nomenclaturas** → **Categorías**
-2. Ruta directa: `/management/nomenclatures/categoria`
+- **Menú:** Nomenclaturas → Categoría
+- **Ruta directa:** `/management/nomenclatures/categoria/list`
+- **Componente:** `CategoriaListComponent`
 
-## Funcionalidades
+> Las rutas `/management/nomenclatures/categoria/add` y `/management/nomenclatures/categoria/edit` comparten el formulario del nomenclador.
 
-- **Listado:** ver todas las categorías registradas
-- **Registro:** agregar nuevas categorías
-- **Visualización de detalles:** consultar la información de cada categoría
+## Captura
 
-## Relacionado
+![categoria — captura real](/img/screenshots/nomenclaturas/categoria.png)
 
-- [Producto](/docs/nomenclaturas/producto)
+*Captura tomada del backoffice Agrimpex.*
+
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Buscar | Filtro de texto para localizar registros. | No |
+| Filtrar | Aplica los filtros seleccionados al listado. | No |
+| Nombre | Nombre del elemento de categoría. | Sí |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Buscar | Buscar | Administrador o Especialista | `/management/nomenclatures/categoria/list` |
+| Recargar | Recargar | Administrador o Especialista | `/management/nomenclatures/categoria/list` |
+| Añadir | Añadir | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/categoria/list/add` |
+| Eliminar | Eliminar | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/categoria/list` |

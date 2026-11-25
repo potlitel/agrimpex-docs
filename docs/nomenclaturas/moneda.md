@@ -1,89 +1,43 @@
 ---
-sidebar_position: 10
+sidebar_position: 2
+source_route: /management/nomenclatures/currency/list
+source_component: CurrencyListComponent
+status: vigente
 ---
 
-# Monedas
-
-## Descripción
-
-El catálogo de **Monedas** contiene todas las monedas utilizadas en las transacciones internacionales de importación. Es fundamental para el registro de valores, cálculo de aranceles y reporting financiero.
-
-## Acceso
-
-- **Menú**: Nomenclaturas → Monedas
-- **Ruta directa**: `/management/nomenclatures/currency`
-
-## Interfaz
-
-### Listado de Monedas
-
-![Listado de Monedas](/img/nomenclaturas/currency-listado.png)
+# Moneda
 
 ## Propósito
 
-Este catálogo se utiliza en:
-- Registro de valores (FOB, CIF)
-- Cálculo de aranceles
-- Reporting financiero
-- Control de cambio
+Gestiona el nomenclador moneda del sistema.
 
-## Monedas Principales
+## Acceso
 
-| Código | Símbolo | Nombre | País |
-|--------|---------|--------|------|
-| USD | $ | Dólar estadounidense | Estados Unidos |
-| EUR | € | Euro | Unión Europea |
-| CUP | ₱ | Peso cubano | Cuba |
-| CNY | ¥ | Yuan chino | China |
-| GBP | £ | Libra esterlina | Reino Unido |
-| MXN | $ | Peso mexicano | México |
-| BRL | R$ | Real brasileño | Brasil |
+- **Menú:** Nomenclaturas → Moneda
+- **Ruta directa:** `/management/nomenclatures/currency/list`
+- **Componente:** `CurrencyListComponent`
+
+> Las rutas `/management/nomenclatures/currency/add` y `/management/nomenclatures/currency/edit` comparten el formulario del nomenclador.
+
+## Captura
+
+![moneda — captura real](/img/screenshots/nomenclaturas/moneda.png)
+
+*Captura tomada del backoffice Agrimpex.*
 
 ## Campos
 
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| Código ISO | Texto | Código de 3 letras (ISO 4217) |
-| Símbolo | Texto | Símbolo monetario |
-| Nombre | Texto | Nombre completo de la moneda |
-| País | Relación | País emisor |
-| Decimal | Número | Decimales (usual: 2) |
-| Tasa Cambio Base | Número | Tasa respecto a moneda base |
-| Fecha Tasa | Fecha | Fecha de la tasa |
-| Activo | Booleano | Si está disponible |
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Buscar | Filtro de texto para localizar registros. | No |
+| Filtrar | Aplica los filtros seleccionados al listado. | No |
+| Nombre | Nombre del elemento de moneda. | Sí |
 
-## Información Adicional
+## Acciones
 
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| Código Numérico | Texto | Código numérico ISO |
-| Símbolo Posición | Texto | Antes/Después del valor |
-| Separador Miles | Texto | Caracter separador de miles |
-| Separador Decimal | Texto | Caracter separador decimal |
-
-## Crear Moneda
-
-1. Accede al módulo de Monedas
-2. Haz clic en **"+ Agregar Moneda"**
-3. Completa los campos:
-   - Código ISO 4217 (ej: USD, EUR)
-   - Símbolo monetario (ej: $, €)
-   - Nombre completo
-   - País emisor
-   - Número de decimales
-4. Configura el formato:
-   - Posición del símbolo
-   - Separadores de miles y decimal
-5. Establece la tasa de cambio base
-6. Activa el toggle "Activo"
-7. Haz clic en **"Guardar"**
-
-## Actualizar Tasas de Cambio
-
-:::info NOTA
-Las tasas de cambio deben actualizarse regularmente para mantener la precisión en los cálculos de valor.
-:::
-
----
-
-**Volver a**: [Nomenclaturas - Introducción](/docs/nomenclaturas/intro)
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Buscar | Buscar | Administrador o Especialista | `/management/nomenclatures/currency/list` |
+| Recargar | Recargar | Administrador o Especialista | `/management/nomenclatures/currency/list` |
+| Añadir | Añadir | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/currency/list/add` |
+| Eliminar | Eliminar | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/currency/list` |

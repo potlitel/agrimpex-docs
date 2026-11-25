@@ -1,20 +1,11 @@
 ---
-sidebar_position: 20
+unlisted: true
 ---
 
-# Básico Nomenclatura
+# Documento movido
 
-## Descripción
+Esta página se ha movido a **[Nomencladores](</docs/nomenclaturas>)**.
 
-El catálogo de Básico Nomenclatura gestiona los registros básicos de nomenclatura asociados a productos, permitiendo mantener los datos de referencia para la codificación de mercancías en el sistema.
+> Esta URL se conserva solo para compatibilidad con enlaces publicados anteriormente.
 
-## Acceso
-
-1. Menú: **Nomenclaturas** → **Básico Nomenclatura**
-2. Ruta directa: `/management/nomenclatures/basic-nom`
-
-## Funcionalidades
-
-- **Listado:** ver los registros básicos de nomenclatura
-- **Registro:** agregar nuevos registros de nomenclatura básica
-- **Edición:** modificar registros existentes
+> Nomenclador no incluido en NomenclaturesRoutes; se conserva como obsoleto.

@@ -1,26 +1,37 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
+source_route: /dashboard
+source_component: LayoutPage
+status: vigente
 ---
 
-# Estructura General
+# Plantilla de navegación
 
-## Descripción
+## Propósito
 
-Esta página describe la estructura general del sistema Agrimpex y las áreas principales disponibles.
+Describe la plantilla de menú lateral y barra superior del backoffice.
 
-## Estructura del Sistema
+## Acceso
 
-El sistema Agrimpex está organizado en módulos principales:
+- **Menú:** Acerca del Sistema → Plantilla de navegación
+- **Ruta directa:** `/dashboard`
+- **Componente:** `LayoutPage`
 
-- **Logística:** gestión de contenedores, desaduanaje, órdenes de entrega e importaciones
-- **Nomenclatures:** catálogos de datos de referencia
-- **Administración:** gestión de usuarios y grupos
-- **Seguridad:** trazabilidad y control de acceso
-- **Notificaciones:** alertas del sistema
-- **Asistente IA:** ayuda asistente dentro del manual
-- **Reportes:** generación y monitoreo de reportes
-- **Verificación:** validación de documentos
+## Captura
 
-## Rutas Directas
+![layout — captura real](/img/screenshots/core/layout.png)
 
-Las rutas directas de los módulos están definidas en el sistema; el menú lateral del sistema ofrece acceso directo a cada área.
+*Captura tomada del backoffice Agrimpex.*
+
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Menú lateral | Navegación principal por módulos. | No |
+| Barra superior | Acciones globales del usuario. | No |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Ver ejemplo | Acceder | Todo usuario autenticado | `/dashboard` |

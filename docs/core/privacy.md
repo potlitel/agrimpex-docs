@@ -1,21 +1,36 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
+source_route: /privacy
+source_component: PrivacyPage
+status: vigente
 ---
 
-# Política de Privacidad
+# Política de privacidad
 
-## Descripción
+## Propósito
 
-Esta página describe la política de privacidad del sistema Agrimpex, un sistema de gestión de importaciones desarrollado por el proyecto Agrimpex.
+Política de privacidad del sistema.
 
-## Datos de Acceso
+## Acceso
 
-Los datos de acceso de usuario (correo electrónico y contraseña) están protegidos mediante métodos de autenticación seguros del sistema. Las credenciales son asignadas por el administrador del sistema y deben mantenerse en confidencialidad; compartir credenciales es una violación de las normas de seguridad del sistema.
+- **Menú:** Acerca del Sistema → Política de privacidad
+- **Ruta directa:** `/privacy`
+- **Componente:** `PrivacyPage`
 
-## Respaldos de Datos
+## Captura
 
-El sistema conserva los datos de operaciones del sistema. La protección y redundancia de datos se configura en la infraestructura del sistema, siguiendo políticas internas del proyecto.
+![privacy — captura real](/img/screenshots/core/privacy.png)
 
-## Normativa Interna
+*Captura tomada del backoffice Agrimpex.*
 
-El proyecto Agrimpex mantiene normativas de uso, protección de datos y acceso a la información del sistema dentro de su política interna de operación.
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Política | Texto de la política de privacidad. | No |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Leer | Acceder | Público (sin autenticación) | `/privacy` |

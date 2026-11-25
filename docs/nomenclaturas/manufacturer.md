@@ -1,24 +1,43 @@
 ---
-sidebar_position: 26
+sidebar_position: 30
+source_route: /management/nomenclatures/manufacturer/list
+source_component: ManufacturerListComponent
+status: vigente
 ---
 
-# Manufacturers
+# Fabricante
 
-## Descripción
+## Propósito
 
-El catálogo de Manufacturers permite gestionar los fabricantes asociados a los productos del sistema, para mantener los datos de los proveedores de producción original de la mercancía.
+Gestiona el nomenclador fabricante del sistema.
 
 ## Acceso
 
-1. Menú: **Nomenclaturas** → **Manufacturers**
-2. Ruta directa: `/management/nomenclatures/manufacturer`
+- **Menú:** Nomenclaturas → Fabricante
+- **Ruta directa:** `/management/nomenclatures/manufacturer/list`
+- **Componente:** `ManufacturerListComponent`
 
-## Funcionalidades
+> Las rutas `/management/nomenclatures/manufacturer/add` y `/management/nomenclatures/manufacturer/edit` comparten el formulario del nomenclador.
 
-- **Listado:** ver todos los manufacturers registrados
-- **Registro:** agregar nuevos manufacturers
-- **Visualización de detalles:** consultar la información de cada manufacturer
+## Captura
 
-## Relacionado
+![manufacturer — captura real](/img/screenshots/nomenclaturas/manufacturer.png)
 
-- [Proveedor](/docs/nomenclaturas/proveedor)
+*Captura tomada del backoffice Agrimpex.*
+
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Buscar | Filtro de texto para localizar registros. | No |
+| Filtrar | Aplica los filtros seleccionados al listado. | No |
+| Nombre | Nombre del elemento de fabricante. | Sí |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Buscar | Buscar | Administrador o Especialista | `/management/nomenclatures/manufacturer/list` |
+| Recargar | Recargar | Administrador o Especialista | `/management/nomenclatures/manufacturer/list` |
+| Añadir | Añadir | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/manufacturer/list/add` |
+| Eliminar | Eliminar | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/manufacturer/list` |

@@ -1,24 +1,43 @@
 ---
-sidebar_position: 19
+sidebar_position: 26
+source_route: /management/nomenclatures/airport/list
+source_component: AirportListComponent
+status: vigente
 ---
 
-# Aeropuertos
+# Aeropuerto
 
-## Descripción
+## Propósito
 
-El catálogo de Aeropuertos permite gestionar las terminales de aviación utilizadas en las operaciones de importación y exportación de carga por vías aéreas.
+Gestiona el nomenclador aeropuerto del sistema.
 
 ## Acceso
 
-1. Menú: **Nomenclaturas** → **Aeropuertos**
-2. Ruta directa: `/management/nomenclatures/airport`
+- **Menú:** Nomenclaturas → Aeropuerto
+- **Ruta directa:** `/management/nomenclatures/airport/list`
+- **Componente:** `AirportListComponent`
 
-## Funcionalidades
+> Las rutas `/management/nomenclatures/airport/add` y `/management/nomenclatures/airport/edit` comparten el formulario del nomenclador.
 
-- **Listado:** ver todos los aeropuertos registrados
-- **Registro:** agregar nuevos aeropuertos
-- **Visualización de detalles:** consultar la información de cada aeropuerto
+## Captura
 
-## Relacionado
+![airport — captura real](/img/screenshots/nomenclaturas/airport.png)
 
-- [Aerolíneas](/docs/nomenclaturas/airline)
+*Captura tomada del backoffice Agrimpex.*
+
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Buscar | Filtro de texto para localizar registros. | No |
+| Filtrar | Aplica los filtros seleccionados al listado. | No |
+| Nombre | Nombre del elemento de aeropuerto. | Sí |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Buscar | Buscar | Administrador o Especialista | `/management/nomenclatures/airport/list` |
+| Recargar | Recargar | Administrador o Especialista | `/management/nomenclatures/airport/list` |
+| Añadir | Añadir | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/airport/list/add` |
+| Eliminar | Eliminar | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/airport/list` |

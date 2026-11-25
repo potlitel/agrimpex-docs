@@ -1,21 +1,36 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
+source_route: /terms
+source_component: TermsPage
+status: vigente
 ---
 
-# Términos de Uso
+# Términos de uso
 
-## Descripción
+## Propósito
 
-Esta página describe los términos de uso del sistema Agrimpex, desarrollado para la gestión de importaciones del sistema.
+Términos de uso del sistema.
 
-## Uso del Sistema
+## Acceso
 
-El acceso al sistema Agrimpex está restringido a usuarios con credenciales válidas asignadas por el sistema. Los usuarios deben usar sus credenciales únicamente para acceder al sistema; compartir credenciales o permitir el uso de credenciales de otros usuarios es una violación de los términos de uso.
+- **Menú:** Acerca del Sistema → Términos de uso
+- **Ruta directa:** `/terms`
+- **Componente:** `TermsPage`
 
-## Responsabilidad
+## Captura
 
-El usuario del sistema es responsable de la información que ingresa y de su uso adecuado. El proyecto Agrimpex no se hace responsable de la información proporcionada por los usuarios a través del sistema.
+![terms — captura real](/img/screenshots/core/terms.png)
 
-## Modificaciones
+*Captura tomada del backoffice Agrimpex.*
 
-Estos términos y las páginas de documentación pueden ser actualizados por el equipo de desarrollo del proyecto Agrimpex; se recomienda revisarlos periódicamente.
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Términos | Texto de los términos de uso. | No |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Leer | Acceder | Público (sin autenticación) | `/terms` |

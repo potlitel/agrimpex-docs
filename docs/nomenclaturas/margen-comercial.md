@@ -1,20 +1,43 @@
 ---
-sidebar_position: 27
+sidebar_position: 34
+source_route: /management/nomenclatures/margen-comercial/list
+source_component: MargenComercialListComponent
+status: vigente
 ---
 
-# Márgenes Comerciales
+# Margen comercial
 
-## Descripción
+## Propósito
 
-El catálogo de Márgenes Comerciales permite gestionar los márgenes asociados a las operaciones comerciales del sistema, para llevar el control de los parámetros de negocio de las cargas.
+Gestiona el nomenclador margen comercial del sistema.
 
 ## Acceso
 
-1. Menú: **Nomenclaturas** → **Márgenes Comerciales**
-2. Ruta directa: `/management/nomenclatures/margen-comercial`
+- **Menú:** Nomenclaturas → Margen comercial
+- **Ruta directa:** `/management/nomenclatures/margen-comercial/list`
+- **Componente:** `MargenComercialListComponent`
 
-## Funcionalidades
+> Las rutas `/management/nomenclatures/margen-comercial/add` y `/management/nomenclatures/margen-comercial/edit` comparten el formulario del nomenclador.
 
-- **Listado:** ver los márgenes registrados
-- **Registro:** agregar nuevos márgenes comerciales
-- **Visualización de detalles:** consultar la información de cada margen
+## Captura
+
+![margen-comercial — captura real](/img/screenshots/nomenclaturas/margen-comercial.png)
+
+*Captura tomada del backoffice Agrimpex.*
+
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Buscar | Filtro de texto para localizar registros. | No |
+| Filtrar | Aplica los filtros seleccionados al listado. | No |
+| Nombre | Nombre del elemento de margen comercial. | Sí |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Buscar | Buscar | Administrador o Especialista | `/management/nomenclatures/margen-comercial/list` |
+| Recargar | Recargar | Administrador o Especialista | `/management/nomenclatures/margen-comercial/list` |
+| Añadir | Añadir | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/margen-comercial/list/add` |
+| Eliminar | Eliminar | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/margen-comercial/list` |

@@ -1,24 +1,11 @@
 ---
-sidebar_position: 11
+unlisted: true
 ---
 
-# Preliberaciones
+# Documento movido
 
-## Descripción
+Esta página se ha movido a **[Calidad](</docs/calidad>)**.
 
-El módulo de Preliberaciones gestiona las solicitudes y preparación de la liberación previa de contenedores y carga antes de su despacho final. Permite llevar un control de las preliminares necesarias para el despacho de importaciones.
+> Esta URL se conserva solo para compatibilidad con enlaces publicados anteriormente.
 
-## Acceso
-
-1. Menú: **Logística** → **Preliberaciones**
-2. Ruta directa: `/logistic/preliberations`
-
-## Funcionalidades
-
-- **Registro de preliberación:** crear solicitudes de preparación de desaduanaje o liberación
-- **Seguimiento:** ver el estado de las preliberaciones realizadas
-
-## Relacionado
-
-- [Desaduanaje](/docs/logistica/desaduane)
-- [Contenedores](/docs/logistica/contenedores)
+> URL publicada anteriormente.

@@ -1,18 +1,11 @@
 ---
-sidebar_position: 9
+unlisted: true
 ---
 
-# Página en Construcción
+# Documento movido
 
-## Descripción
+Esta página se ha movido a **[Logística](</docs/logistica>)**.
 
-El módulo de páginas en construcción (_under construction_) contiene pantallas del sistema que están siendo desarrolladas; aún no están disponibles para su uso.
+> Esta URL se conserva solo para compatibilidad con enlaces publicados anteriormente.
 
-## Acceso
-
-1. Menú: **Logística** → **Página en Construcción**
-2. Ruta directa: `/logistic/under-construction`
-
-:::caution
-Esta pantalla se encuentra en desarrollo. Su funcionalidad y acceso pueden modificarse a medida que avanza la implementación.
-:::
+> La acción "Nueva Importación" no existe en las rutas vigentes.

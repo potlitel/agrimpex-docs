@@ -1,24 +1,43 @@
 ---
-sidebar_position: 39
+sidebar_position: 32
+source_route: /management/nomenclatures/unit-of-measure/list
+source_component: UnitOfMeasureListComponent
+status: vigente
 ---
 
-# Unidades de Medida
+# Unidad de medida
 
-## Descripción
+## Propósito
 
-El catálogo de Unidades de Medida permite gestionar las unidades de medida asociadas a los productos del sistema, para llevar el control de la especificación de cantidades en las cargas.
+Gestiona el nomenclador unidad de medida del sistema.
 
 ## Acceso
 
-1. Menú: **Nomenclaturas** → **Unidades de Medida**
-2. Ruta directa: `/management/nomenclatures/unit-of-measure`
+- **Menú:** Nomenclaturas → Unidad de medida
+- **Ruta directa:** `/management/nomenclatures/unit-of-measure/list`
+- **Componente:** `UnitOfMeasureListComponent`
 
-## Funcionalidades
+> Las rutas `/management/nomenclatures/unit-of-measure/add` y `/management/nomenclatures/unit-of-measure/edit` comparten el formulario del nomenclador.
 
-- **Listado:** ver todas las unidades de medida registradas
-- **Registro:** agregar nuevas unidades de medida
-- **Visualización de detalles:** consultar la información de cada unidad
+## Captura
 
-## Relacionado
+![unit-of-measure — captura real](/img/screenshots/nomenclaturas/unit-of-measure.png)
 
-- [Producto](/docs/nomenclaturas/producto)
+*Captura tomada del backoffice Agrimpex.*
+
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Buscar | Filtro de texto para localizar registros. | No |
+| Filtrar | Aplica los filtros seleccionados al listado. | No |
+| Nombre | Nombre del elemento de unidad de medida. | Sí |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Buscar | Buscar | Administrador o Especialista | `/management/nomenclatures/unit-of-measure/list` |
+| Recargar | Recargar | Administrador o Especialista | `/management/nomenclatures/unit-of-measure/list` |
+| Añadir | Añadir | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/unit-of-measure/list/add` |
+| Eliminar | Eliminar | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/unit-of-measure/list` |

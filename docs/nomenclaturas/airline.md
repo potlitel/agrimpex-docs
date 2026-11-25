@@ -1,24 +1,43 @@
 ---
-sidebar_position: 18
+sidebar_position: 25
+source_route: /management/nomenclatures/airline/list
+source_component: AirlineListComponent
+status: vigente
 ---
 
-# Aerolíneas
+# Aerolínea
 
-## Descripción
+## Propósito
 
-El catálogo de Aerolíneas permite gestionar las compañías aereas utilizadas en las operaciones de la navegación aérea asociadas a las cargas del sistema.
+Gestiona el nomenclador aerolínea del sistema.
 
 ## Acceso
 
-1. Menú: **Nomenclaturas** → **Aerolíneas**
-2. Ruta directa: `/management/nomenclatures/airline`
+- **Menú:** Nomenclaturas → Aerolínea
+- **Ruta directa:** `/management/nomenclatures/airline/list`
+- **Componente:** `AirlineListComponent`
 
-## Funcionalidades
+> Las rutas `/management/nomenclatures/airline/add` y `/management/nomenclatures/airline/edit` comparten el formulario del nomenclador.
 
-- **Listado:** ver todas las aerolíneas registradas
-- **Registro:** agregar nuevas compañías aéreas
-- **Visualización de detalles:** consultar la información de cada aerolínea
+## Captura
 
-## Relacionado
+![airline — captura real](/img/screenshots/nomenclaturas/airline.png)
 
-- [Aeropuertos](/docs/nomenclaturas/airport)
+*Captura tomada del backoffice Agrimpex.*
+
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Buscar | Filtro de texto para localizar registros. | No |
+| Filtrar | Aplica los filtros seleccionados al listado. | No |
+| Nombre | Nombre del elemento de aerolínea. | Sí |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Buscar | Buscar | Administrador o Especialista | `/management/nomenclatures/airline/list` |
+| Recargar | Recargar | Administrador o Especialista | `/management/nomenclatures/airline/list` |
+| Añadir | Añadir | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/airline/list/add` |
+| Eliminar | Eliminar | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/airline/list` |

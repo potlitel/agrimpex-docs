@@ -1,20 +1,43 @@
 ---
-sidebar_position: 22
+sidebar_position: 6
+source_route: /management/nomenclatures/cargo/list
+source_component: CargoListComponent
+status: vigente
 ---
 
-# Carga (Nomenclatura)
+# Cargo
 
-## Descripción
+## Propósito
 
-El catálogo de Carga gestiona los registros de nomenclatura asociados a la carga, permitiendo mantener los datos de referencia de los tipos y categorías de carga en el sistema.
+Gestiona el nomenclador cargo del sistema.
 
 ## Acceso
 
-1. Menú: **Nomenclaturas** → **Carga**
-2. Ruta directa: `/management/nomenclatures/cargo`
+- **Menú:** Nomenclaturas → Cargo
+- **Ruta directa:** `/management/nomenclatures/cargo/list`
+- **Componente:** `CargoListComponent`
 
-## Funcionalidades
+> Las rutas `/management/nomenclatures/cargo/add` y `/management/nomenclatures/cargo/edit` comparten el formulario del nomenclador.
 
-- **Listado:** ver los registros de nomenclatura de carga
-- **Registro:** agregar nuevos registros de carga
-- **Edición:** modificar registros existentes
+## Captura
+
+![cargo — captura real](/img/screenshots/nomenclaturas/cargo.png)
+
+*Captura tomada del backoffice Agrimpex.*
+
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Buscar | Filtro de texto para localizar registros. | No |
+| Filtrar | Aplica los filtros seleccionados al listado. | No |
+| Nombre | Nombre del elemento de cargo. | Sí |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Buscar | Buscar | Administrador o Especialista | `/management/nomenclatures/cargo/list` |
+| Recargar | Recargar | Administrador o Especialista | `/management/nomenclatures/cargo/list` |
+| Añadir | Añadir | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/cargo/list/add` |
+| Eliminar | Eliminar | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/cargo/list` |

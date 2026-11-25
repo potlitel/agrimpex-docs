@@ -1,24 +1,41 @@
 ---
-sidebar_position: 32
+sidebar_position: 21
+source_route: /management/nomenclatures/product-line/list
+source_component: ProductLineListComponent
+status: vigente
 ---
 
-# Líneas de Producto
+# Línea de productos
 
-## Descripción
+## Propósito
 
-El catálogo de Líneas de Producto permite clasificar los productos en líneas funcionales, facilitando la organización y reportes por línea de producto en el sistema.
+Gestiona el nomenclador línea de productos del sistema.
 
 ## Acceso
 
-1. Menú: **Nomenclaturas** → **Líneas de Producto**
-2. Ruta directa: `/management/nomenclatures/product-line`
+- **Menú:** Nomenclaturas → Línea de productos
+- **Ruta directa:** `/management/nomenclatures/product-line/list`
+- **Componente:** `ProductLineListComponent`
 
-## Funcionalidades
+> El frontend expone únicamente el listado de este nomenclador.
 
-- **Listado:** ver todas las líneas de producto registradas
-- **Registro:** agregar nuevas líneas
-- **Visualización de detalles:** consultar la información de cada línea
+## Captura
 
-## Relacionado
+![product-line — captura real](/img/screenshots/nomenclaturas/product-line.png)
 
-- [Producto](/docs/nomenclaturas/producto)
+*Captura tomada del backoffice Agrimpex.*
+
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Buscar | Filtro de texto para localizar registros. | No |
+| Filtrar | Aplica los filtros seleccionados al listado. | No |
+| Nombre | Nombre del elemento de línea de productos. | Sí |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Buscar | Buscar | Administrador o Especialista | `/management/nomenclatures/product-line/list` |
+| Recargar | Recargar | Administrador o Especialista | `/management/nomenclatures/product-line/list` |

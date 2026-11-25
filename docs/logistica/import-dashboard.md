@@ -1,30 +1,11 @@
 ---
-sidebar_position: 12
+unlisted: true
 ---
 
-# Dashboard de Importación (Detallada)
+# Documento movido
 
-## Descripción
+Esta página se ha movido a **[Dashboard de importación](</docs/logistica/importacion/dashboard>)**.
 
-El Dashboard de Importación (Detallada) complementa el dashboard principal con vistas detalladas de la operación de importaciones, incluyendo indicadores sobre importaciones activas, contenedores y estados.
+> Esta URL se conserva solo para compatibilidad con enlaces publicados anteriormente.
 
-## Acceso
-
-1. Menú: **Logística** → **Dashboard de Importación (Detallada)**
-2. Ruta directa: `/logistic/import-dashboard`
-
-## Componentes
-
-### Tarjetas de Métricas
-
-Indicadores clave de la operación de importaciones (totales, en proceso, contenedores en Terminal).
-
-### Gráficos y Distribuciones
-
-- Distribución de importaciones por estado
-- Contenedores por terminal
-- Evolución temporal
-
-## Relacionado
-
-- [Dashboard de Importaciones](/docs/logistica/dashboard)
+> URL publicada anteriormente.

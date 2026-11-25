@@ -1,23 +1,11 @@
 ---
-sidebar_position: 10
+unlisted: true
 ---
 
-# Solicitudes de Extensión
+# Documento movido
 
-## Descripción
+Esta página se ha movido a **[Listado de solicitudes de extensión](</docs/logistica/solicitudes-extension/listado>)**.
 
-El módulo de Solicitudes de Extensión permite generar y gestionar solicitudes para ampliar plazos o fechas límite de los procesos logísticos (por ejemplo, fechas de desaduanaje o entrega).
+> Esta URL se conserva solo para compatibilidad con enlaces publicados anteriormente.
 
-## Acceso
-
-1. Menú: **Logística** → **Solicitudes de Extensión**
-2. Ruta directa: `/logistic/extension-request`
-
-## Funcionalidades
-
-- **Crear solicitud:** generar una solicitud de extensión asociada a un proceso
-- **Listado:** ver las solicitudes realizadas con su estado
-
-## Relacionado
-
-- [Desaduanaje](/docs/logistica/desaduane)
+> URL publicada anteriormente.

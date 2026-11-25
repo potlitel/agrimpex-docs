@@ -1,98 +1,41 @@
 ---
-sidebar_position: 17
+sidebar_position: 20
+source_route: /management/nomenclatures/management-type/list
+source_component: ManagementTypeListComponent
+status: vigente
 ---
 
-# Tipos de Gestión
-
-## Descripción
-
-El catálogo de **Tipos de Gestión** define las diferentes modalidades de gestión o administración de las importaciones y procesos logísticos. Clasifica cómo se maneja cada operación dentro del sistema.
-
-## Acceso
-
-- **Menú**: Nomenclaturas → Tipos de Gestión
-- **Ruta directa**: `/management/nomenclatures/management-type`
-
-## Interfaz
-
-### Listado de Tipos de Gestión
-
-![Listado de Tipos de Gestión](/img/nomenclaturas/management-type-listado.png)
+# Tipo de forma de gestión
 
 ## Propósito
 
-Este catálogo se utiliza en:
-- Clasificación de importaciones
-- Determinación de procedimientos
-- Reporting operativo
-- Control de procesos
+Gestiona el nomenclador tipo de forma de gestión del sistema.
 
-## Tipos de Gestión
+## Acceso
 
-| Código | Nombre | Descripción |
-|--------|--------|-------------|
-| PROPIA | Gestión Propia | Importación directa por la empresa |
-| TERCERO | Tercerizado | Gestionado por agente aduanero |
-| CONSIGNACION | Consignación | Bajo régimen de consignación |
-| TRANSITO | Tránsito | En tránsito aduanero |
-| DEPOSITO | Depósito | En depósito temporal |
+- **Menú:** Nomenclaturas → Tipo de forma de gestión
+- **Ruta directa:** `/management/nomenclatures/management-type/list`
+- **Componente:** `ManagementTypeListComponent`
 
-## Descripción Detallada
+> El frontend expone únicamente el listado de este nomenclador.
 
-### Gestión Propia
-La empresa realiza directamente todos los trámites de importación, desde la negociación hasta la entrega final.
+## Captura
 
-### Tercerizado
-La gestión es realizada por un agente aduanero o empresa第三方 (third-party) especializada.
+![gestion — captura real](/img/screenshots/nomenclaturas/gestion.png)
 
-### Consignación
-La mercancía llega consignada y se paga al proveedor según se van realizando las ventas o entregas.
-
-### Tránsito
-Mercancía en tránsito aduanero hacia otro destino final (transshipment).
-
-### Depósito
-Mercancía almacenada en depósito aduanero esperando trámites o mejores condiciones.
+*Captura tomada del backoffice Agrimpex.*
 
 ## Campos
 
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| Código | Texto | Identificador único |
-| Nombre | Texto | Nombre descriptivo |
-| Descripción | Texto | Detalles del tipo de gestión |
-| Categoría | Texto | Categoría principal |
-| Requiere Garantía | Booleano | Si requiere garantía bancaria |
-| Tiempo Máximo | Número | Tiempo máximo en días |
-| Coste | Número | Coste estimado |
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Buscar | Filtro de texto para localizar registros. | No |
+| Filtrar | Aplica los filtros seleccionados al listado. | No |
+| Nombre | Nombre del elemento de tipo de forma de gestión. | Sí |
 
-## Configuración de Proceso
+## Acciones
 
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| Documentos Requeridos | Lista | Documentación necesaria |
-| Pasos Proceso | Lista | Pasos del workflow |
-| Estados Asociados | Lista | Estados posibles |
-| Activo | Booleano | Si está disponible |
-
-## Crear Tipo de Gestión
-
-1. Accede al módulo de Tipos de Gestión
-2. Haz clic in **"+ Agregar Tipo"**
-3. Completa los datos:
-   - Código identificador
-   - Nombre descriptivo
-   - Descripción
-   - Categoría
-4. Configura el proceso:
-   - Tiempo máximo estimado
-   - Si requiere garantía
-   - Coste estimado
-5. Especifica documentos requeridos
-6. Define los pasos del proceso
-7. Activa el toggle "Activo"
-8. Guarda el registro
-
----
-
-**Volver a**: [Nomenclaturas - Introducción](/docs/nomenclaturas/intro)
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Buscar | Buscar | Administrador o Especialista | `/management/nomenclatures/management-type/list` |
+| Recargar | Recargar | Administrador o Especialista | `/management/nomenclatures/management-type/list` |

@@ -1,20 +1,11 @@
 ---
-sidebar_position: 30
+unlisted: true
 ---
 
-# Consejos de Pueblo
+# Documento movido
 
-## Descripción
+Esta página se ha movido a **[Nomencladores](</docs/nomenclaturas>)**.
 
-El catálogo de Consejos de Pueblo permite gestionar los grupos de población o comunidades locales asociados a los procesos logísticos y administrativos del sistema.
+> Esta URL se conserva solo para compatibilidad con enlaces publicados anteriormente.
 
-## Acceso
-
-1. Menú: **Nomenclaturas** → **Consejos de Pueblo**
-2. Ruta directa: `/management/nomenclatures/peoples-council`
-
-## Funcionalidades
-
-- **Listado:** ver todos los consejos registrados
-- **Registro:** agregar nuevos consejos
-- **Visualización de detalles:** consultar la información de cada consejo
+> Nomenclador no incluido en NomenclaturesRoutes; se conserva como obsoleto.

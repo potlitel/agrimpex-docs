@@ -1,24 +1,43 @@
 ---
-sidebar_position: 33
+sidebar_position: 22
+source_route: /management/nomenclatures/product-origin/list
+source_component: ProductOriginListComponent
+status: vigente
 ---
 
-# Orígenes de Producto
+# Origen de producto
 
-## Descripción
+## Propósito
 
-El catálogo de Orígenes de Producto permite gestionar el origen geográfico de los productos del sistema, para llevar el control de la procedencia de la mercancía.
+Gestiona el nomenclador origen de producto del sistema.
 
 ## Acceso
 
-1. Menú: **Nomenclaturas** → **Orígenes de Producto**
-2. Ruta directa: `/management/nomenclatures/product-origin`
+- **Menú:** Nomenclaturas → Origen de producto
+- **Ruta directa:** `/management/nomenclatures/product-origin/list`
+- **Componente:** `ProductOriginListComponent`
 
-## Funcionalidades
+> Las rutas `/management/nomenclatures/product-origin/add` y `/management/nomenclatures/product-origin/edit` comparten el formulario del nomenclador.
 
-- **Listado:** ver todos los orígenes registrados
-- **Registro:** agregar nuevos orígenes de producto
-- **Visualización de detalles:** consultar la información de cada origen
+## Captura
 
-## Relacionado
+![product-origin — captura real](/img/screenshots/nomenclaturas/product-origin.png)
 
-- [Países](/docs/nomenclaturas/pais)
+*Captura tomada del backoffice Agrimpex.*
+
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Buscar | Filtro de texto para localizar registros. | No |
+| Filtrar | Aplica los filtros seleccionados al listado. | No |
+| Nombre | Nombre del elemento de origen de producto. | Sí |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Buscar | Buscar | Administrador o Especialista | `/management/nomenclatures/product-origin/list` |
+| Recargar | Recargar | Administrador o Especialista | `/management/nomenclatures/product-origin/list` |
+| Añadir | Añadir | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/product-origin/list/add` |
+| Eliminar | Eliminar | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/product-origin/list` |

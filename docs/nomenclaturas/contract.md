@@ -1,24 +1,41 @@
 ---
-sidebar_position: 24
+sidebar_position: 16
+source_route: /management/nomenclatures/contract/list
+source_component: ContractListComponent
+status: vigente
 ---
 
-# Contratos
+# Contrato
 
-## Descripción
+## Propósito
 
-El catálogo de Contratos permite gestionar los contratos asociados a las operaciones de importación y exportación, para llevar un control del estado y los términos de los mismos.
+Gestiona el nomenclador contrato del sistema.
 
 ## Acceso
 
-1. Menú: **Nomenclaturas** → **Contratos**
-2. Ruta directa: `/management/nomenclatures/contract`
+- **Menú:** Nomenclaturas → Contrato
+- **Ruta directa:** `/management/nomenclatures/contract/list`
+- **Componente:** `ContractListComponent`
 
-## Funcionalidades
+> El frontend expone únicamente el listado de este nomenclador.
 
-- **Listado:** ver todos los contratos registrados
-- **Visualización de detalles:** consultar la información de cada contrato
-- **Estado:** seguimiento del estado del contrato
+## Captura
 
-## Relacionado
+![contract — captura real](/img/screenshots/nomenclaturas/contract.png)
 
-- [Desaduanaje](/docs/logistica/desaduane)
+*Captura tomada del backoffice Agrimpex.*
+
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Buscar | Filtro de texto para localizar registros. | No |
+| Filtrar | Aplica los filtros seleccionados al listado. | No |
+| Nombre | Nombre del elemento de contrato. | Sí |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Buscar | Buscar | Administrador o Especialista | `/management/nomenclatures/contract/list` |
+| Recargar | Recargar | Administrador o Especialista | `/management/nomenclatures/contract/list` |

@@ -1,24 +1,40 @@
 ---
 sidebar_position: 1
+source_route: /calidad/import-permits/dashboard
+source_component: ImportPermitsDashboardComponent
+status: vigente
 ---
 
-# Módulo de Calidad
+# Calidad
 
-## Descripción
+## Propósito
 
-El módulo de Calidad permite realizar seguimiento y control de calidad sobre las operaciones y procesos del sistema Agrimpex. Proporciona herramientas para asegurar la calidad de los datos y procesos esenciales del sistema.
+Panel canónico de permisos de importación y preliberaciones de calidad.
 
 ## Acceso
 
-1. Menú: **Calidad**
-2. Ruta directa: `/calidad`
+- **Menú:** Calidad → Calidad
+- **Ruta directa:** `/calidad/import-permits/dashboard`
+- **Componente:** `ImportPermitsDashboardComponent`
 
-## Funcionalidades
+> Logística enlaza a este módulo; no mantiene copias de estas pantallas.
 
-- **Seguimiento de calidad:** registro y seguimiento de indicadores de calidad
-- **Control de procesos:** verificación del cumplimiento de procesos esenciales
-- **Reportes de calidad:** resultados y tendencias de los procesos de calidad
+## Captura
 
-:::info
-Este módulo está en desarrollo y su cobertura documental puede ampliarse a medida que se implemente.
-:::
+![index — captura real](/img/screenshots/calidad/index.png)
+
+*Captura tomada del backoffice Agrimpex.*
+
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Contenedor | Identificador del contenedor. | No |
+| Estado | Estado del permiso o preliberación. | No |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Ir a permisos | Acceder | Administrador, Especialista, Calidad o Consultor | `/calidad/import-permits/cenasa/list` |
+| Ir a preliberaciones | Acceder | Administrador, Especialista, Calidad o Consultor | `/calidad/preliberations/health/list` |

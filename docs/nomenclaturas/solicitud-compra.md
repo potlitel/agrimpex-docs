@@ -1,20 +1,41 @@
 ---
-sidebar_position: 37
+sidebar_position: 29
+source_route: /management/nomenclatures/solicitud-compra/list
+source_component: SolicitudCompraListComponent
+status: vigente
 ---
 
-# Solicitudes de Compra
+# Solicitud de Importación
 
-## Descripción
+## Propósito
 
-El catálogo de Solicitudes de Compra permite gestionar las solicitudes de adquisición de materiales asociadas a los procesos del sistema, para llevar el control de las demandas de compra.
+Gestiona el nomenclador solicitud de importación del sistema.
 
 ## Acceso
 
-1. Menú: **Nomenclaturas** → **Solicitudes de Compra**
-2. Ruta directa: `/management/nomenclatures/solicitud-compra`
+- **Menú:** Nomenclaturas → Solicitud de Importación
+- **Ruta directa:** `/management/nomenclatures/solicitud-compra/list`
+- **Componente:** `SolicitudCompraListComponent`
 
-## Funcionalidades
+> El frontend expone únicamente el listado de este nomenclador.
 
-- **Listado:** ver todas las solicitudes de compra registradas
-- **Registro:** agregar nuevas solicitudes
-- **Visualización de detalles:** consultar la información de cada solicitud
+## Captura
+
+![solicitud-compra — captura real](/img/screenshots/nomenclaturas/solicitud-compra.png)
+
+*Captura tomada del backoffice Agrimpex.*
+
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Buscar | Filtro de texto para localizar registros. | No |
+| Filtrar | Aplica los filtros seleccionados al listado. | No |
+| Nombre | Nombre del elemento de solicitud de importación. | Sí |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Buscar | Buscar | Administrador o Especialista | `/management/nomenclatures/solicitud-compra/list` |
+| Recargar | Recargar | Administrador o Especialista | `/management/nomenclatures/solicitud-compra/list` |

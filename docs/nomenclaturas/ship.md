@@ -1,20 +1,43 @@
 ---
-sidebar_position: 35
+sidebar_position: 27
+source_route: /management/nomenclatures/ship/list
+source_component: ShipListComponent
+status: vigente
 ---
 
-# Embarcaciones (Ship)
+# Buque
 
-## Descripción
+## Propósito
 
-El catálogo de Embarcaciones permite gestionar los barcos y navíos asociados a las operaciones marítimas del sistema, para llevar el control de la movilidad de la mercancía.
+Gestiona el nomenclador buque del sistema.
 
 ## Acceso
 
-1. Menú: **Nomenclaturas** → **Embarcaciones (Ship)**
-2. Ruta directa: `/management/nomenclatures/ship`
+- **Menú:** Nomenclaturas → Buque
+- **Ruta directa:** `/management/nomenclatures/ship/list`
+- **Componente:** `ShipListComponent`
 
-## Funcionalidades
+> Las rutas `/management/nomenclatures/ship/add` y `/management/nomenclatures/ship/edit` comparten el formulario del nomenclador.
 
-- **Listado:** ver todas las embarcaciones registradas
-- **Registro:** agregar nuevos barcos
-- **Visualización de detalles:** consultar la información de cada embarcación
+## Captura
+
+![ship — captura real](/img/screenshots/nomenclaturas/ship.png)
+
+*Captura tomada del backoffice Agrimpex.*
+
+## Campos
+
+| Campo | Descripción | Obligatorio |
+|-------|-------------|-------------|
+| Buscar | Filtro de texto para localizar registros. | No |
+| Filtrar | Aplica los filtros seleccionados al listado. | No |
+| Nombre | Nombre del elemento de buque. | Sí |
+
+## Acciones
+
+| Acción | Botón | Rol | Ruta |
+|--------|-------|-----|------|
+| Buscar | Buscar | Administrador o Especialista | `/management/nomenclatures/ship/list` |
+| Recargar | Recargar | Administrador o Especialista | `/management/nomenclatures/ship/list` |
+| Añadir | Añadir | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/ship/list/add` |
+| Eliminar | Eliminar | Administrador, Especialista, Logístico o Calidad | `/management/nomenclatures/ship/list` |

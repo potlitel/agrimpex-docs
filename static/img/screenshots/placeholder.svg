@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Captura pendiente</title>
+  <desc id="desc">Marcador de posición para la captura de pantalla de esta pantalla.</desc>
+  <rect width="960" height="540" fill="#f4f6f8"/>
+  <rect x="24" y="24" width="912" height="492" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="4" stroke-dasharray="14 10"/>
+  <path d="M300 250h360M480 190v120" stroke="#94a3b8" stroke-width="8" stroke-linecap="round"/>
+  <text x="480" y="370" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="36" fill="#475569">Captura pendiente</text>
+  <text x="480" y="410" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#94a3b8">Sustituir por una imagen real de la pantalla</text>
+</svg>
