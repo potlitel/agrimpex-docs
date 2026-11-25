@@ -1,0 +1,187 @@
+{
+  "comment": "Capturas adicionales del módulo Calidad. Cada entrada genera static/img/screenshots/<docId>-<suffix>.png sin sobrescribir la captura original <docId>.png. Las rutas son concretas: nunca incluyen parametros ':' ni '$'. El campo clickText nombra el texto visible del boton que debe pulsarse antes de disparar la captura (hoja de filtros o pestana del formulario).",
+  "captures": [
+    {
+      "docId": "calidad/index",
+      "suffix": "panel-kpis",
+      "route": "/calidad/import-permits/dashboard",
+      "scrollY": 0,
+      "waitFor": ".apexcharts-canvas"
+    },
+    {
+      "docId": "calidad/index",
+      "suffix": "panel-graficos",
+      "route": "/calidad/import-permits/dashboard",
+      "scrollY": 900,
+      "waitFor": ".apexcharts-canvas"
+    },
+    {
+      "docId": "calidad/index",
+      "suffix": "panel-resumen",
+      "route": "/calidad/import-permits/dashboard",
+      "scrollY": 1900,
+      "waitFor": ".apexcharts-canvas"
+    },
+    {
+      "docId": "calidad/permisos-importacion/cenasa",
+      "suffix": "filtros",
+      "route": "/calidad/import-permits/cenasa/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "calidad/permisos-importacion/cenasa",
+      "suffix": "operaciones",
+      "route": "/calidad/import-permits/cenasa/list",
+      "scrollY": 420,
+      "scrollRight": true
+    },
+    {
+      "docId": "calidad/permisos-importacion/cenasa",
+      "suffix": "formulario-general",
+      "route": "/calidad/import-permits/cenasa/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "calidad/permisos-importacion/cenasa",
+      "suffix": "formulario-clientes",
+      "route": "/calidad/import-permits/cenasa/add",
+      "scrollY": 0,
+      "clickText": "Clientes"
+    },
+    {
+      "docId": "calidad/permisos-importacion/cenasa",
+      "suffix": "formulario-productos",
+      "route": "/calidad/import-permits/cenasa/add",
+      "scrollY": 0,
+      "clickText": "Productos"
+    },
+    {
+      "docId": "calidad/permisos-importacion/fitosanitario",
+      "suffix": "filtros",
+      "route": "/calidad/import-permits/phytosanitary/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "calidad/permisos-importacion/fitosanitario",
+      "suffix": "operaciones",
+      "route": "/calidad/import-permits/phytosanitary/list",
+      "scrollY": 420,
+      "scrollRight": true
+    },
+    {
+      "docId": "calidad/permisos-importacion/fitosanitario",
+      "suffix": "formulario",
+      "route": "/calidad/import-permits/phytosanitary/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "calidad/permisos-importacion/inhem",
+      "suffix": "filtros",
+      "route": "/calidad/import-permits/inhem/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "calidad/permisos-importacion/inhem",
+      "suffix": "operaciones",
+      "route": "/calidad/import-permits/inhem/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "calidad/permisos-importacion/inhem",
+      "suffix": "formulario",
+      "route": "/calidad/import-permits/inhem/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "calidad/preliberaciones/salud",
+      "suffix": "filtros",
+      "route": "/calidad/preliberations/health/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "calidad/preliberaciones/salud",
+      "suffix": "operaciones",
+      "route": "/calidad/preliberations/health/list",
+      "scrollY": 420,
+      "scrollRight": true
+    },
+    {
+      "docId": "calidad/preliberaciones/salud",
+      "suffix": "formulario-general",
+      "route": "/calidad/preliberations/health/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "calidad/preliberaciones/salud",
+      "suffix": "formulario-direcciones",
+      "route": "/calidad/preliberations/health/add",
+      "scrollY": 0,
+      "clickText": "Direcciones de Descarga"
+    },
+    {
+      "docId": "calidad/preliberaciones/veterinario",
+      "suffix": "filtros",
+      "route": "/calidad/preliberations/veterinary/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "calidad/preliberaciones/veterinario",
+      "suffix": "operaciones",
+      "route": "/calidad/preliberations/veterinary/list",
+      "scrollY": 420,
+      "scrollRight": true
+    },
+    {
+      "docId": "calidad/preliberaciones/veterinario",
+      "suffix": "formulario-general",
+      "route": "/calidad/preliberations/veterinary/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "calidad/preliberaciones/veterinario",
+      "suffix": "formulario-productos",
+      "route": "/calidad/preliberations/veterinary/add",
+      "scrollY": 0,
+      "clickText": "Productos"
+    },
+    {
+      "docId": "calidad/preliberaciones/veterinario",
+      "suffix": "formulario-cliente",
+      "route": "/calidad/preliberations/veterinary/add",
+      "scrollY": 0,
+      "clickText": "Cliente"
+    },
+    {
+      "docId": "calidad/preliberaciones/fitosanitario",
+      "suffix": "filtros",
+      "route": "/calidad/preliberations/phytosanitary/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "calidad/preliberaciones/fitosanitario",
+      "suffix": "operaciones",
+      "route": "/calidad/preliberations/phytosanitary/list",
+      "scrollY": 420,
+      "scrollRight": true
+    },
+    {
+      "docId": "calidad/preliberaciones/fitosanitario",
+      "suffix": "formulario-general",
+      "route": "/calidad/preliberations/phytosanitary/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "calidad/preliberaciones/fitosanitario",
+      "suffix": "formulario-productos",
+      "route": "/calidad/preliberations/phytosanitary/add",
+      "scrollY": 0,
+      "clickText": "Productos"
+    }
+  ]
+}

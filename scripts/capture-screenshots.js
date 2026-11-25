@@ -8,15 +8,48 @@ const sqlite3 = require('sqlite3').verbose();
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+/**
+ * Algunas rutas Angular (en particular /dashboard) nunca disparan el evento
+ * DOMContentLoaded que Puppeteer espera, aunque la página termine de
+ * renderizar. Se tolera el timeout de la navegación y se sondea readyState.
+ */
+async function gotoReady(page, url) {
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 15000 });
+    } catch (error) {
+      if (!/timeout/i.test(error.message)) throw error;
+    }
+    const deadline = Date.now() + 25000;
+    while (Date.now() < deadline) {
+      const state = await page.evaluate(() => ({
+        ready: document.readyState,
+        length: (document.body && document.body.innerText ? document.body.innerText.length : 0),
+      })).catch(() => null);
+      // La sesión autenticada deja peticiones externas pendientes (fuentes),
+      // así que "interactive" con contenido renderizado también cuenta como listo.
+      if (state && (state.ready === 'complete' || (state.ready === 'interactive' && state.length > 150))) return;
+      await sleep(500);
+    }
+    if (attempt === 0) await sleep(1000);
+  }
+  throw new Error(`La página no terminó de renderizar (${url})`);
+}
+
 const root = path.join(__dirname, '..');
 const inventoryPath = path.join(root, 'scripts/docs-inventory.json');
+const manifestPath = path.join(root, 'scripts/docs-captures.json');
 const outputDir = path.join(root, 'static/img/screenshots');
-const baseUrl = (process.env.DOCS_CAPTURE_BASE_URL || 'http://localhost:5000').replace(/\/$/, '');
+const baseUrl = (process.env.DOCS_CAPTURE_BASE_URL || 'https://localhost:5000').replace(/\/$/, '');
 const apiUrl = (process.env.DOCS_API_URL || 'http://127.0.0.1:8990').replace(/\/$/, '');
 const only = (process.env.DOCS_CAPTURE_ONLY || '').split(',').map((s) => s.trim()).filter(Boolean);
+const onlySuffix = (process.env.DOCS_CAPTURE_SUFFIX || '').split(',').map((s) => s.trim()).filter(Boolean);
 const limit = Number(process.env.DOCS_CAPTURE_LIMIT || 0);
 const delay = Number(process.env.DOCS_CAPTURE_DELAY || 1500);
 const batchSize = Number(process.env.DOCS_CAPTURE_BATCH || 12);
+// "inventory" captura la imagen original de cada pantalla; "extra" captura las
+// imágenes sufijadas del manifiesto sin tocar las originales.
+const mode = (process.env.DOCS_CAPTURE_MODE || 'inventory').toLowerCase();
 const appVersion = 'v1.0.0';
 const userDataKey = 'authf649fc9a5f55';
 
@@ -158,7 +191,7 @@ async function main() {
       args: [
         '--no-sandbox', '--disable-setuid-sandbox', '--ignore-certificate-errors',
         '--disable-gpu', '--disable-dev-shm-usage', '--disable-extensions',
-        '--disable-background-networking', '--js-flags=--max-old-space-size=512',
+        '--disable-background-networking',
       ],
     });
     const page = await browser.newPage();
@@ -175,7 +208,7 @@ async function main() {
       if (values.refreshToken) localStorage.setItem(values.refreshKey, values.refreshToken);
       if (values.expiration) localStorage.setItem(values.expirationKey, String(values.expiration));
     }, injectValues);
-    await page.goto(`${baseUrl}/dashboard`, { waitUntil: 'domcontentloaded', timeout: 45000 });
+    await gotoReady(page, `${baseUrl}/dashboard`);
     await sleep(2500);
     if (page.url().includes('/auth/login')) throw new Error('La sesión no fue reconocida por el frontend; revisa el token y la configuración local.');
     return { browser, page };
@@ -184,11 +217,20 @@ async function main() {
   let { browser, page } = await launch();
   console.log('Sesión activa detectada.');
 
-  const screens = inventory.screens.filter((screen) => {
-    if (only.length && !only.includes(screen.docId)) return false;
-    if (process.env.DOCS_CAPTURE_SKIP_EXISTING === '1' && fs.existsSync(path.join(outputDir, `${screen.docId}.png`))) return false;
-    return true;
-  }).slice(0, limit || undefined);
+  const jobs = mode === 'extra'
+    ? JSON.parse(fs.readFileSync(manifestPath, 'utf8')).captures.filter((capture) => {
+        if (only.length && !only.includes(capture.docId)) return false;
+        if (onlySuffix.length && !onlySuffix.includes(capture.suffix)) return false;
+        if (process.env.DOCS_CAPTURE_SKIP_EXISTING === '1' && fs.existsSync(path.join(outputDir, `${capture.docId}-${capture.suffix}.png`))) return false;
+        return true;
+      })
+    : inventory.screens.filter((screen) => {
+        if (only.length && !only.includes(screen.docId)) return false;
+        if (process.env.DOCS_CAPTURE_SKIP_EXISTING === '1' && fs.existsSync(path.join(outputDir, `${screen.docId}.png`))) return false;
+        return true;
+      }).map((screen) => ({ docId: screen.docId, route: ROUTE_OVERRIDES[screen.docId] || screen.sourceRoute }));
+  const bounded = jobs.slice(0, limit || undefined);
+  console.log(`Modo ${mode}: ${bounded.length} capturas pendientes.`);
 
   let captured = 0;
   let skipped = 0;
@@ -202,30 +244,65 @@ async function main() {
     sinceRestart = 0;
   }
 
-  for (const screen of screens) {
-    const route = ROUTE_OVERRIDES[screen.docId] || screen.sourceRoute;
+  for (const job of bounded) {
+    const label = job.suffix ? `${job.docId}-${job.suffix}` : job.docId;
+    const route = job.route;
+    if (mode === 'extra' && !job.suffix) {
+      console.log(`OMITIR ${label} (el manifiesto exige un sufijo)`);
+      skipped++;
+      continue;
+    }
     if (/:|\$/.test(route)) {
-      console.log(`OMITIR ${screen.docId} (ruta con parámetros: ${screen.sourceRoute})`);
+      console.log(`OMITIR ${label} (ruta con parámetros: ${route})`);
       skipped++;
       continue;
     }
     try {
       if (!browser || !browser.connected || sinceRestart >= batchSize) await restart();
-      await page.goto(`${baseUrl}${route}`, { waitUntil: 'domcontentloaded', timeout: 30000 });
+      await gotoReady(page, `${baseUrl}${route}`);
+      if (job.waitFor) await page.waitForSelector(job.waitFor, { timeout: 15000 });
       await page.waitForNetworkIdle({ idleTime: 500, timeout: 6000 }).catch(() => {});
       await sleep(delay);
-      const isAuthScreen = route.startsWith('/auth');
-      if (!isAuthScreen && page.url().includes('/auth/login')) throw new Error('Sesión expirada durante la captura');
-      const file = path.join(outputDir, `${screen.docId}.png`);
+      if (!route.startsWith('/auth') && page.url().includes('/auth/login')) throw new Error('Sesión expirada durante la captura');
+      if (job.clickText) {
+        const clicked = await page.evaluate((text) => {
+          const buttons = Array.from(document.querySelectorAll('button'));
+          const exact = buttons.find((button) => button.textContent.trim() === text);
+          const target = exact || buttons.find((button) => button.textContent.trim().includes(text));
+          if (!target) return false;
+          target.click();
+          return true;
+        }, job.clickText);
+        if (!clicked) throw new Error(`No se encontró el botón "${job.clickText}"`);
+        await sleep(800);
+      }
+      const scrollY = Number(job.scrollY || 0);
+      if (scrollY) {
+        await page.evaluate((y) => window.scrollTo(0, y), scrollY);
+        await sleep(500);
+      }
+      if (job.scrollRight) {
+        const scrolled = await page.evaluate(() => {
+          const container = Array.from(document.querySelectorAll('*')).find(
+            (element) => element.scrollWidth - element.clientWidth > 20 && getComputedStyle(element).overflowX === 'auto',
+          );
+          if (!container) return false;
+          container.scrollLeft = container.scrollWidth;
+          return true;
+        });
+        if (!scrolled) throw new Error('No se encontró el contenedor desplazable de la tabla');
+        await sleep(500);
+      }
+      const file = path.join(outputDir, job.suffix ? `${job.docId}-${job.suffix}.png` : `${job.docId}.png`);
       fs.mkdirSync(path.dirname(file), { recursive: true });
       await page.screenshot({ path: file, fullPage: false });
       captured++;
       sinceRestart++;
-      if (updatePage(screen.docId)) updated++;
-      console.log(`CAPTURADO ${screen.docId} (${page.url()}) -> ${path.relative(root, file)}`);
+      if (mode !== 'extra' && updatePage(job.docId)) updated++;
+      console.log(`CAPTURADO ${label} (${page.url()}) -> ${path.relative(root, file)}`);
     } catch (error) {
-      failures.push(`${screen.docId}: ${error.message}`);
-      console.error(`ERROR ${screen.docId}: ${error.message}`);
+      failures.push(`${label}: ${error.message}`);
+      console.error(`ERROR ${label}: ${error.message}`);
       if (!browser || !browser.connected) {
         try { await restart(); } catch (restartError) {
           console.error(`ERROR reiniciando navegador: ${restartError.message}`);
@@ -241,11 +318,11 @@ async function main() {
   console.log(`\nResultado: ${captured} capturas, ${updated} páginas actualizadas, ${skipped} omitidas, ${failures.length} errores.`);
   if (failures.length) {
     console.error(failures.join('\n'));
-    process.exitCode = 1;
+    process.exit(1);
   }
 }
 
 main().catch((error) => {
   console.error(`Error fatal: ${error.message}`);
-  process.exitCode = 1;
+  process.exit(1);
 });

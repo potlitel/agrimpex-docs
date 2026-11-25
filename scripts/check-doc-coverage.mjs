@@ -18,6 +18,11 @@ const expectedNavLabels = [
   'Reportes', 'Calidad', 'Configuración', 'Perfil', 'Acerca del Sistema',
 ];
 const requiredHeadings = ['Propósito', 'Acceso', 'Captura', 'Campos', 'Acciones'];
+const allowedExtraHeadings = [
+  'Filtros del listado', 'Formulario (alta y edición)', 'Operaciones y documentos', 'Interpretación del panel',
+];
+const expectedScreenCount = 113;
+const manifestPath = path.join(root, 'scripts/docs-captures.json');
 const errors = [];
 const fail = (message) => errors.push(message);
 
@@ -35,6 +40,9 @@ if (idSet.size !== docIds.length) {
   }
 }
 summary.push(`inventario: ${screens.length} pantallas, ${idSet.size} ids únicos`);
+if (screens.length !== expectedScreenCount) {
+  fail(`El inventario tiene ${screens.length} pantallas; se esperan ${expectedScreenCount}`);
+}
 
 for (const group of inventory.navigation || []) {
   for (const id of group.docIds) {
@@ -132,8 +140,18 @@ if (!inventoryOnly) {
       fail(`docs/${screen.docId}.md: el H1 "${h1[0].slice(2)}" no coincide con la etiqueta "${screen.label}"`);
     }
     const headings = (content.match(/^## (.+)$/gm) || []).map((line) => line.slice(3));
-    if (headings.join('|') !== requiredHeadings.join('|')) {
-      fail(`docs/${screen.docId}.md: encabezados H2 ${headings.join(', ')}; se esperaban ${requiredHeadings.join(', ')}`);
+    const original = headings.slice(0, requiredHeadings.length);
+    if (original.join('|') !== requiredHeadings.join('|')) {
+      fail(`docs/${screen.docId}.md: los encabezados originales son ${original.join(', ')}; se esperaban ${requiredHeadings.join(', ')}`);
+    }
+    const extras = headings.slice(requiredHeadings.length);
+    for (const heading of extras) {
+      if (!allowedExtraHeadings.includes(heading)) {
+        fail(`docs/${screen.docId}.md: sección añadida no reconocida "${heading}"`);
+      }
+    }
+    if (new Set(extras).size !== extras.length) {
+      fail(`docs/${screen.docId}.md: secciones añadidas duplicadas`);
     }
     const realCapture = path.join(root, 'static/img/screenshots', `${screen.docId}.png`);
     if (fs.existsSync(realCapture)) {
@@ -148,6 +166,60 @@ if (!inventoryOnly) {
     }
   }
   summary.push(`documentos: ${screens.length} páginas del inventario revisadas`);
+
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  const captures = manifest.captures || [];
+  const seenCaptures = new Set();
+  for (const capture of captures) {
+    const label = `${capture.docId}-${capture.suffix}`;
+    if (!idSet.has(capture.docId)) {
+      fail(`El manifiesto referencia un docId sin inventario: ${capture.docId}`);
+      continue;
+    }
+    if (!capture.suffix || !/^[a-z0-9-]+$/.test(capture.suffix)) {
+      fail(`Manifiesto: sufijo inválido en ${label}`);
+      continue;
+    }
+    if (seenCaptures.has(label)) fail(`Manifiesto: captura duplicada ${label}`);
+    seenCaptures.add(label);
+    if (!capture.route || !capture.route.startsWith('/') || /[:$]/.test(capture.route)) {
+      fail(`Manifiesto: ruta no concreta en ${label}: ${capture.route}`);
+    }
+    const file = path.join(root, 'static/img/screenshots', `${capture.docId}-${capture.suffix}.png`);
+    if (!fs.existsSync(file)) {
+      fail(`Falta la captura del manifiesto: static/img/screenshots/${capture.docId}-${capture.suffix}.png`);
+    }
+  }
+  summary.push(`manifiesto: ${captures.length} capturas adicionales verificadas`);
+
+  for (const screen of screens) {
+    const file = path.join(root, 'docs', `${screen.docId}.md`);
+    if (!fs.existsSync(file)) continue;
+    const content = fs.readFileSync(file, 'utf8');
+    const headings = (content.match(/^## (.+)$/gm) || []).map((line) => line.slice(3));
+    const extras = headings.slice(requiredHeadings.length);
+    for (const heading of extras) {
+      const escaped = heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const section = content.match(new RegExp(`^## ${escaped}\\r?\\n([\\s\\S]*?)(?=^## |(?![\\s\\S]))`, 'm'));
+      const body = section ? section[1] : '';
+      const images = [...body.matchAll(/!\[[^\]]*\]\(\/img\/screenshots\/([^)]+\.png)\)/g)].map((match) => match[1]);
+      if (!images.length) {
+        fail(`docs/${screen.docId}.md: la sección "${heading}" no incluye ninguna captura real`);
+        continue;
+      }
+      for (const image of new Set(images)) {
+        if (!fs.existsSync(path.join(root, 'static/img/screenshots', image))) {
+          fail(`docs/${screen.docId}.md: la sección "${heading}" referencia una imagen inexistente: ${image}`);
+        }
+      }
+      if (screen.docId === 'calidad/index' && heading === 'Interpretación del panel') {
+        const dashboardImages = images.filter((image) => /^calidad\/index-.*\.png$/.test(image));
+        if (new Set(dashboardImages).size < 2) {
+          fail(`docs/${screen.docId}.md: "Interpretación del panel" debe mostrar al menos dos capturas del dashboard`);
+        }
+      }
+    }
+  }
 
   let sidebar;
   try {
