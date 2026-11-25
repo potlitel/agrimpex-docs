@@ -1,5 +1,5 @@
 {
-  "comment": "Capturas adicionales de Calidad y Autenticación. Cada entrada genera static/img/screenshots/<docId>-<suffix>.png sin sobrescribir la captura original <docId>.png. Las rutas son concretas: nunca incluyen parámetros ':' ni '$'. clickText nombra el texto visible del botón que debe pulsarse; fill rellena campos (selector, valor e índice opcional); respond simula una respuesta de API (url, status y body); waitForText espera un texto observable antes de capturar.",
+  "comment": "Capturas adicionales de Calidad, Autenticación y Administración. Cada entrada genera static/img/screenshots/<docId>-<suffix>.png sin sobrescribir la captura original <docId>.png. Las rutas son concretas: nunca incluyen parámetros ':' ni '$'. clickText nombra el texto visible del botón que debe pulsarse; fill rellena campos (selector, valor e índice opcional); respond simula una respuesta de API (url, status y body); waitForText espera un texto observable antes de capturar.",
   "captures": [
     {
       "docId": "calidad/index",
@@ -294,6 +294,75 @@
       },
       "clickText": "Aceptar",
       "waitForText": "El código enviado no es correcto o ha expirado."
+    },
+    {
+      "docId": "administracion/index",
+      "suffix": "mapa-usuarios",
+      "route": "/management/user/list",
+      "scrollY": 0
+    },
+    {
+      "docId": "administracion/index",
+      "suffix": "mapa-grupos",
+      "route": "/management/group/list",
+      "scrollY": 0
+    },
+    {
+      "docId": "administracion/index",
+      "suffix": "mapa-asistente",
+      "route": "/ai-assistant",
+      "scrollY": 0
+    },
+    {
+      "docId": "administracion/usuarios/listado",
+      "suffix": "filtros",
+      "route": "/management/user/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "administracion/usuarios/listado",
+      "suffix": "operaciones",
+      "route": "/management/user/list",
+      "scrollY": 420,
+      "scrollRight": true
+    },
+    {
+      "docId": "administracion/usuarios/formulario",
+      "suffix": "formulario-general",
+      "route": "/management/user/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "administracion/grupos/listado",
+      "suffix": "filtros",
+      "route": "/management/group/list",
+      "scrollY": 0
+    },
+    {
+      "docId": "administracion/grupos/listado",
+      "suffix": "operaciones",
+      "route": "/management/group/list",
+      "scrollY": 260
+    },
+    {
+      "docId": "administracion/grupos/formulario",
+      "suffix": "formulario-general",
+      "route": "/management/group/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "administracion/asistente-ia",
+      "suffix": "chat-vacio",
+      "route": "/ai-assistant",
+      "scrollY": 0
+    },
+    {
+      "docId": "administracion/asistente-ia",
+      "suffix": "chat-consulta",
+      "route": "/ai-assistant",
+      "scrollY": 0,
+      "clickText": "Estadísticas del sistema"
     }
   ]
 }

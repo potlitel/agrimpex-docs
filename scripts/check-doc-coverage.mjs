@@ -24,6 +24,7 @@ const allowedExtraHeadings = [
   'Formulario de inicio de sesión', 'Sesión, errores y redirecciones',
   'Formulario de recuperación', 'Envío del código',
   'Formulario de nueva contraseña', 'Validación del código y errores',
+  'Mapa del módulo', 'Operaciones y estados', 'Uso del asistente',
 ];
 const expectedScreenCount = 113;
 const manifestPath = path.join(root, 'scripts/docs-captures.json');
@@ -208,6 +209,32 @@ if (!inventoryOnly) {
         }
       }
     }
+    if (capture.docId.startsWith('administracion/')) {
+      for (const key of ['clickText', 'waitForText']) {
+        if (capture[key] !== undefined && (typeof capture[key] !== 'string' || !capture[key].trim())) {
+          fail(`Manifiesto: ${key} inválido en ${label}`);
+        }
+      }
+      if (capture.scrollY !== undefined && (!Number.isInteger(capture.scrollY) || capture.scrollY < 0)) {
+        fail(`Manifiesto: scrollY inválido en ${label}`);
+      }
+      if (capture.scrollRight !== undefined && typeof capture.scrollRight !== 'boolean') {
+        fail(`Manifiesto: scrollRight inválido en ${label}`);
+      }
+    }
+  }
+  const adminDocIds = [
+    'administracion/index',
+    'administracion/usuarios/listado',
+    'administracion/usuarios/formulario',
+    'administracion/grupos/listado',
+    'administracion/grupos/formulario',
+    'administracion/asistente-ia',
+  ];
+  for (const docId of adminDocIds) {
+    if (!captures.some((capture) => capture.docId === docId)) {
+      fail(`Manifiesto: faltan capturas sufijadas para ${docId}`);
+    }
   }
   summary.push(`manifiesto: ${captures.length} capturas adicionales verificadas`);
 
@@ -245,6 +272,20 @@ if (!inventoryOnly) {
         const dashboardImages = images.filter((image) => /^calidad\/index-.*\.png$/.test(image));
         if (new Set(dashboardImages).size < 2) {
           fail(`docs/${screen.docId}.md: "Interpretación del panel" debe mostrar al menos dos capturas del dashboard`);
+        }
+      }
+      if (screen.docId.startsWith('administracion/')) {
+        const suffixed = images.filter((image) => image.startsWith(`${screen.docId}-`));
+        if (!suffixed.length) {
+          fail(`docs/${screen.docId}.md: la sección "${heading}" debe mostrar una captura sufijada del manifiesto`);
+        }
+        if (screen.docId === 'administracion/index' && heading === 'Mapa del módulo'
+          && new Set(suffixed).size < 2) {
+          fail(`docs/${screen.docId}.md: "Mapa del módulo" debe mostrar al menos dos capturas del módulo`);
+        }
+        if (screen.docId === 'administracion/asistente-ia' && heading === 'Uso del asistente'
+          && new Set(suffixed).size < 2) {
+          fail(`docs/${screen.docId}.md: "Uso del asistente" debe mostrar al menos dos capturas del chat`);
         }
       }
     }
