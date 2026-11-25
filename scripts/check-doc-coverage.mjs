@@ -20,6 +20,10 @@ const expectedNavLabels = [
 const requiredHeadings = ['Propósito', 'Acceso', 'Captura', 'Campos', 'Acciones'];
 const allowedExtraHeadings = [
   'Filtros del listado', 'Formulario (alta y edición)', 'Operaciones y documentos', 'Interpretación del panel',
+  'Recorrido del acceso', 'Contenedor y modal legal',
+  'Formulario de inicio de sesión', 'Sesión, errores y redirecciones',
+  'Formulario de recuperación', 'Envío del código',
+  'Formulario de nueva contraseña', 'Validación del código y errores',
 ];
 const expectedScreenCount = 113;
 const manifestPath = path.join(root, 'scripts/docs-captures.json');
@@ -189,6 +193,21 @@ if (!inventoryOnly) {
     if (!fs.existsSync(file)) {
       fail(`Falta la captura del manifiesto: static/img/screenshots/${capture.docId}-${capture.suffix}.png`);
     }
+    if (capture.docId.startsWith('autenticacion/')) {
+      if (capture.fill !== undefined && (!Array.isArray(capture.fill)
+        || capture.fill.some((field) => !field || typeof field.selector !== 'string' || !field.selector))) {
+        fail(`Manifiesto: fill inválido en ${label}`);
+      }
+      if (capture.respond !== undefined && (!capture.respond
+        || typeof capture.respond.url !== 'string' || !capture.respond.url.startsWith('/'))) {
+        fail(`Manifiesto: respond inválido en ${label}`);
+      }
+      for (const key of ['clickText', 'waitForText']) {
+        if (capture[key] !== undefined && (typeof capture[key] !== 'string' || !capture[key].trim())) {
+          fail(`Manifiesto: ${key} inválido en ${label}`);
+        }
+      }
+    }
   }
   summary.push(`manifiesto: ${captures.length} capturas adicionales verificadas`);
 
@@ -210,6 +229,16 @@ if (!inventoryOnly) {
       for (const image of new Set(images)) {
         if (!fs.existsSync(path.join(root, 'static/img/screenshots', image))) {
           fail(`docs/${screen.docId}.md: la sección "${heading}" referencia una imagen inexistente: ${image}`);
+        }
+      }
+      if (screen.docId.startsWith('autenticacion/')) {
+        const suffixed = images.filter((image) => image.startsWith(`${screen.docId}-`));
+        if (!suffixed.length) {
+          fail(`docs/${screen.docId}.md: la sección "${heading}" debe mostrar una captura sufijada del manifiesto`);
+        }
+        if (screen.docId === 'autenticacion/index' && heading === 'Recorrido del acceso'
+          && new Set(suffixed).size < 2) {
+          fail(`docs/${screen.docId}.md: "Recorrido del acceso" debe mostrar al menos dos capturas del recorrido`);
         }
       }
       if (screen.docId === 'calidad/index' && heading === 'Interpretación del panel') {

@@ -166,6 +166,61 @@ function updatePage(docId) {
   return true;
 }
 
+/**
+ * Rellena campos declarados en el manifiesto. Se usa el setter nativo y un
+ * evento `input` para que Angular reactive forms registre el valor, incluidos
+ * los campos precargados en el entorno local que deben dejarse vacíos.
+ */
+async function applyFill(page, fill) {
+  if (!Array.isArray(fill) || !fill.length) return;
+  for (const field of fill) {
+    await page.waitForSelector(field.selector, { timeout: 20000 });
+    const applied = await page.$$eval(field.selector, (elements, options) => {
+      const element = elements[options.index || 0];
+      if (!element) return false;
+      const prototype = element.tagName === 'TEXTAREA'
+        ? HTMLTextAreaElement.prototype
+        : HTMLInputElement.prototype;
+      Object.getOwnPropertyDescriptor(prototype, 'value').set.call(element, options.value ?? '');
+      element.dispatchEvent(new Event('input', { bubbles: true }));
+      return true;
+    }, { value: field.value ?? '', index: field.index ?? 0 });
+    if (!applied) throw new Error(`No se encontró el campo "${field.selector}"`);
+  }
+}
+
+/**
+ * Intercepta la petición declarada en el manifiesto y devuelve una respuesta
+ * controlada, sin enviar correos ni modificar cuentas. Devuelve una función
+ * que desinstala el interceptor al terminar la captura.
+ */
+async function installResponder(page, respond) {
+  if (!respond) return () => {};
+  const onRequest = (request) => {
+    // La API real resuelve el preflight CORS; solo se simula la petición final.
+    if (request.method() === 'OPTIONS') return request.continue();
+    if (request.url().includes(respond.url)) {
+      const origin = request.headers().origin || baseUrl;
+      return request.respond({
+        status: Number(respond.status || 200),
+        contentType: 'application/json',
+        headers: {
+          'Access-Control-Allow-Origin': origin,
+          'Access-Control-Allow-Credentials': 'true',
+        },
+        body: JSON.stringify(respond.body ?? {}),
+      });
+    }
+    return request.continue();
+  };
+  await page.setRequestInterception(true);
+  page.on('request', onRequest);
+  return async () => {
+    page.off('request', onRequest);
+    await page.setRequestInterception(false).catch(() => {});
+  };
+}
+
 async function main() {
   const inventory = JSON.parse(fs.readFileSync(inventoryPath, 'utf8'));
   const session = await refreshSession();
@@ -257,10 +312,13 @@ async function main() {
       skipped++;
       continue;
     }
+    let removeResponder = () => {};
     try {
       if (!browser || !browser.connected || sinceRestart >= batchSize) await restart();
       await gotoReady(page, `${baseUrl}${route}`);
       if (job.waitFor) await page.waitForSelector(job.waitFor, { timeout: 15000 });
+      await applyFill(page, job.fill);
+      removeResponder = await installResponder(page, job.respond);
       await page.waitForNetworkIdle({ idleTime: 500, timeout: 6000 }).catch(() => {});
       await sleep(delay);
       if (!route.startsWith('/auth') && page.url().includes('/auth/login')) throw new Error('Sesión expirada durante la captura');
@@ -275,6 +333,13 @@ async function main() {
         }, job.clickText);
         if (!clicked) throw new Error(`No se encontró el botón "${job.clickText}"`);
         await sleep(800);
+        if (job.waitForText) {
+          await page.waitForFunction(
+            (text) => Boolean(document.body && document.body.innerText.includes(text)),
+            { timeout: 12000 },
+            job.waitForText,
+          );
+        }
       }
       const scrollY = Number(job.scrollY || 0);
       if (scrollY) {
@@ -311,6 +376,8 @@ async function main() {
           page = null;
         }
       }
+    } finally {
+      await removeResponder();
     }
   }
 

@@ -1,5 +1,5 @@
 {
-  "comment": "Capturas adicionales del módulo Calidad. Cada entrada genera static/img/screenshots/<docId>-<suffix>.png sin sobrescribir la captura original <docId>.png. Las rutas son concretas: nunca incluyen parametros ':' ni '$'. El campo clickText nombra el texto visible del boton que debe pulsarse antes de disparar la captura (hoja de filtros o pestana del formulario).",
+  "comment": "Capturas adicionales de Calidad y Autenticación. Cada entrada genera static/img/screenshots/<docId>-<suffix>.png sin sobrescribir la captura original <docId>.png. Las rutas son concretas: nunca incluyen parámetros ':' ni '$'. clickText nombra el texto visible del botón que debe pulsarse; fill rellena campos (selector, valor e índice opcional); respond simula una respuesta de API (url, status y body); waitForText espera un texto observable antes de capturar.",
   "captures": [
     {
       "docId": "calidad/index",
@@ -182,6 +182,118 @@
       "route": "/calidad/preliberations/phytosanitary/add",
       "scrollY": 0,
       "clickText": "Productos"
+    },
+    {
+      "docId": "autenticacion/index",
+      "suffix": "recorrido-login",
+      "route": "/auth/login",
+      "scrollY": 0,
+      "fill": [
+        { "selector": "#email", "value": "" },
+        { "selector": "#password", "value": "" }
+      ]
+    },
+    {
+      "docId": "autenticacion/index",
+      "suffix": "recorrido-recuperacion",
+      "route": "/auth/forgot-password",
+      "scrollY": 0,
+      "fill": [
+        { "selector": "#email", "value": "" }
+      ]
+    },
+    {
+      "docId": "autenticacion/index",
+      "suffix": "recorrido-nueva-clave",
+      "route": "/auth/new-password",
+      "scrollY": 0
+    },
+    {
+      "docId": "autenticacion/index",
+      "suffix": "modal-legal",
+      "route": "/auth/login",
+      "scrollY": 0,
+      "clickText": "Términos de uso",
+      "waitForText": "Términos de uso"
+    },
+    {
+      "docId": "autenticacion/login",
+      "suffix": "login-formulario-vacio",
+      "route": "/auth/login",
+      "scrollY": 0,
+      "fill": [
+        { "selector": "#email", "value": "" },
+        { "selector": "#password", "value": "" }
+      ]
+    },
+    {
+      "docId": "autenticacion/login",
+      "suffix": "login-error-credenciales",
+      "route": "/auth/login",
+      "scrollY": 0,
+      "fill": [
+        { "selector": "#email", "value": "usuario@ejemplo.com" },
+        { "selector": "#password", "value": "clave-incorrecta" }
+      ],
+      "respond": {
+        "url": "/authentication_token",
+        "status": 401,
+        "body": { "code": 401, "message": "Credenciales inválidas." }
+      },
+      "clickText": "Iniciar",
+      "waitForText": "Credenciales inválidas."
+    },
+    {
+      "docId": "autenticacion/recuperar-clave",
+      "suffix": "recuperacion-formulario",
+      "route": "/auth/forgot-password",
+      "scrollY": 0,
+      "fill": [
+        { "selector": "#email", "value": "" }
+      ]
+    },
+    {
+      "docId": "autenticacion/recuperar-clave",
+      "suffix": "recuperacion-codigo-enviado",
+      "route": "/auth/forgot-password",
+      "scrollY": 0,
+      "fill": [
+        { "selector": "#email", "value": "usuario@ejemplo.com" }
+      ],
+      "respond": {
+        "url": "/reset-password-code",
+        "status": 200,
+        "body": { "status": true }
+      },
+      "clickText": "Enviar",
+      "waitForText": "Si el correo está registrado"
+    },
+    {
+      "docId": "autenticacion/nueva-clave",
+      "suffix": "nueva-clave-formulario",
+      "route": "/auth/new-password",
+      "scrollY": 0
+    },
+    {
+      "docId": "autenticacion/nueva-clave",
+      "suffix": "nueva-clave-error-codigo",
+      "route": "/auth/new-password",
+      "scrollY": 0,
+      "fill": [
+        { "selector": "input[placeholder=\"-\"]", "index": 0, "value": "1" },
+        { "selector": "input[placeholder=\"-\"]", "index": 1, "value": "2" },
+        { "selector": "input[placeholder=\"-\"]", "index": 2, "value": "3" },
+        { "selector": "input[placeholder=\"-\"]", "index": 3, "value": "4" },
+        { "selector": "input[placeholder=\"Nueva contraseña\"]", "value": "Abcdefgh1!" },
+        { "selector": "input[placeholder=\"Confirmar contraseña\"]", "value": "Abcdefgh1!" }
+      ],
+      "respond": {
+        "url": "/check-password-code",
+        "status": 200,
+        "body": { "status": false, "description": "INVALID_CHANGE_PASSWORD_CODE" }
+      },
+      "clickText": "Aceptar",
+      "waitForText": "El código enviado no es correcto o ha expirado."
     }
   ]
 }
