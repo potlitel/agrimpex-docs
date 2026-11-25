@@ -1411,6 +1411,57 @@
       "suffix": "mapa-apoyo",
       "route": "/management/nomenclatures/airport/list",
       "scrollY": 0
+    },
+    {
+      "docId": "seguridad/index",
+      "suffix": "mapa-trazabilidad",
+      "route": "/security/trace/list",
+      "scrollY": 0
+    },
+    {
+      "docId": "seguridad/index",
+      "suffix": "mapa-verificacion",
+      "route": "/verification",
+      "scrollY": 0
+    },
+    {
+      "docId": "seguridad/index",
+      "suffix": "mapa-notificaciones",
+      "route": "/logistic/notification/BL/BL-1",
+      "scrollY": 0
+    },
+    {
+      "docId": "seguridad/trazabilidad/listado",
+      "suffix": "filtros",
+      "route": "/security/trace/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "seguridad/trazabilidad/listado",
+      "suffix": "operaciones",
+      "route": "/security/trace/list",
+      "scrollY": 420,
+      "scrollRight": true
+    },
+    {
+      "docId": "seguridad/trazabilidad/dashboard",
+      "suffix": "panel",
+      "route": "/security/trace/dashboard",
+      "scrollY": 0,
+      "waitFor": "#kpi-cards"
+    },
+    {
+      "docId": "seguridad/verificar-documento",
+      "suffix": "verificacion",
+      "route": "/verification",
+      "scrollY": 0
+    },
+    {
+      "docId": "seguridad/notificaciones",
+      "suffix": "detalle",
+      "route": "/logistic/notification/BL/BL-1",
+      "scrollY": 0
     }
 
   ]

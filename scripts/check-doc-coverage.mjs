@@ -26,6 +26,7 @@ const allowedExtraHeadings = [
   'Formulario de nueva contraseña', 'Validación del código y errores',
   'Mapa del módulo', 'Operaciones y estados', 'Uso del asistente', 'Excepciones del nomenclador',
   'Control y trazabilidad', 'Columnas y resultados', 'Generación y exportación',
+  'Uso de la verificación', 'Detalle de la notificación',
 ];
 const expectedScreenCount = 113;
 const manifestPath = path.join(root, 'scripts/docs-captures.json');
@@ -249,6 +250,19 @@ if (!inventoryOnly) {
         fail(`Manifiesto: scrollRight inválido en ${label}`);
       }
     }
+    if (capture.docId.startsWith('seguridad/')) {
+      for (const key of ['clickText', 'waitForText', 'waitFor']) {
+        if (capture[key] !== undefined && (typeof capture[key] !== 'string' || !capture[key].trim())) {
+          fail(`Manifiesto: ${key} inválido en ${label}`);
+        }
+      }
+      if (capture.scrollY !== undefined && (!Number.isInteger(capture.scrollY) || capture.scrollY < 0)) {
+        fail(`Manifiesto: scrollY inválido en ${label}`);
+      }
+      if (capture.scrollRight !== undefined && typeof capture.scrollRight !== 'boolean') {
+        fail(`Manifiesto: scrollRight inválido en ${label}`);
+      }
+    }
   }
   const adminDocIds = [
     'administracion/index',
@@ -344,6 +358,18 @@ if (!inventoryOnly) {
       fail(`Manifiesto: faltan capturas sufijadas para ${docId}`);
     }
   }
+  const seguridadDocIds = [
+    'seguridad/index',
+    'seguridad/verificar-documento',
+    'seguridad/trazabilidad/listado',
+    'seguridad/trazabilidad/dashboard',
+    'seguridad/notificaciones',
+  ];
+  for (const docId of seguridadDocIds) {
+    if (!captures.some((capture) => capture.docId === docId)) {
+      fail(`Manifiesto: faltan capturas sufijadas para ${docId}`);
+    }
+  }
   summary.push(`manifiesto: ${captures.length} capturas adicionales verificadas`);
 
   for (const screen of screens) {
@@ -424,6 +450,16 @@ if (!inventoryOnly) {
           fail(`docs/${screen.docId}.md: la sección "${heading}" debe mostrar una captura sufijada del manifiesto`);
         }
         if (screen.docId === 'nomenclaturas/index' && heading === 'Mapa del módulo'
+          && new Set(suffixed).size < 2) {
+          fail(`docs/${screen.docId}.md: "Mapa del módulo" debe mostrar al menos dos capturas del módulo`);
+        }
+      }
+      if (screen.docId.startsWith('seguridad/')) {
+        const suffixed = images.filter((image) => image.startsWith(`${screen.docId}-`));
+        if (!suffixed.length) {
+          fail(`docs/${screen.docId}.md: la sección "${heading}" debe mostrar una captura sufijada del manifiesto`);
+        }
+        if (screen.docId === 'seguridad/index' && heading === 'Mapa del módulo'
           && new Set(suffixed).size < 2) {
           fail(`docs/${screen.docId}.md: "Mapa del módulo" debe mostrar al menos dos capturas del módulo`);
         }
