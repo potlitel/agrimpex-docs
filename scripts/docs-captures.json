@@ -363,6 +363,445 @@
       "route": "/ai-assistant",
       "scrollY": 0,
       "clickText": "Estadísticas del sistema"
+    },
+    {
+      "docId": "logistica/index",
+      "suffix": "mapa-importacion",
+      "route": "/logistic/import",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/index",
+      "suffix": "mapa-contenedores",
+      "route": "/logistic/terminal-inventory",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/index",
+      "suffix": "mapa-crud",
+      "route": "/logistic/delivery-orders/list",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/index",
+      "suffix": "mapa-reportes",
+      "route": "/logistic/reports",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/importacion/dashboard",
+      "suffix": "panel-estados",
+      "route": "/logistic/import",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/importacion/dashboard",
+      "suffix": "panel-tarjetas",
+      "route": "/logistic/import",
+      "scrollY": 700
+    },
+    {
+      "docId": "logistica/importacion/estadisticas",
+      "suffix": "panel-kpis",
+      "route": "/logistic/import/stats",
+      "scrollY": 0,
+      "waitFor": ".apexcharts-canvas"
+    },
+    {
+      "docId": "logistica/importacion/estadisticas",
+      "suffix": "panel-graficos",
+      "route": "/logistic/import/stats",
+      "scrollY": 900,
+      "waitFor": ".apexcharts-canvas"
+    },
+    {
+      "docId": "logistica/importacion/mariel",
+      "suffix": "panel-carga",
+      "route": "/logistic/import/tc-mariel",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/importacion/mariel",
+      "suffix": "panel-formatos",
+      "route": "/logistic/import/tc-mariel",
+      "scrollY": 520
+    },
+    {
+      "docId": "logistica/importacion/santiago",
+      "suffix": "panel-carga",
+      "route": "/logistic/import/puerto-santiago",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/importacion/santiago",
+      "suffix": "panel-auditoria",
+      "route": "/logistic/import/puerto-santiago",
+      "scrollY": 520
+    },
+    {
+      "docId": "logistica/importacion/no-devueltos",
+      "suffix": "panel-carga",
+      "route": "/logistic/import/no-devueltos",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/importacion/no-devueltos",
+      "suffix": "panel-formatos",
+      "route": "/logistic/import/no-devueltos",
+      "scrollY": 520
+    },
+    {
+      "docId": "logistica/importacion/extraidos",
+      "suffix": "panel-carga",
+      "route": "/logistic/import/extraidos",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/importacion/extraidos",
+      "suffix": "panel-formatos",
+      "route": "/logistic/import/extraidos",
+      "scrollY": 520
+    },
+    {
+      "docId": "logistica/importacion/recepcion-puerta",
+      "suffix": "panel-carga",
+      "route": "/logistic/import/recepcion-puerta",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/importacion/recepcion-puerta",
+      "suffix": "panel-formatos",
+      "route": "/logistic/import/recepcion-puerta",
+      "scrollY": 520
+    },
+    {
+      "docId": "logistica/importacion/logs",
+      "suffix": "filtros",
+      "route": "/logistic/import/logs",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "logistica/importacion/logs",
+      "suffix": "operaciones",
+      "route": "/logistic/import/logs",
+      "scrollY": 420
+    },
+    {
+      "docId": "logistica/importacion/excluidos",
+      "suffix": "filtros",
+      "route": "/logistic/excludes-containers",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "logistica/importacion/excluidos",
+      "suffix": "columnas",
+      "route": "/logistic/excludes-containers",
+      "scrollY": 420
+    },
+    {
+      "docId": "logistica/control-importaciones",
+      "suffix": "panel-control",
+      "route": "/logistic/imports-control",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/control-importaciones",
+      "suffix": "filtros",
+      "route": "/logistic/imports-control",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "logistica/contenedores/inventario-terminal",
+      "suffix": "filtros",
+      "route": "/logistic/terminal-inventory",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "logistica/contenedores/inventario-terminal",
+      "suffix": "detalle",
+      "route": "/logistic/terminal-inventory",
+      "scrollY": 700
+    },
+    {
+      "docId": "logistica/contenedores/navegando",
+      "suffix": "filtros",
+      "route": "/logistic/navigating-containers/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "logistica/contenedores/navegando",
+      "suffix": "operaciones",
+      "route": "/logistic/navigating-containers/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "logistica/contenedores/retorno",
+      "suffix": "panel",
+      "route": "/logistic/return-cycle",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/contenedores/retorno",
+      "suffix": "estados",
+      "route": "/logistic/return-cycle",
+      "scrollY": 420
+    },
+    {
+      "docId": "logistica/contenedores/documentos",
+      "suffix": "filtros",
+      "route": "/logistic/shipping-documents/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "logistica/contenedores/documentos",
+      "suffix": "operaciones",
+      "route": "/logistic/shipping-documents/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "logistica/contenedores/documentos-formulario",
+      "suffix": "formulario-bl",
+      "route": "/logistic/shipping-documents/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/contenedores/documentos-formulario",
+      "suffix": "formulario-factura",
+      "route": "/logistic/shipping-documents/add",
+      "scrollY": 0,
+      "clickText": "Factura / Packing List"
+    },
+    {
+      "docId": "logistica/contenedores/explorador",
+      "suffix": "panel",
+      "route": "/logistic/documents/explorer",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/contenedores/explorador",
+      "suffix": "resultados",
+      "route": "/logistic/documents/explorer",
+      "scrollY": 600
+    },
+    {
+      "docId": "logistica/contenedores/trazabilidad",
+      "suffix": "busqueda",
+      "route": "/logistic/container-control",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/contenedores/trazabilidad",
+      "suffix": "detalle",
+      "route": "/logistic/container-control",
+      "scrollY": 700
+    },
+    {
+      "docId": "logistica/contenedores/extracciones-diarias",
+      "suffix": "filtros",
+      "route": "/logistic/daily-extractions",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/contenedores/extracciones-diarias",
+      "suffix": "operaciones",
+      "route": "/logistic/daily-extractions",
+      "scrollY": 420
+    },
+    {
+      "docId": "logistica/contenedores/extraidos",
+      "suffix": "filtros",
+      "route": "/logistic/extracted-containers",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "logistica/contenedores/extraidos",
+      "suffix": "operaciones",
+      "route": "/logistic/extracted-containers",
+      "scrollY": 420,
+      "scrollRight": true
+    },
+    {
+      "docId": "logistica/entregas/listado",
+      "suffix": "filtros",
+      "route": "/logistic/delivery-orders/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "logistica/entregas/listado",
+      "suffix": "operaciones",
+      "route": "/logistic/delivery-orders/list",
+      "scrollY": 420,
+      "scrollRight": true
+    },
+    {
+      "docId": "logistica/entregas/formulario",
+      "suffix": "formulario-oferta",
+      "route": "/logistic/delivery-orders/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/entregas/formulario",
+      "suffix": "formulario-embarque",
+      "route": "/logistic/delivery-orders/add",
+      "scrollY": 0,
+      "clickText": "Datos del Embarque"
+    },
+    {
+      "docId": "logistica/inbonds/listado",
+      "suffix": "filtros",
+      "route": "/logistic/inbond-goods/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "logistica/inbonds/listado",
+      "suffix": "operaciones",
+      "route": "/logistic/inbond-goods/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "logistica/inbonds/formulario",
+      "suffix": "formulario-general",
+      "route": "/logistic/inbond-goods/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/inbonds/formulario",
+      "suffix": "formulario-productos",
+      "route": "/logistic/inbond-goods/add",
+      "scrollY": 700
+    },
+    {
+      "docId": "logistica/solicitudes-extension/listado",
+      "suffix": "filtros",
+      "route": "/logistic/extensions-requests/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "logistica/solicitudes-extension/listado",
+      "suffix": "operaciones",
+      "route": "/logistic/extensions-requests/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "logistica/solicitudes-extension/formulario",
+      "suffix": "formulario-general",
+      "route": "/logistic/extensions-requests/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/solicitudes-extension/formulario",
+      "suffix": "formulario-contenedores",
+      "route": "/logistic/extensions-requests/add",
+      "scrollY": 700
+    },
+    {
+      "docId": "logistica/desaduanes/listado",
+      "suffix": "filtros",
+      "route": "/logistic/desaduanes/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "logistica/desaduanes/listado",
+      "suffix": "operaciones",
+      "route": "/logistic/desaduanes/list",
+      "scrollY": 420,
+      "scrollRight": true
+    },
+    {
+      "docId": "logistica/desaduanes/formulario",
+      "suffix": "formulario-general",
+      "route": "/logistic/desaduanes/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/desaduanes/formulario",
+      "suffix": "formulario-clientes",
+      "route": "/logistic/desaduanes/add",
+      "scrollY": 0,
+      "clickText": "Clientes"
+    },
+    {
+      "docId": "logistica/desaduanes/formulario",
+      "suffix": "formulario-contrato",
+      "route": "/logistic/desaduanes/add",
+      "scrollY": 0,
+      "clickText": "Contrato"
+    },
+    {
+      "docId": "logistica/especialistas/listado",
+      "suffix": "filtros",
+      "route": "/logistic/specialist-suppliers/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "logistica/especialistas/listado",
+      "suffix": "operaciones",
+      "route": "/logistic/specialist-suppliers/list",
+      "scrollY": 420
+    },
+    {
+      "docId": "logistica/especialistas/formulario",
+      "suffix": "formulario-general",
+      "route": "/logistic/specialist-suppliers/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/especialistas/formulario",
+      "suffix": "formulario-proveedores",
+      "route": "/logistic/specialist-suppliers/add",
+      "scrollY": 500
+    },
+    {
+      "docId": "logistica/fletes-aereos/listado",
+      "suffix": "filtros",
+      "route": "/logistic/airs-freights/list",
+      "scrollY": 0,
+      "clickText": "Filtrar"
+    },
+    {
+      "docId": "logistica/fletes-aereos/listado",
+      "suffix": "operaciones",
+      "route": "/logistic/airs-freights/list",
+      "scrollY": 420,
+      "scrollRight": true
+    },
+    {
+      "docId": "logistica/fletes-aereos/formulario",
+      "suffix": "formulario-awb",
+      "route": "/logistic/airs-freights/add",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/fletes-aereos/formulario",
+      "suffix": "formulario-factura",
+      "route": "/logistic/airs-freights/add",
+      "scrollY": 0,
+      "clickText": "Factura"
+    },
+    {
+      "docId": "logistica/reportes",
+      "suffix": "configuracion",
+      "route": "/logistic/reports",
+      "scrollY": 0
+    },
+    {
+      "docId": "logistica/reportes",
+      "suffix": "exportacion",
+      "route": "/logistic/reports",
+      "scrollY": 500
     }
+
   ]
 }

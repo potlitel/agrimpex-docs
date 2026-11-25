@@ -25,6 +25,7 @@ const allowedExtraHeadings = [
   'Formulario de recuperación', 'Envío del código',
   'Formulario de nueva contraseña', 'Validación del código y errores',
   'Mapa del módulo', 'Operaciones y estados', 'Uso del asistente',
+  'Control y trazabilidad', 'Columnas y resultados', 'Generación y exportación',
 ];
 const expectedScreenCount = 113;
 const manifestPath = path.join(root, 'scripts/docs-captures.json');
@@ -209,6 +210,19 @@ if (!inventoryOnly) {
         }
       }
     }
+    if (capture.docId.startsWith('logistica/')) {
+      for (const key of ['clickText', 'waitForText', 'waitFor']) {
+        if (capture[key] !== undefined && (typeof capture[key] !== 'string' || !capture[key].trim())) {
+          fail(`Manifiesto: ${key} inválido en ${label}`);
+        }
+      }
+      if (capture.scrollY !== undefined && (!Number.isInteger(capture.scrollY) || capture.scrollY < 0)) {
+        fail(`Manifiesto: scrollY inválido en ${label}`);
+      }
+      if (capture.scrollRight !== undefined && typeof capture.scrollRight !== 'boolean') {
+        fail(`Manifiesto: scrollRight inválido en ${label}`);
+      }
+    }
     if (capture.docId.startsWith('administracion/')) {
       for (const key of ['clickText', 'waitForText']) {
         if (capture[key] !== undefined && (typeof capture[key] !== 'string' || !capture[key].trim())) {
@@ -232,6 +246,46 @@ if (!inventoryOnly) {
     'administracion/asistente-ia',
   ];
   for (const docId of adminDocIds) {
+    if (!captures.some((capture) => capture.docId === docId)) {
+      fail(`Manifiesto: faltan capturas sufijadas para ${docId}`);
+    }
+  }
+  const logisticaDocIds = [
+    'logistica/index',
+    'logistica/importacion/dashboard',
+    'logistica/importacion/estadisticas',
+    'logistica/importacion/mariel',
+    'logistica/importacion/santiago',
+    'logistica/importacion/no-devueltos',
+    'logistica/importacion/extraidos',
+    'logistica/importacion/recepcion-puerta',
+    'logistica/importacion/logs',
+    'logistica/importacion/excluidos',
+    'logistica/control-importaciones',
+    'logistica/contenedores/inventario-terminal',
+    'logistica/contenedores/navegando',
+    'logistica/contenedores/retorno',
+    'logistica/contenedores/documentos',
+    'logistica/contenedores/documentos-formulario',
+    'logistica/contenedores/explorador',
+    'logistica/contenedores/trazabilidad',
+    'logistica/contenedores/extracciones-diarias',
+    'logistica/contenedores/extraidos',
+    'logistica/entregas/listado',
+    'logistica/entregas/formulario',
+    'logistica/inbonds/listado',
+    'logistica/inbonds/formulario',
+    'logistica/solicitudes-extension/listado',
+    'logistica/solicitudes-extension/formulario',
+    'logistica/desaduanes/listado',
+    'logistica/desaduanes/formulario',
+    'logistica/especialistas/listado',
+    'logistica/especialistas/formulario',
+    'logistica/fletes-aereos/listado',
+    'logistica/fletes-aereos/formulario',
+    'logistica/reportes',
+  ];
+  for (const docId of logisticaDocIds) {
     if (!captures.some((capture) => capture.docId === docId)) {
       fail(`Manifiesto: faltan capturas sufijadas para ${docId}`);
     }
@@ -286,6 +340,28 @@ if (!inventoryOnly) {
         if (screen.docId === 'administracion/asistente-ia' && heading === 'Uso del asistente'
           && new Set(suffixed).size < 2) {
           fail(`docs/${screen.docId}.md: "Uso del asistente" debe mostrar al menos dos capturas del chat`);
+        }
+      }
+      if (screen.docId.startsWith('logistica/')) {
+        const suffixed = images.filter((image) => image.startsWith(`${screen.docId}-`));
+        if (!suffixed.length) {
+          fail(`docs/${screen.docId}.md: la sección "${heading}" debe mostrar una captura sufijada del manifiesto`);
+        }
+        if (screen.docId === 'logistica/index' && heading === 'Mapa del módulo'
+          && new Set(suffixed).size < 2) {
+          fail(`docs/${screen.docId}.md: "Mapa del módulo" debe mostrar al menos dos capturas del módulo`);
+        }
+        if (screen.docId === 'logistica/importacion/estadisticas' && heading === 'Interpretación del panel'
+          && new Set(suffixed).size < 2) {
+          fail(`docs/${screen.docId}.md: "Interpretación del panel" debe mostrar al menos dos capturas de los gráficos`);
+        }
+        const tabbedForms = [
+          'logistica/entregas/formulario', 'logistica/desaduanes/formulario',
+          'logistica/fletes-aereos/formulario', 'logistica/contenedores/documentos-formulario',
+        ];
+        if (tabbedForms.includes(screen.docId) && heading === 'Formulario (alta y edición)'
+          && new Set(suffixed).size < 2) {
+          fail(`docs/${screen.docId}.md: "Formulario (alta y edición)" debe mostrar al menos dos capturas de las pestañas`);
         }
       }
     }
