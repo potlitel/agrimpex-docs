@@ -74,6 +74,16 @@ npm run build
 
 Este comando genera contenido estático en el directorio `build` 📁, que puede ser desplegado en cualquier servicio de hosting estático.
 
+### 🔗 Destino del botón «Volver al sistema»
+
+El enlace de la cabecera se configura en el momento de la compilación con `AGRIMPEX_BACKOFFICE_URL`:
+
+```bash
+AGRIMPEX_BACKOFFICE_URL=https://backoffice.eicma.cu npm run build
+```
+
+Si la variable no está definida o no es una URL `http`/`https` válida, se usa `https://agrimpex.eicma.cu`. El sitio es estático: el valor queda incluido en el bundle, por lo que hay que **volver a compilar** para cambiarlo.
+
 ---
 
 ## ☁️ Despliegue

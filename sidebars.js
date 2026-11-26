@@ -6,6 +6,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Autenticación',
+      customProps: {icon: 'LogIn'},
       collapsed: false,
       items: [
         'autenticacion/index',
@@ -17,6 +18,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Administración',
+      customProps: {icon: 'ClipboardList'},
       items: [
         'administracion/index',
         'administracion/usuarios/listado',
@@ -29,6 +31,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Logística',
+      customProps: {icon: 'Truck'},
       items: [
         'logistica/index',
         'logistica/importacion/dashboard',
@@ -68,6 +71,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Nomenclaturas',
+      customProps: {icon: 'Boxes'},
       items: [
         'nomenclaturas/index',
         'nomenclaturas/moneda',
@@ -108,6 +112,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Seguridad',
+      customProps: {icon: 'Shield'},
       items: [
         'seguridad/index',
         'seguridad/verificar-documento',
@@ -119,6 +124,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Reportes',
+      customProps: {icon: 'BarChart3'},
       items: [
         'reportes/index',
         'reportes/por-rango-fechas',
@@ -133,6 +139,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Calidad',
+      customProps: {icon: 'Info'},
       items: [
         'calidad/index',
         'calidad/permisos-importacion/cenasa',
@@ -146,6 +153,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Configuración',
+      customProps: {icon: 'Settings2'},
       items: [
         'configuracion/index',
         'configuracion/formulario',
@@ -156,6 +164,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Perfil',
+      customProps: {icon: 'UserRound'},
       items: [
         'perfil/index',
         'perfil/preferencias',
@@ -165,6 +174,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Acerca del Sistema',
+      customProps: {icon: 'BookOpen'},
       items: [
         'intro',
         'core/about',

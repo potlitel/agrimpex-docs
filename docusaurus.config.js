@@ -1,6 +1,23 @@
 // @ts-check
 import {themes as prismThemes} from 'prism-react-renderer';
 
+const DEFAULT_BACKOFFICE_URL = 'https://agrimpex.eicma.cu';
+
+function resolveBackofficeUrl() {
+  const configured = process.env.AGRIMPEX_BACKOFFICE_URL?.trim();
+  if (!configured) {
+    return DEFAULT_BACKOFFICE_URL;
+  }
+  try {
+    const parsed = new URL(configured);
+    return ['http:', 'https:'].includes(parsed.protocol)
+      ? configured
+      : DEFAULT_BACKOFFICE_URL;
+  } catch {
+    return DEFAULT_BACKOFFICE_URL;
+  }
+}
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Agrimpex - Manual de Usuario',
@@ -16,10 +33,16 @@ const config = {
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
+  customFields: {
+    backofficeUrl: resolveBackofficeUrl(),
+  },
+
   i18n: {
     defaultLocale: 'es',
     locales: ['es'],
   },
+
+  plugins: ['./plugins/local-search-index.js'],
 
   presets: [
     [
@@ -70,10 +93,23 @@ const config = {
             label: 'GitLab',
             position: 'right',
           },
+          {
+            type: 'custom-search',
+            position: 'right',
+          },
+          {
+            type: 'custom-backoffice',
+            position: 'right',
+          },
         ],
       },
       footer: {
         style: 'dark',
+        logo: {
+          alt: 'Logo Agrimpex',
+          src: 'img/logo.svg',
+          href: '/docs/intro',
+        },
         links: [
           {
             title: 'Documentación',
@@ -102,6 +138,19 @@ const config = {
               {
                 label: 'EICMA Soft',
                 href: 'https://eicma.cu',
+              },
+            ],
+          },
+          {
+            title: 'Accesos',
+            items: [
+              {
+                label: 'Volver al sistema',
+                href: resolveBackofficeUrl(),
+              },
+              {
+                label: 'Buscar en el manual',
+                to: '/docs/intro',
               },
             ],
           },
