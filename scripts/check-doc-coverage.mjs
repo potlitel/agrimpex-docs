@@ -24,7 +24,8 @@ const allowedExtraHeadings = [
   'Formulario de inicio de sesión', 'Sesión, errores y redirecciones',
   'Formulario de recuperación', 'Envío del código',
   'Formulario de nueva contraseña', 'Validación del código y errores',
-  'Mapa del módulo', 'Operaciones y estados', 'Uso del asistente', 'Excepciones del nomenclador',
+  'Mapa del módulo', 'Pestañas y preferencias', 'Secciones de configuración',
+  'Operaciones y estados', 'Uso del asistente', 'Excepciones del nomenclador',
   'Control y trazabilidad', 'Columnas y resultados', 'Generación y exportación',
   'Uso de la verificación', 'Detalle de la notificación',
   'Variantes de exportación',
@@ -277,6 +278,19 @@ if (!inventoryOnly) {
         fail(`Manifiesto: scrollRight inválido en ${label}`);
       }
     }
+    if (capture.docId.startsWith('configuracion/')) {
+      for (const key of ['clickText', 'waitForText', 'waitFor']) {
+        if (capture[key] !== undefined && (typeof capture[key] !== 'string' || !capture[key].trim())) {
+          fail(`Manifiesto: ${key} inválido en ${label}`);
+        }
+      }
+      if (capture.scrollY !== undefined && (!Number.isInteger(capture.scrollY) || capture.scrollY < 0)) {
+        fail(`Manifiesto: scrollY inválido en ${label}`);
+      }
+      if (capture.scrollRight !== undefined && typeof capture.scrollRight !== 'boolean') {
+        fail(`Manifiesto: scrollRight inválido en ${label}`);
+      }
+    }
   }
   const adminDocIds = [
     'administracion/index',
@@ -399,6 +413,27 @@ if (!inventoryOnly) {
       fail(`Manifiesto: faltan capturas sufijadas para ${docId}`);
     }
   }
+  const configuracionDocIds = [
+    'configuracion/index',
+    'configuracion/formulario',
+    'configuracion/recomplus-sync',
+    'configuracion/origen-parte',
+  ];
+  for (const docId of configuracionDocIds) {
+    if (!captures.some((capture) => capture.docId === docId)) {
+      fail(`Manifiesto: faltan capturas sufijadas para ${docId}`);
+    }
+  }
+  const configuracionTabCaptures = [
+    'general', 'secuencias', 'operaciones', 'recomplus', 'permisos-importacion',
+    'firmas-modelos', 'matriz-permisos', 'verificacion', 'notificaciones',
+    'preferencias-roles', 'parametros-reportes',
+  ];
+  for (const suffix of configuracionTabCaptures) {
+    if (!captures.some((capture) => capture.docId === 'configuracion/formulario' && capture.suffix === suffix)) {
+      fail(`Manifiesto: falta la captura configuracion/formulario-${suffix}`);
+    }
+  }
   summary.push(`manifiesto: ${captures.length} capturas adicionales verificadas`);
 
   for (const screen of screens) {
@@ -503,12 +538,27 @@ if (!inventoryOnly) {
           fail(`docs/${screen.docId}.md: "Mapa del módulo" debe mostrar al menos dos capturas del módulo`);
         }
       }
+      if (screen.docId.startsWith('configuracion/')) {
+        const suffixed = images.filter((image) => image.startsWith(`${screen.docId}-`));
+        if (!suffixed.length) {
+          fail(`docs/${screen.docId}.md: la sección "${heading}" debe mostrar una captura sufijada del manifiesto`);
+        }
+        if (screen.docId === 'configuracion/index' && heading === 'Mapa del módulo'
+          && new Set(suffixed).size < 2) {
+          fail(`docs/${screen.docId}.md: "Mapa del módulo" debe mostrar al menos dos capturas del módulo`);
+        }
+        if (screen.docId === 'configuracion/formulario' && heading === 'Pestañas y preferencias'
+          && new Set(suffixed).size !== configuracionTabCaptures.length) {
+          fail(`docs/${screen.docId}.md: "Pestañas y preferencias" debe mostrar ${configuracionTabCaptures.length} capturas de las pestañas`);
+        }
+      }
     }
   }
 
   const expectedSubsections = {
     'reportes/monitorizacion': 7,
     'reportes/exportacion': 15,
+    'configuracion/formulario': 10,
   };
   for (const [docId, expected] of Object.entries(expectedSubsections)) {
     const file = path.join(root, 'docs', `${docId}.md`);

@@ -1713,6 +1713,141 @@
       "suffix": "variante-tendencias-proveedor",
       "route": "/reports/trends-supplier",
       "scrollY": 0
+    },
+    {
+      "docId": "configuracion/index",
+      "suffix": "mapa-formulario",
+      "route": "/settings",
+      "scrollY": 0
+    },
+    {
+      "docId": "configuracion/index",
+      "suffix": "mapa-recomplus",
+      "route": "/settings/recomplus-sync",
+      "scrollY": 0
+    },
+    {
+      "docId": "configuracion/index",
+      "suffix": "mapa-origen-parte",
+      "route": "/settings/origen-parte",
+      "scrollY": 0
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "general",
+      "route": "/settings/form",
+      "scrollY": 0
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "secuencias",
+      "route": "/settings/form",
+      "scrollY": 0,
+      "clickText": "Secuencias de Orden de Entrega",
+      "waitForText": "Gestión de numeración consecutiva por proveedor"
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "operaciones",
+      "route": "/settings/form",
+      "scrollY": 0,
+      "clickText": "Configuración avanzada de operaciones",
+      "waitForText": "Formato de importación TC Mariel"
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "verificacion",
+      "route": "/settings/form",
+      "scrollY": 0,
+      "clickText": "Verificación de Documentos",
+      "waitForText": "Habilitar sello de verificación globalmente"
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "notificaciones",
+      "route": "/settings/form?tab=notifications",
+      "scrollY": 0,
+      "clickText": "Mis Preferencias",
+      "waitForText": "Active solo los eventos que desea recibir."
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "preferencias-roles",
+      "route": "/settings/form?tab=notifications",
+      "scrollY": 0,
+      "clickText": "Configuración de Roles",
+      "waitForText": "Roles destinatarios por tipo"
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "recomplus",
+      "route": "/settings/form?tab=recomplus",
+      "scrollY": 0,
+      "waitForText": "Configure los parámetros de acceso al servidor Recomplus."
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "permisos-importacion",
+      "route": "/settings/form?tab=import_permits",
+      "scrollY": 0,
+      "waitForText": "Configuración para documentos de permisos de importación"
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "firmas-modelos",
+      "route": "/settings/form?tab=model_signatures",
+      "scrollY": 0,
+      "waitForText": "Firmas y Destinatarios de Modelos Exportados"
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "matriz-permisos",
+      "route": "/settings/form?tab=permission_matrix",
+      "scrollY": 0,
+      "waitForText": "Matriz de Asignación de Permisos de Importación"
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "parametros-reportes",
+      "route": "/settings/form?tab=report_parameters",
+      "scrollY": 0,
+      "waitForText": "Cantidad días de entrega de la mercancía"
+    },
+    {
+      "docId": "configuracion/recomplus-sync",
+      "suffix": "filtros",
+      "route": "/settings/recomplus-sync",
+      "scrollY": 0,
+      "clickText": "Filtrar",
+      "waitForText": "Disparado por:"
+    },
+    {
+      "docId": "configuracion/recomplus-sync",
+      "suffix": "operaciones",
+      "route": "/settings/recomplus-sync",
+      "scrollY": 320
+    },
+    {
+      "docId": "configuracion/origen-parte",
+      "suffix": "secciones",
+      "route": "/settings/origen-parte",
+      "scrollY": 0
+    },
+    {
+      "docId": "configuracion/origen-parte",
+      "suffix": "frecuencia",
+      "route": "/settings/origen-parte",
+      "scrollY": 0,
+      "clickText": "Frecuencia de sondeo",
+      "waitForText": "Estrategia de sondeo"
+    },
+    {
+      "docId": "configuracion/origen-parte",
+      "suffix": "reintentos",
+      "route": "/settings/origen-parte",
+      "scrollY": 0,
+      "clickText": "Reintentos y timeouts",
+      "waitForText": "Timeout conexión (seg)"
     }
 
   ]
