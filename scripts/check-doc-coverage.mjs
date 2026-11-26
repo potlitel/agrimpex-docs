@@ -428,6 +428,12 @@ if (!inventoryOnly) {
     'general', 'secuencias', 'operaciones', 'recomplus', 'permisos-importacion',
     'firmas-modelos', 'matriz-permisos', 'verificacion', 'notificaciones',
     'preferencias-roles', 'parametros-reportes',
+    'preferencias-mine-top', 'preferencias-mine-types-1', 'preferencias-mine-types-2',
+    'preferencias-mine-save', 'preferencias-roles-types-2',
+    'preferencias-roles-recipients-1', 'preferencias-roles-recipients-2',
+    'preferencias-roles-role-dropdown', 'preferencias-roles-thresholds',
+    'preferencias-roles-mandatory-1', 'preferencias-roles-mandatory-2',
+    'preferencias-roles-save',
   ];
   for (const suffix of configuracionTabCaptures) {
     if (!captures.some((capture) => capture.docId === 'configuracion/formulario' && capture.suffix === suffix)) {

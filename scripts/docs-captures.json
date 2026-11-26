@@ -1780,6 +1780,102 @@
     },
     {
       "docId": "configuracion/formulario",
+      "suffix": "preferencias-mine-top",
+      "route": "/settings/form?tab=notifications",
+      "scrollY": 0,
+      "clickText": "Mis Preferencias",
+      "waitForText": "Active solo los eventos que desea recibir."
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "preferencias-mine-types-1",
+      "route": "/settings/form?tab=notifications",
+      "scrollY": 180,
+      "clickText": "Mis Preferencias",
+      "waitForText": "Preliberación de calidad pendiente"
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "preferencias-mine-types-2",
+      "route": "/settings/form?tab=notifications",
+      "scrollY": 420,
+      "clickText": "Mis Preferencias",
+      "waitForText": "Parte diario procesado"
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "preferencias-mine-save",
+      "route": "/settings/form?tab=notifications",
+      "scrollY": 506,
+      "clickText": "Mis Preferencias",
+      "waitForText": "Guardar preferencias"
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "preferencias-roles-types-2",
+      "route": "/settings/form?tab=notifications",
+      "scrollY": 400,
+      "clickText": "Configuración de Roles",
+      "waitForText": "Parte diario procesado"
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "preferencias-roles-recipients-1",
+      "route": "/settings/form?tab=notifications",
+      "scrollY": 900,
+      "clickText": "Configuración de Roles",
+      "waitForText": "Roles destinatarios por tipo"
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "preferencias-roles-recipients-2",
+      "route": "/settings/form?tab=notifications",
+      "scrollY": 1400,
+      "clickText": "Configuración de Roles",
+      "waitForText": "Sin rol por defecto: visible para todos los usuarios."
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "preferencias-roles-role-dropdown",
+      "route": "/settings/form?tab=notifications",
+      "scrollY": 900,
+      "clickText": "Configuración de Roles",
+      "waitForText": "Especialista Principal"
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "preferencias-roles-thresholds",
+      "route": "/settings/form?tab=notifications",
+      "scrollY": 1580,
+      "clickText": "Configuración de Roles",
+      "waitForText": "Frecuencia de sondeo (segundos)"
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "preferencias-roles-mandatory-1",
+      "route": "/settings/form?tab=notifications",
+      "scrollY": 1758,
+      "clickText": "Configuración de Roles",
+      "waitForText": "Marque un tipo como obligatorio"
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "preferencias-roles-mandatory-2",
+      "route": "/settings/form?tab=notifications",
+      "scrollY": 1758,
+      "clickText": "Configuración de Roles",
+      "waitForText": "Sin asignar (rol por defecto)"
+    },
+    {
+      "docId": "configuracion/formulario",
+      "suffix": "preferencias-roles-save",
+      "route": "/settings/form?tab=notifications",
+      "scrollY": 1758,
+      "clickText": "Configuración de Roles",
+      "waitForText": "Guardar preferencias"
+    },
+    {
+      "docId": "configuracion/formulario",
       "suffix": "recomplus",
       "route": "/settings/form?tab=recomplus",
       "scrollY": 0,

@@ -150,16 +150,154 @@ Cada pestaña admite un enlace profundo `/settings/form?tab=<id>`. El parámetro
 ### 9. Notificaciones (`notifications`)
 
 - **Acceso:** `/settings/form?tab=notifications`. Es la única pestaña visible para usuarios autenticados sin `ROLE_ADMIN`. Con bearer de administrador, el enlace profundo abre directamente **Configuración de Roles**; para ver **Mis Preferencias** hay que seleccionar esa subpestaña. Al hacer clic en una subpestaña la URL no cambia.
-- **Mis Preferencias:** disponible para todo usuario. Muestra los diez tipos de notificación con su descripción y un interruptor para activarlos; **Guardar preferencias** guarda solo la relación tipo/booleano del usuario actual. Algunos tipos aparecen bloqueados y explican el motivo: «No aplicable a su rol», «Requiere rol: …», «Notificación obligatoria para su rol» o «Deshabilitada por el administrador».
-- **Configuración de Roles:** exclusiva de administradores. **Tipos de notificación** activa o desactiva globalmente cada tipo; **Roles destinatarios por tipo** asigna uno o más de los ocho roles disponibles, con **Seleccionar todos** y las indicaciones de rol por defecto o «visible para todos los usuarios» cuando no hay asignación. **Umbrales de alerta** fija los días de retraso para la extracción, la antelación para prórrogas por vencer, los días sin avance en estados Precita/Transferido, la frecuencia de sondeo en segundos y el envío también por correo. **Tipos obligatorios** marca qué tipos quedan fijos para determinados roles. **Guardar preferencias** actualiza la configuración global, que no se confunde con la matriz de permisos de importación.
+
+La tarjeta se titula **Preferencias de notificaciones** y se describe así: «Configure qué eventos generan notificaciones, los umbrales de alerta y la frecuencia de consulta.». Debajo aparece una barra interna con `aria-label="Vistas de notificaciones"` y dos botones: **Mis Preferencias**, disponible para todo usuario autenticado, y **Configuración de Roles**, que solo se muestra a administradores. El enlace profundo se lee al construir el componente: los administradores entran en la vista de roles, los demás usuarios son redirigidos a `?tab=notifications` y siempre ven **Mis Preferencias**. Cambiar de subpestaña no modifica la URL.
 
 ![Notificaciones — backoffice Agrimpex](/img/screenshots/configuracion/formulario-notificaciones.png)
 
-*Captura tomada del backoffice Agrimpex con la subpestaña Mis Preferencias.*
+*Captura tomada del backoffice Agrimpex con la vista superior de Mis Preferencias.*
 
-![Configuración de Roles — backoffice Agrimpex](/img/screenshots/configuracion/formulario-preferencias-roles.png)
+#### Mis Preferencias
 
-*Captura tomada del backoffice Agrimpex con la subpestaña Configuración de Roles.*
+##### Contenido y control
+
+La vista muestra el texto de ayuda «Active solo los eventos que desea recibir.» y una rejilla de dos columnas con diez casillas. Cada fila contiene la etiqueta del tipo, su descripción completa y, cuando corresponde, un icono de candado con el motivo por el que no se puede modificar. Las filas bloqueadas no obligatorias se muestran atenuadas; las obligatorias permanecen activas aunque su valor no se pueda cambiar. Los cambios son locales hasta que se pulsa **Guardar preferencias**: no hay indicador de cambios pendientes y el botón está habilitado aunque no se haya tocado ninguna casilla.
+
+| Código | Etiqueta visible | Descripción |
+|--------|------------------|-------------|
+| `BL_SIN_ESPECIALISTA` | BL sin especialista asignado | Se genera cuando un BL está cargado en el sistema sin un especialista de calidad asignado, impidiendo continuar la gestión de la importación. |
+| `CONTENEDOR_HABILITADO_SIN_OE` | Contenedor habilitado sin Orden de Entrega | Se genera cuando el contenedor ya está habilitado por Aduana (autorizado para mover) pero aún no tiene una Orden de Entrega que permita su extracción. |
+| `CONTENEDOR_LISTO_DESADUANE` | Contenedor listo para Desaduane | Se genera cuando el contenedor alcanza el estado de listo y debe iniciarse su proceso de Desaduane (despacho aduanero). |
+| `CONTENEDOR_PENDIENTE_PRELIBERACION` | Preliberación de calidad pendiente | Se genera cuando el contenedor tiene pendiente la preliberación de calidad y debe aprobarse antes de continuar. |
+| `CONTENEDOR_RETRASO_EXTRACCION_72H` | Retraso de extracción (> 72h) | Se genera cuando la extracción del contenedor supera el umbral configurado de retraso (por defecto 72 horas). |
+| `PRORROGA_POR_VENCER` | Prórroga por vencer | Se genera cuando una prórroga autorizada está por vencer dentro del plazo configurado de aviso (por defecto 5 días). |
+| `CONTENEDOR_PRECITA_SIN_AVANCE` | Precita/Transferido sin avance | Se genera cuando un contenedor en estado Precita/Transferido no refleja avance dentro del período configurado (por defecto 7 días), alertando de una posible gestión estancada. |
+| `IMPORTACION_COMPLETADA` | Importación completada | Se genera cuando el proceso de importación del contenedor finalizó exitosamente con su extracción. |
+| `CONTENEDOR_EXTRAIDO_SINTETICO` | Extracción sintética por reconciliación | Se genera cuando la reconciliación del parte diario detecta contenedores que estaban en el patio y ya no aparecen, y les crea una extracción sintética para regularizar la salida. |
+| `PARTE_ORIGEN_PROCESADO` | Parte diario procesado | Se genera cuando el ciclo de Origen del Parte Diario termina (éxito o con errores) y su resumen queda disponible en la campana. |
+
+El texto `> 72h` de la quinta etiqueta es fijo: aunque el administrador cambie el umbral de extracción, la etiqueta visible no se actualiza.
+
+![Mis Preferencias — vista superior](/img/screenshots/configuracion/formulario-preferencias-mine-top.png)
+
+*Captura tomada del backoffice Agrimpex con la tarjeta, las subpestañas y los primeros tipos de Mis Preferencias.*
+
+![Mis Preferencias — tipos 1 a 6](/img/screenshots/configuracion/formulario-preferencias-mine-types-1.png)
+
+*Captura tomada del backoffice Agrimpex con la primera mitad de la rejilla de tipos.*
+
+![Mis Preferencias — tipos 7 a 10](/img/screenshots/configuracion/formulario-preferencias-mine-types-2.png)
+
+*Captura tomada del backoffice Agrimpex con la segunda mitad de la rejilla de tipos.*
+
+##### Motivos de bloqueo
+
+Una casilla puede estar deshabilitada por tres causas. El sistema evalúa los motivos en este orden y muestra solo el primero que aplica:
+
+1. **«Requiere rol: …»**: el tipo no aplica al usuario y la configuración global declaró roles requeridos. Los nombres se muestran traducidos y separados por comas, por ejemplo «Gerente de Comex, Calidad, Logístico».
+2. **«No aplicable a su rol.»**: el tipo no aplica al usuario y no hay roles requeridos declarados.
+3. **«Deshabilitada por el administrador.»**: el tipo fue desactivado globalmente en **Configuración de Roles**.
+4. **«Notificación obligatoria para su rol.»**: el tipo es obligatorio para uno de los roles del usuario; la casilla aparece activa pero no se puede cambiar.
+
+Incluso si el navegador fuerza un cambio, la aplicación descarta la modificación de cualquier fila bloqueada antes de guardar.
+
+##### Estados y guardado
+
+Mientras carga, la vista muestra diez esqueletos en la rejilla. Si la consulta falla aparece «No se pudieron cargar tus preferencias de notificación.»; si el servicio devuelve una lista vacía aparece «Todavía no hay tipos de notificación para mostrar.». En esos tres estados no se muestra el botón de guardado.
+
+**Guardar preferencias** envía únicamente un mapa `tipo → booleano` de los tipos desbloqueados del usuario actual. No envía umbrales, roles, frecuencia de sondeo ni correo. Tras guardar, la respuesta vuelve a resolver la matriz y sustituye la vista local. El éxito se avisa con «Preferencias de notificación guardadas correctamente.» y cualquier fallo con «Error al guardar las preferencias de notificación.».
+
+![Mis Preferencias — guardado al final del desplazamiento](/img/screenshots/configuracion/formulario-preferencias-mine-save.png)
+
+*Captura tomada del backoffice Agrimpex con el botón Guardar preferencias al final de la vista de usuario.*
+
+#### Configuración de Roles
+
+Esta vista es exclusiva de `ROLE_ADMIN`. Si la consulta global no ha terminado, el botón de guardado permanece deshabilitado; si la carga falla después de iniciada, se avisa con «No se pudo cargar la configuración de notificaciones.». El panel se organiza en cuatro fieldsets, que aparecen en este orden.
+
+##### Tipos de notificación
+
+El primer fieldset repite la ayuda «Active solo los eventos que desea recibir.» y los mismos diez tipos de la vista de usuario, esta vez como interruptores globales. Desmarcar un tipo lo desactiva para todos los usuarios, incluso para aquellos a los que el tipo sería obligatorio: la resolución final lo deja apagado.
+
+![Configuración de Roles — subpestaña y tipos globales](/img/screenshots/configuracion/formulario-preferencias-roles.png)
+
+*Captura tomada del backoffice Agrimpex con la vista superior de Configuración de Roles.*
+
+![Configuración de Roles — últimos tipos globales](/img/screenshots/configuracion/formulario-preferencias-roles-types-2.png)
+
+*Captura tomada del backoffice Agrimpex con el final del fieldset de tipos.*
+
+##### Roles destinatarios por tipo
+
+La ayuda indica: «Seleccione uno o más roles que recibirán cada tipo. Si un tipo queda sin asignar, se usará su rol por defecto.». Hay un selector múltiple por tipo con los ocho roles disponibles, el botón **Seleccionar todos** y el placeholder «Sin asignar (rol por defecto)».
+
+| Código del rol | Etiqueta visible |
+|----------------|------------------|
+| `ROLE_USER` | Usuario |
+| `ROLE_ADMIN` | Administrador |
+| `ROLE_ESPECIALISTA` | Especialista |
+| `ROLE_CONSULTOR` | Consultor |
+| `ROLE_GERENTE_COMEX` | Gerente de Comex |
+| `ROLE_ESPECIALISTA_PRINCIPAL` | Especialista Principal |
+| `ROLE_CALIDAD` | Calidad |
+| `ROLE_LOGISTICO` | Logístico |
+
+Los roles por defecto son: **Gerente de Comex** para `BL_SIN_ESPECIALISTA`; **Calidad** para `CONTENEDOR_PENDIENTE_PRELIBERACION`; **Logístico** para los ocho tipos operativos restantes; y ninguno para `PARTE_ORIGEN_PROCESADO`. Cuando no hay asignación explícita se muestra «Rol por defecto: …» con los roles traducidos; si el tipo no tiene default se muestra «Sin rol por defecto: visible para todos los usuarios.».
+
+**Seleccionar todos** marca los ocho roles; si ya están todos marcados, los limpia y devuelve el tipo a su rol por defecto. Dejar el selector vacío elimina la asignación en lugar de enviar una lista vacía, para que el backend aplique el default.
+
+![Configuración de Roles — destinatarios, primera parte](/img/screenshots/configuracion/formulario-preferencias-roles-recipients-1.png)
+
+*Captura tomada del backoffice Agrimpex con el inicio del fieldset de roles destinatarios.*
+
+![Configuración de Roles — destinatarios, segunda parte](/img/screenshots/configuracion/formulario-preferencias-roles-recipients-2.png)
+
+*Captura tomada del backoffice Agrimpex con el final de los selectores y las indicaciones de rol por defecto.*
+
+![Configuración de Roles — desplegable de roles](/img/screenshots/configuracion/formulario-preferencias-roles-role-dropdown.png)
+
+*Captura tomada del backoffice Agrimpex con el desplegable abierto y los ocho roles traducidos.*
+
+##### Umbrales de alerta
+
+El tercer fieldset contiene cuatro campos numéricos obligatorios y una casilla adicional.
+
+| Campo | Valor inicial | Mínimo | Efecto |
+|-------|---------------|--------|--------|
+| Días de retraso para alerta de extracción | 3 | 0 | Controla `CONTENEDOR_RETRASO_EXTRACCION_72H`; el valor se convierte a horas (`días × 24`) para la alerta. |
+| Días de antelación para prórroga por vencer | 5 | 0 | Controla `PRORROGA_POR_VENCER` con el plazo de aviso configurado. |
+| Días sin avance (Precita/Transferido) | 7 | 0 | Controla `CONTENEDOR_PRECITA_SIN_AVANCE`. |
+| Frecuencia de sondeo (segundos) | 60 | 10 | Se envía como `pollingSeconds`, pero hoy no altera la campana, que sigue sondeando cada 60 segundos. |
+
+**Enviar también por correo** se envía en la configuración global como `emailByType`, pero el backend vigente no lo aplica: no genera envíos adicionales. Ninguno de estos campos muestra mensajes de validación en línea; un valor fuera de rango simplemente impide guardar.
+
+![Configuración de Roles — umbrales de alerta](/img/screenshots/configuracion/formulario-preferencias-roles-thresholds.png)
+
+*Captura tomada del backoffice Agrimpex con los cuatro umbrales y la opción de correo.*
+
+##### Tipos obligatorios
+
+La ayuda indica: «Marque un tipo como obligatorio y seleccione los roles para los que queda bloqueado (casilla siempre activa).». Cada fila lleva el distintivo «Obligatoria» al marcar la casilla. Al activarla se prellenan los roles destinatarios de ese tipo; si no tiene destinatarios, se marcan los ocho roles. Si la lista de roles queda vacía se avisa «Sin roles seleccionados el tipo no queda obligatorio para nadie.»; si el tipo no tenía roles destinatarios se avisa «El tipo no tiene roles destinatarios: se marcó obligatorio para todos los roles.». Aparece entonces un segundo selector múltiple con el placeholder «Sin asignar (rol por defecto)».
+
+Los tipos obligatorios ignoran el valor guardado por el usuario: la resolución final fuerza la casilla activa para los roles indicados. Las listas vacías se descartan al guardar, porque «obligatoria para nadie» no es una configuración válida.
+
+![Configuración de Roles — tipos obligatorios](/img/screenshots/configuracion/formulario-preferencias-roles-mandatory-1.png)
+
+*Captura tomada del backoffice Agrimpex con el fieldset de tipos obligatorios.*
+
+![Configuración de Roles — roles de un tipo obligatorio](/img/screenshots/configuracion/formulario-preferencias-roles-mandatory-2.png)
+
+*Captura tomada del backoffice Agrimpex con el selector de roles de un tipo obligatorio ya desplegado.*
+
+##### Guardado global
+
+El botón **Guardar preferencias** de esta vista guarda la configuración global: tipos activos, umbrales, destinatarios por tipo, tipos obligatorios y los valores de sondeo/correo enviados. No recarga la respuesta del servidor después de guardar; la pantalla conserva los valores locales. El éxito y el error usan los mismos textos que el guardado de usuario: «Preferencias de notificación guardadas correctamente.» y «Error al guardar las preferencias de notificación.».
+
+Este guardado **no** es el de **Mis Preferencias**, que solo persiste booleanos del usuario actual, y **no** es la **Matriz de Permisos**, que reparte permisos de importación por línea de producto.
+
+![Configuración de Roles — guardado al final del desplazamiento](/img/screenshots/configuracion/formulario-preferencias-roles-save.png)
+
+*Captura tomada del backoffice Agrimpex con el botón Guardar preferencias al final de la configuración global.*
 
 ### 10. Parámetros de Reportes (`report_parameters`)
 
