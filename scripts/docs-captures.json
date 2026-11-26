@@ -1462,6 +1462,257 @@
       "suffix": "detalle",
       "route": "/logistic/notification/BL/BL-1",
       "scrollY": 0
+    },
+    {
+      "docId": "reportes/index",
+      "suffix": "mapa-listados",
+      "route": "/reports/days-range",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/index",
+      "suffix": "mapa-monitorizacion",
+      "route": "/reports/monitoring",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/index",
+      "suffix": "mapa-prioridades",
+      "route": "/reports/customs-priorities",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/index",
+      "suffix": "mapa-exportacion",
+      "route": "/reports/arrived-enabled",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/por-rango-fechas",
+      "suffix": "filtros",
+      "route": "/reports/days-range",
+      "scrollY": 0,
+      "clickText": "Rango de Días"
+    },
+    {
+      "docId": "reportes/por-rango-fechas",
+      "suffix": "operaciones",
+      "route": "/reports/days-range",
+      "scrollY": 300
+    },
+    {
+      "docId": "reportes/por-estado",
+      "suffix": "filtros",
+      "route": "/reports/count-by-status",
+      "scrollY": 0,
+      "clickText": "Conteo por Estado"
+    },
+    {
+      "docId": "reportes/por-estado",
+      "suffix": "operaciones",
+      "route": "/reports/count-by-status",
+      "scrollY": 300
+    },
+    {
+      "docId": "reportes/por-especialista",
+      "suffix": "filtros",
+      "route": "/reports/summary-by-specialist",
+      "scrollY": 0,
+      "clickText": "Resumen por Especialista"
+    },
+    {
+      "docId": "reportes/por-especialista",
+      "suffix": "operaciones",
+      "route": "/reports/summary-by-specialist",
+      "scrollY": 300
+    },
+    {
+      "docId": "reportes/estado-por-especialista",
+      "suffix": "filtros",
+      "route": "/reports/status-by-specialist",
+      "scrollY": 0,
+      "clickText": "Estado por Especialista"
+    },
+    {
+      "docId": "reportes/estado-por-especialista",
+      "suffix": "operaciones",
+      "route": "/reports/status-by-specialist",
+      "scrollY": 300
+    },
+    {
+      "docId": "reportes/monitorizacion",
+      "suffix": "panel",
+      "route": "/reports/monitoring",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/monitorizacion",
+      "suffix": "operaciones",
+      "route": "/reports/monitoring",
+      "scrollY": 300
+    },
+    {
+      "docId": "reportes/prioridades-aduaneras",
+      "suffix": "filtros",
+      "route": "/reports/customs-priorities",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/prioridades-aduaneras",
+      "suffix": "operaciones",
+      "route": "/reports/customs-priorities",
+      "scrollY": 300
+    },
+    {
+      "docId": "reportes/exportacion",
+      "suffix": "rango-fechas",
+      "route": "/reports/arrived-enabled",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/exportacion",
+      "suffix": "variantes",
+      "route": "/reports/arrived-enabled",
+      "scrollY": 300
+    },
+    {
+      "docId": "reportes/monitorizacion",
+      "suffix": "condicion-24h-sin-especialista",
+      "route": "/reports/monitoring",
+      "scrollY": 0,
+      "clickText": "24h sin Especialista"
+    },
+    {
+      "docId": "reportes/monitorizacion",
+      "suffix": "condicion-48h-tramite-aduana",
+      "route": "/reports/monitoring",
+      "scrollY": 0,
+      "clickText": "48h en Trámite Aduana"
+    },
+    {
+      "docId": "reportes/monitorizacion",
+      "suffix": "condicion-25-dias-sin-extraer",
+      "route": "/reports/monitoring",
+      "scrollY": 0,
+      "clickText": "25 días sin extraer"
+    },
+    {
+      "docId": "reportes/monitorizacion",
+      "suffix": "condicion-demora-devolucion",
+      "route": "/reports/monitoring",
+      "scrollY": 0,
+      "clickText": "Demora en Devolución (15 días)"
+    },
+    {
+      "docId": "reportes/monitorizacion",
+      "suffix": "condicion-habilitados-no-liberados",
+      "route": "/reports/monitoring",
+      "scrollY": 0,
+      "clickText": "Habilitados no liberados"
+    },
+    {
+      "docId": "reportes/monitorizacion",
+      "suffix": "condicion-almacenaje-terminal",
+      "route": "/reports/monitoring",
+      "scrollY": 0,
+      "clickText": "Almacenaje en Terminal"
+    },
+    {
+      "docId": "reportes/monitorizacion",
+      "suffix": "condicion-habilitados-sin-extraer-72h",
+      "route": "/reports/monitoring",
+      "scrollY": 0,
+      "clickText": "Habilitados sin extraer 72h"
+    },
+    {
+      "docId": "reportes/exportacion",
+      "suffix": "variante-arribos-habilitados",
+      "route": "/reports/arrived-enabled",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/exportacion",
+      "suffix": "variante-arribos-clientes",
+      "route": "/reports/arrived-clients",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/exportacion",
+      "suffix": "variante-arribos-proveedores",
+      "route": "/reports/arrived-suppliers",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/exportacion",
+      "suffix": "variante-arribos-producto",
+      "route": "/reports/arrived-product",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/exportacion",
+      "suffix": "variante-arribos-tipo-contenedor",
+      "route": "/reports/arrived-container-type",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/exportacion",
+      "suffix": "variante-precios-tipo-producto",
+      "route": "/reports/price-product-type",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/exportacion",
+      "suffix": "variante-precios-origen",
+      "route": "/reports/price-origin",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/exportacion",
+      "suffix": "variante-precios-proveedor",
+      "route": "/reports/price-supplier",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/exportacion",
+      "suffix": "variante-precios-tendencias",
+      "route": "/reports/price-trends",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/exportacion",
+      "suffix": "variante-precita",
+      "route": "/reports/precita",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/exportacion",
+      "suffix": "variante-alerta-24h-no-id",
+      "route": "/reports/alert-24h-no-id",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/exportacion",
+      "suffix": "variante-alerta-24h-post-arribo",
+      "route": "/reports/alert-24h-post-arrival",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/exportacion",
+      "suffix": "variante-tendencias-top-productos",
+      "route": "/reports/trends-top-products",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/exportacion",
+      "suffix": "variante-tendencias-origen",
+      "route": "/reports/trends-origin",
+      "scrollY": 0
+    },
+    {
+      "docId": "reportes/exportacion",
+      "suffix": "variante-tendencias-proveedor",
+      "route": "/reports/trends-supplier",
+      "scrollY": 0
     }
 
   ]

@@ -27,6 +27,7 @@ const allowedExtraHeadings = [
   'Mapa del módulo', 'Operaciones y estados', 'Uso del asistente', 'Excepciones del nomenclador',
   'Control y trazabilidad', 'Columnas y resultados', 'Generación y exportación',
   'Uso de la verificación', 'Detalle de la notificación',
+  'Variantes de exportación',
 ];
 const expectedScreenCount = 113;
 const manifestPath = path.join(root, 'scripts/docs-captures.json');
@@ -263,6 +264,19 @@ if (!inventoryOnly) {
         fail(`Manifiesto: scrollRight inválido en ${label}`);
       }
     }
+    if (capture.docId.startsWith('reportes/')) {
+      for (const key of ['clickText', 'waitForText', 'waitFor']) {
+        if (capture[key] !== undefined && (typeof capture[key] !== 'string' || !capture[key].trim())) {
+          fail(`Manifiesto: ${key} inválido en ${label}`);
+        }
+      }
+      if (capture.scrollY !== undefined && (!Number.isInteger(capture.scrollY) || capture.scrollY < 0)) {
+        fail(`Manifiesto: scrollY inválido en ${label}`);
+      }
+      if (capture.scrollRight !== undefined && typeof capture.scrollRight !== 'boolean') {
+        fail(`Manifiesto: scrollRight inválido en ${label}`);
+      }
+    }
   }
   const adminDocIds = [
     'administracion/index',
@@ -370,6 +384,21 @@ if (!inventoryOnly) {
       fail(`Manifiesto: faltan capturas sufijadas para ${docId}`);
     }
   }
+  const reportesDocIds = [
+    'reportes/index',
+    'reportes/por-rango-fechas',
+    'reportes/por-estado',
+    'reportes/por-especialista',
+    'reportes/estado-por-especialista',
+    'reportes/monitorizacion',
+    'reportes/prioridades-aduaneras',
+    'reportes/exportacion',
+  ];
+  for (const docId of reportesDocIds) {
+    if (!captures.some((capture) => capture.docId === docId)) {
+      fail(`Manifiesto: faltan capturas sufijadas para ${docId}`);
+    }
+  }
   summary.push(`manifiesto: ${captures.length} capturas adicionales verificadas`);
 
   for (const screen of screens) {
@@ -462,6 +491,46 @@ if (!inventoryOnly) {
         if (screen.docId === 'seguridad/index' && heading === 'Mapa del módulo'
           && new Set(suffixed).size < 2) {
           fail(`docs/${screen.docId}.md: "Mapa del módulo" debe mostrar al menos dos capturas del módulo`);
+        }
+      }
+      if (screen.docId.startsWith('reportes/')) {
+        const suffixed = images.filter((image) => image.startsWith(`${screen.docId}-`));
+        if (!suffixed.length) {
+          fail(`docs/${screen.docId}.md: la sección "${heading}" debe mostrar una captura sufijada del manifiesto`);
+        }
+        if (screen.docId === 'reportes/index' && heading === 'Mapa del módulo'
+          && new Set(suffixed).size < 2) {
+          fail(`docs/${screen.docId}.md: "Mapa del módulo" debe mostrar al menos dos capturas del módulo`);
+        }
+      }
+    }
+  }
+
+  const expectedSubsections = {
+    'reportes/monitorizacion': 7,
+    'reportes/exportacion': 15,
+  };
+  for (const [docId, expected] of Object.entries(expectedSubsections)) {
+    const file = path.join(root, 'docs', `${docId}.md`);
+    if (!fs.existsSync(file)) continue;
+    const content = fs.readFileSync(file, 'utf8');
+    const subsections = [...content.matchAll(/^### (.+)\r?\n([\s\S]*?)(?=^### |^## |(?![\s\S]))/gm)];
+    if (subsections.length !== expected) {
+      fail(`docs/${docId}.md: se esperan ${expected} subsecciones "###", encontradas ${subsections.length}`);
+    }
+    for (const subsection of subsections) {
+      const title = subsection[1].trim();
+      const images = [...subsection[2].matchAll(/!\[[^\]]*\]\(\/img\/screenshots\/([^)]+\.png)\)/g)].map((match) => match[1]);
+      if (!images.length) {
+        fail(`docs/${docId}.md: la subsección "${title}" no incluye ninguna captura real`);
+        continue;
+      }
+      for (const image of new Set(images)) {
+        if (!fs.existsSync(path.join(root, 'static/img/screenshots', image))) {
+          fail(`docs/${docId}.md: la subsección "${title}" referencia una imagen inexistente: ${image}`);
+        }
+        if (!image.startsWith(`${docId}-`)) {
+          fail(`docs/${docId}.md: la subsección "${title}" debe usar una captura sufijada del manifiesto`);
         }
       }
     }
