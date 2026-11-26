@@ -30,6 +30,8 @@ const allowedExtraHeadings = [
   'Uso de la verificación', 'Detalle de la notificación',
   'Variantes de exportación', 'Vista de perfil y widgets',
   'Preferencias de visualización', 'Cambio de contraseña',
+  'Mapa del manual', 'Contenido y acceso', 'Códigos y recuperación',
+  'Estructura de la plantilla', 'Verificación pública',
 ];
 const expectedScreenCount = 113;
 const manifestPath = path.join(root, 'scripts/docs-captures.json');
@@ -456,6 +458,24 @@ if (!inventoryOnly) {
       }
     }
   }
+  const acercaCaptureSuffixes = {
+    intro: ['mapa-modulos', 'mapa-recorrido'],
+    'core/about': ['contenido'],
+    'core/contact': ['contenido'],
+    'core/privacy': ['contenido'],
+    'core/terms': ['contenido'],
+    'core/errors': ['404', '500'],
+    'core/layout': ['dashboard'],
+    'core/template': ['componentes'],
+    'core/verify': ['formulario', 'resultado'],
+  };
+  for (const [docId, suffixes] of Object.entries(acercaCaptureSuffixes)) {
+    for (const suffix of suffixes) {
+      if (!captures.some((capture) => capture.docId === docId && capture.suffix === suffix)) {
+        fail(`Manifiesto: falta la captura ${docId}-${suffix}`);
+      }
+    }
+  }
   summary.push(`manifiesto: ${captures.length} capturas adicionales verificadas`);
 
   for (const screen of screens) {
@@ -586,6 +606,24 @@ if (!inventoryOnly) {
         if (screen.docId === 'perfil/preferencias' && heading === 'Preferencias de visualización'
           && new Set(suffixed).size < 2) {
           fail(`docs/${screen.docId}.md: "Preferencias de visualización" debe mostrar al menos dos capturas de los grupos`);
+        }
+      }
+      if (Object.hasOwn(acercaCaptureSuffixes, screen.docId)) {
+        const suffixed = images.filter((image) => image.startsWith(`${screen.docId}-`));
+        if (!suffixed.length) {
+          fail(`docs/${screen.docId}.md: la sección "${heading}" debe mostrar una captura sufijada del manifiesto`);
+        }
+        if (screen.docId === 'intro' && heading === 'Mapa del manual'
+          && new Set(suffixed).size < 2) {
+          fail(`docs/${screen.docId}.md: "Mapa del manual" debe mostrar al menos dos capturas del backoffice`);
+        }
+        if (screen.docId === 'core/errors' && heading === 'Códigos y recuperación'
+          && new Set(suffixed).size < 2) {
+          fail(`docs/${screen.docId}.md: "Códigos y recuperación" debe mostrar los estados 404 y 500`);
+        }
+        if (screen.docId === 'core/verify' && heading === 'Verificación pública'
+          && new Set(suffixed).size < 2) {
+          fail(`docs/${screen.docId}.md: "Verificación pública" debe mostrar al menos dos capturas`);
         }
       }
     }

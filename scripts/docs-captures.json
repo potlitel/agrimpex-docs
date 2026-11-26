@@ -2004,6 +2004,90 @@
       "suffix": "reglas",
       "route": "/profile/change-password",
       "scrollY": 700
+    },
+    {
+      "docId": "intro",
+      "suffix": "mapa-modulos",
+      "route": "/dashboard",
+      "scrollY": 0,
+      "waitFor": "app-inventory-kpi-cards"
+    },
+    {
+      "docId": "intro",
+      "suffix": "mapa-recorrido",
+      "route": "/dashboard",
+      "scrollY": 1200,
+      "waitFor": "app-inventory-kpi-cards"
+    },
+    {
+      "docId": "core/about",
+      "suffix": "contenido",
+      "route": "/about",
+      "scrollY": 0,
+      "waitFor": "h1"
+    },
+    {
+      "docId": "core/contact",
+      "suffix": "contenido",
+      "route": "/contact",
+      "scrollY": 0,
+      "waitFor": "h1"
+    },
+    {
+      "docId": "core/privacy",
+      "suffix": "contenido",
+      "route": "/privacy",
+      "scrollY": 0,
+      "waitFor": "h1"
+    },
+    {
+      "docId": "core/terms",
+      "suffix": "contenido",
+      "route": "/terms",
+      "scrollY": 0,
+      "waitFor": "h1"
+    },
+    {
+      "docId": "core/errors",
+      "suffix": "404",
+      "route": "/error/404",
+      "scrollY": 0,
+      "waitFor": "h1"
+    },
+    {
+      "docId": "core/errors",
+      "suffix": "500",
+      "route": "/error/500",
+      "scrollY": 0,
+      "waitFor": "h1"
+    },
+    {
+      "docId": "core/layout",
+      "suffix": "dashboard",
+      "route": "/dashboard",
+      "scrollY": 700,
+      "waitFor": "app-inventory-kpi-cards"
+    },
+    {
+      "docId": "core/template",
+      "suffix": "componentes",
+      "route": "/dashboard",
+      "scrollY": 1850,
+      "waitFor": "app-inventory-kpi-cards"
+    },
+    {
+      "docId": "core/verify",
+      "suffix": "formulario",
+      "route": "/verify",
+      "scrollY": 0,
+      "waitFor": "h1"
+    },
+    {
+      "docId": "core/verify",
+      "suffix": "resultado",
+      "route": "/verify/DEMO-CODE",
+      "scrollY": 0,
+      "waitFor": "[role=alert]"
     }
   ]
 }
