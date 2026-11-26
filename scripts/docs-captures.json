@@ -1944,7 +1944,66 @@
       "scrollY": 0,
       "clickText": "Reintentos y timeouts",
       "waitForText": "Timeout conexión (seg)"
+    },
+    {
+      "docId": "perfil/index",
+      "suffix": "mapa-detalles",
+      "route": "/profile/overview",
+      "scrollY": 0
+    },
+    {
+      "docId": "perfil/index",
+      "suffix": "mapa-preferencias",
+      "route": "/profile/preferences",
+      "scrollY": 0
+    },
+    {
+      "docId": "perfil/index",
+      "suffix": "mapa-cambiar-clave",
+      "route": "/profile/change-password",
+      "scrollY": 0
+    },
+    {
+      "docId": "perfil/index",
+      "suffix": "widgets-indicadores",
+      "route": "/profile/overview",
+      "scrollY": 1150
+    },
+    {
+      "docId": "perfil/index",
+      "suffix": "widgets-resumen",
+      "route": "/profile/overview",
+      "scrollY": 1850
+    },
+    {
+      "docId": "perfil/preferencias",
+      "suffix": "visualizacion",
+      "route": "/profile/preferences",
+      "scrollY": 500
+    },
+    {
+      "docId": "perfil/preferencias",
+      "suffix": "importaciones",
+      "route": "/profile/preferences",
+      "scrollY": 1000
+    },
+    {
+      "docId": "perfil/preferencias",
+      "suffix": "aduana",
+      "route": "/profile/preferences",
+      "scrollY": 1500
+    },
+    {
+      "docId": "perfil/cambiar-clave",
+      "suffix": "formulario",
+      "route": "/profile/change-password",
+      "scrollY": 0
+    },
+    {
+      "docId": "perfil/cambiar-clave",
+      "suffix": "reglas",
+      "route": "/profile/change-password",
+      "scrollY": 700
     }
-
   ]
 }

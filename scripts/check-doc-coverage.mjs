@@ -28,7 +28,8 @@ const allowedExtraHeadings = [
   'Operaciones y estados', 'Uso del asistente', 'Excepciones del nomenclador',
   'Control y trazabilidad', 'Columnas y resultados', 'Generación y exportación',
   'Uso de la verificación', 'Detalle de la notificación',
-  'Variantes de exportación',
+  'Variantes de exportación', 'Vista de perfil y widgets',
+  'Preferencias de visualización', 'Cambio de contraseña',
 ];
 const expectedScreenCount = 113;
 const manifestPath = path.join(root, 'scripts/docs-captures.json');
@@ -440,6 +441,21 @@ if (!inventoryOnly) {
       fail(`Manifiesto: falta la captura configuracion/formulario-${suffix}`);
     }
   }
+  const perfilCaptureSuffixes = {
+    'perfil/index': [
+      'mapa-detalles', 'mapa-preferencias', 'mapa-cambiar-clave',
+      'widgets-indicadores', 'widgets-resumen',
+    ],
+    'perfil/preferencias': ['visualizacion', 'importaciones', 'aduana'],
+    'perfil/cambiar-clave': ['formulario', 'reglas'],
+  };
+  for (const [docId, suffixes] of Object.entries(perfilCaptureSuffixes)) {
+    for (const suffix of suffixes) {
+      if (!captures.some((capture) => capture.docId === docId && capture.suffix === suffix)) {
+        fail(`Manifiesto: falta la captura ${docId}-${suffix}`);
+      }
+    }
+  }
   summary.push(`manifiesto: ${captures.length} capturas adicionales verificadas`);
 
   for (const screen of screens) {
@@ -556,6 +572,20 @@ if (!inventoryOnly) {
         if (screen.docId === 'configuracion/formulario' && heading === 'Pestañas y preferencias'
           && new Set(suffixed).size !== configuracionTabCaptures.length) {
           fail(`docs/${screen.docId}.md: "Pestañas y preferencias" debe mostrar ${configuracionTabCaptures.length} capturas de las pestañas`);
+        }
+      }
+      if (screen.docId.startsWith('perfil/')) {
+        const suffixed = images.filter((image) => image.startsWith(`${screen.docId}-`));
+        if (!suffixed.length) {
+          fail(`docs/${screen.docId}.md: la sección "${heading}" debe mostrar una captura sufijada del manifiesto`);
+        }
+        if (screen.docId === 'perfil/index' && heading === 'Mapa del módulo'
+          && new Set(suffixed).size < 2) {
+          fail(`docs/${screen.docId}.md: "Mapa del módulo" debe mostrar al menos dos capturas del módulo`);
+        }
+        if (screen.docId === 'perfil/preferencias' && heading === 'Preferencias de visualización'
+          && new Set(suffixed).size < 2) {
+          fail(`docs/${screen.docId}.md: "Preferencias de visualización" debe mostrar al menos dos capturas de los grupos`);
         }
       }
     }
